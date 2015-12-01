@@ -14,3 +14,4 @@
 
 # Ignore stp.box
 /stp.box
+/.vagrant
