@@ -1,28 +1,33 @@
-== README
+## Contributing
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Calvyn82/stp. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
-Things you may want to cover:
+# Getting Vagrant up and running
 
-* Ruby version
+The Vagrant build is designed to allow users on systems not conducive to developing in Rails, namely Microsoft Windows, to participate. To that end, there is a Cheffile and a Vagrantfile included in the repository.
 
-* System dependencies
+You use vagrant to set up and run a virtual machine, so you'll need to allow for at least 2GB of space.
 
-* Configuration
+The configuration of the Cheffile and Vagrantfile are a variation on the version outlined [here](https://gorails.com/guides/using-vagrant-for-rails-development).
 
-* Database creation
+You'll need to install [Vagrant](http://www.vagrantup.com/downloads.html) and [Virtualbox](https://www.virtualbox.org/wiki/Downloads) for whatever operating system you are using.
 
-* Database initialization
+You'll also need to install the following Vagrant plugins:
 
-* How to run the test suite
+`vagrant plugin install vagrant-vbguest`
+`vagrant plugin install vagrant-librarian-chef-nochef`
 
-* Services (job queues, cache servers, search engines, etc.)
+Navigate to the app's root directory and type:
 
-* Deployment instructions
+`vagrant up`.
 
-* ...
+This will install the Vagrant build for you.
+
+Once that is completed, you can ssh in to the Vagrant Box by typing:
+
+`vagrant ssh` 
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## License
+
+The code is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
