@@ -27,6 +27,20 @@ Once that is completed, you can ssh in to the Vagrant Box by typing:
 
 `vagrant ssh` 
 
+Once you're in the Vagrant shell, navigate to the rails app with:
+
+`cd /vagrant`
+
+You'll then have to install bundler, reset the load path and bundle.
+
+`gem install bundler`
+`rbenv rehash`
+`bundle`
+
+This should get you all of the gems necessary to run the app.
+
+
+
 
 ## License
 
