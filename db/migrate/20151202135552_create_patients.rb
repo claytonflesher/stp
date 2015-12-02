@@ -2,7 +2,7 @@ class CreatePatients < ActiveRecord::Migration
   def change
     create_table :patients do |t|
       t.string :username, null: false
-      t.string :password, null: false
+      t.string :password_digest, null: false
       t.string :name
       t.string :phone
       t.string :email, null: false
