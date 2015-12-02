@@ -4,18 +4,13 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Calvyn
 
 # Getting Vagrant up and running
 
-The Vagrant build is designed to allow users on systems not conducive to developing in Rails, namely Microsoft Windows, to participate. To that end, there is a Cheffile and a Vagrantfile included in the repository.
+The Vagrant build is designed to allow users on systems not conducive to developing in Rails, namely Microsoft Windows, to participate. To that end, we've greated a Vagrant box for getting the app up and running. If you need to develop in vagrant, get in contact with us to get a copy of the box.
 
 You use vagrant to set up and run a virtual machine, so you'll need to allow for at least 2GB of space.
 
-The configuration of the Cheffile and Vagrantfile are a variation on the version outlined [here](https://gorails.com/guides/using-vagrant-for-rails-development).
-
 You'll need to install [Vagrant](http://www.vagrantup.com/downloads.html) and [Virtualbox](https://www.virtualbox.org/wiki/Downloads) for whatever operating system you are using.
 
-You'll also need to install the following Vagrant plugins:
-
-`vagrant plugin install vagrant-vbguest`
-`vagrant plugin install vagrant-librarian-chef-nochef`
+Once you have the box file, place it in the root directory of your locally cloned stp repo.
 
 Navigate to the app's root directory and type:
 
@@ -30,17 +25,6 @@ Once that is completed, you can ssh in to the Vagrant Box by typing:
 Once you're in the Vagrant shell, navigate to the rails app with:
 
 `cd /vagrant`
-
-You'll then have to install bundler, reset the load path and bundle.
-
-`gem install bundler`
-`rbenv rehash`
-`bundle`
-
-This should get you all of the gems necessary to run the app.
-
-
-
 
 ## License
 
