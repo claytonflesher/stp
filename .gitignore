@@ -14,4 +14,7 @@
 
 # Ignore stp.box
 /stp.box
-.vagrant/*
+
+# Ignore hidden files and directories
+.*
+!/.gitignore
