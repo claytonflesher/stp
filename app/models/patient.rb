@@ -12,7 +12,7 @@ class Patient < ActiveRecord::Base
 
   validates :zipcode,
             presence:   true,
-            format:     /\A[+0-9x]+\z/
+            format:     /\A[-0-9]+\z/
 
   validates :former_religion, presence: true
   validates :description,     presence: true

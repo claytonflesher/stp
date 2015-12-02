@@ -6,4 +6,12 @@ RSpec.describe Patient, type: :model do
     expect(patient).not_to                   be_valid
     expect(patient.errors[:username]).not_to be_empty
   end
+
+  it "validates the username is unique" do
+    patient1 = create(:patient)
+    expect(patient1).to                       be_valid
+    patient2 = build(:patient)
+    expect(patient2).not_to                   be_valid
+    expect(patient2.errors[:username]).not_to be_empty
+  end
 end
