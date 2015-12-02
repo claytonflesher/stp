@@ -17,4 +17,7 @@ class Patient < ActiveRecord::Base
   validates :former_religion, presence: true
   validates :description,     presence: true
   validates :distance,        presence: true
+
+  has_many :therapists, through: :patient_therapist_relationships
+  has_many :patient_therapist_relationships
 end
