@@ -15,7 +15,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+ gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -26,10 +26,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  # Use Rspec for spec testing and Capybara for feature testing
-  gem 'rspec-rails', '~> 3.0'
-  gem 'capybara'
 end
 
 group :development do
@@ -41,5 +37,10 @@ group :development do
 
   # Use pry in the console
   gem 'pry-rails', :group => :development
+
+  # Use Rspec for spec testing and Capybara for feature testing
+  gem 'rspec-rails', '~> 3.0'
+  gem 'capybara'
+  gem 'factory_girl_rails', '~> 4.5'
 end
 

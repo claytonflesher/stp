@@ -5,7 +5,7 @@ class Patient < ActiveRecord::Base
             presence:   true,
             uniqueness: true
 
-  valudates :email, 
+  validates :email, 
             presence:   true,
             format:     /\A[^@\s]+@[^@\s]+\.[^@\s]+\z/,
             uniqueness: true
