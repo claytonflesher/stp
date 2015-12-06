@@ -38,6 +38,17 @@ class Therapist < ActiveRecord::Base
             presence:   true,
             format:     /\A[-0-9 ]+\z/
 
+  def geo_address
+    if address != ""
+      if state != "Not Applicable"
+        geo_address = [address, city, state, zipcode].join(", ")
+      else
+        geo_address = [address, city, country, zipcode].join(", ")
+      end
+      geo_address
+    end
+  end
+
   has_many :patients, through: :patient_therapist_relationships
   has_many :patient_therapist_relationships
 end
