@@ -39,8 +39,6 @@ class TherapistsController < ApplicationController
       secular_evidence:      params[:secular_evidence]
     )
     if @therapist.id
-      set_location_info
-      @therapist.save!
       redirect_to therapist_verify_path(therapist_id: @therapist.id)
     else
       render :new
@@ -52,28 +50,5 @@ class TherapistsController < ApplicationController
   end
 
   def update
-  end
-
-  private
-
-  def set_location_info
-    if @therapist.address != ""
-      if @therapist.state != "Not Applicable"
-        normalized_address = normalize_address_with_state
-      else
-        normalized_address = normalize_address_without_state
-      end
-      @therapist.geo_address = normalized_address
-    end
-  end
-
-  def normalize_address_with_state
-    [@therapist.address, @therapist.city, @therapist.state, @therapist.zipcode]
-      .join(", ")
-  end
-
-  def normalize_address_without_state
-    [@therapist.address, @therpist.city, @therapist.country, @therapist.zipcode]
-      .join(", ")
   end
 end
