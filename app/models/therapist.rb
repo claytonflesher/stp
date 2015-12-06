@@ -32,7 +32,7 @@ class Therapist < ActiveRecord::Base
 
   validates :zipcode,
             presence:   true,
-            format:     /\A[-0-9]+\z/
+            format:     /\A[-0-9 ]+\z/
 
   has_many :patients, through: :patient_therapist_relationships
   has_many :patient_therapist_relationships
