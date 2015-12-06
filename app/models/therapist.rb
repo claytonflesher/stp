@@ -1,5 +1,9 @@
 class Therapist < ActiveRecord::Base
   has_secure_password
+  geocoded_by :geo_address
+  after_validation :geocode
+  
+  geocoded_by :zipcode
 
   validates :first_name,          presence: true
   validates :last_name,           presence: true

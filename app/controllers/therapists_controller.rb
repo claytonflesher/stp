@@ -63,7 +63,7 @@ class TherapistsController < ApplicationController
       else
         normalized_address = normalize_address_without_state
       end
-      set_geocoordinates(normalized_address)
+      @therapist.geo_address = normalized_address
     end
   end
 
@@ -75,11 +75,5 @@ class TherapistsController < ApplicationController
   def normalize_address_without_state
     [@therapist.address, @therpist.city, @therapist.country, @therapist.zipcode]
       .join(", ")
-  end
-
-  def set_geocoordinates(normalized_address)
-    geo_coordinates = Geocoder.coordinates(normalized_address)
-    @therapist.lattitude = geo_coordinates[0]
-    @therapist.longitude = geo_coordinates[1]
   end
 end

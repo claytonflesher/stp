@@ -21,8 +21,6 @@ class PatientsController < ApplicationController
       distance:              params[:distance]
     )
     if @patient.id
-      set_location_info
-      @patient.save!
       redirect_to patient_verify_path(patient_id: @patient.id)
     else
       render :new
@@ -34,15 +32,5 @@ class PatientsController < ApplicationController
   end
 
   def update
-  end
-
-  private
-
-  def set_location_info
-    if @patient.zipcode != ""
-      geo_coordinates = Geocoder.coordinates(@patient.zipcode)
-      @patient.lattitude = geo_coordinates[0]
-      @patient.longitude = geo_coordinates[1]
-    end
   end
 end
