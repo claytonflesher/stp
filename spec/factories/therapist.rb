@@ -19,6 +19,7 @@ FactoryGirl.define do
     purpose             "To mitigate my anui."
     email               "ziggystardust01@example.com"
     phone               "5558675309"
-    zipcode             "23523-23442"
+    zipcode             "10001"
+    geo_address         "111 Main St, New York, NY, 10001"
   end
 end

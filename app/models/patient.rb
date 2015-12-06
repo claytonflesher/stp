@@ -1,5 +1,9 @@
 class Patient < ActiveRecord::Base
   has_secure_password
+  geocoded_by :zipcode
+  after_validation :geocode, if: ->(obj){ 
+    obj.zipcode.present? && obj.zipcode_changed? 
+  }
 
   validates :username,        
             presence:   true,

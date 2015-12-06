@@ -1,10 +1,10 @@
 class Therapist < ActiveRecord::Base
   has_secure_password
   geocoded_by :geo_address
-  after_validation :geocode
+  after_validation :geocode, if: ->(obj){ 
+    obj.geo_address.present? && obj.geo_address_changed? 
+  }
   
-  geocoded_by :zipcode
-
   validates :first_name,          presence: true
   validates :last_name,           presence: true
   validates :address,             presence: true
