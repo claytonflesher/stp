@@ -6,11 +6,11 @@ class Therapist < ActiveRecord::Base
   }
 
   def phone=(phone)
-    phone.try(:gsub(/[^+\dx]/, ""))
+    write_attribute(:phone, phone.try(:gsub, /[^+\dx]/, ""))
   end
 
   def email=(email)
-    email.try(:downcase)
+    write_attribute(:email, email.try(:downcase))
   end
 
   validates :first_name,          presence: true
