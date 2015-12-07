@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  get  "therapist_signup"            => "therpists#new",     as: :therpist_signup
-  post "therapist_signup"            => "therpists#create"
-  get  "patient_signup"              => "patients#new",      as: :patient_signup
-  post "patient_signup"              => "patients#create"
+  get  "therapist_signup"     => "therapists#new",      as: :therapist_signup
+  post "therapist_signup"     => "therapists#create"
+  get  "signup"               => "patients#new",        as: :signup
+  post "signup"               => "patients#create"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
