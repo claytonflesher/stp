@@ -5,6 +5,10 @@ class Patient < ActiveRecord::Base
     obj.zipcode.present? && obj.zipcode_changed? 
   }
 
+  def email=(email)
+    email.try(:downcase)
+  end
+
   validates :username,        
             presence:   true,
             uniqueness: true

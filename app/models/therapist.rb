@@ -4,7 +4,15 @@ class Therapist < ActiveRecord::Base
   after_validation :geocode, if: ->(obj){ 
     obj.geo_address.present? && obj.geo_address_changed? 
   }
-  
+
+  def phone=(phone)
+    phone.try(:gsub(/[^+\dx]/, ""))
+  end
+
+  def email=(email)
+    email.try(:downcase)
+  end
+
   validates :first_name,          presence: true
   validates :last_name,           presence: true
   validates :address,             presence: true
