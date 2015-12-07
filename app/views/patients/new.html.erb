@@ -1,0 +1,35 @@
+<% provide(:title, 'Sign up') %>
+<h1>Sign up</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@patient) do |f| %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+
+      <%= f.label :zipcode %>
+      <%= f.text_field :zipcode %>
+
+      <%= f.label :former_religion %>
+      <%= f.text_field :former_religion %>
+
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+
+      <%= f.label :distance %>
+      <%= f.text_field :distance %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Create my account", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
