@@ -14,6 +14,9 @@ gem 'coffee-rails', '~> 4.1'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
+# Use bourbon and neat for scss layouts
+gem 'neat'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes the following links in your web application faster. Read more https://github.com/rails/turbolinks
