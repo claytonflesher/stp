@@ -77,4 +77,14 @@ RSpec.describe Patient, type: :model do
     expect(patient).not_to                          be_valid
     expect(patient.errors[:distance]).not_to be_empty
   end
+
+  it "has a lattitude" do
+    patient = create(:patient)
+    expect(patient.latitude).to eq(22.3909672)
+  end
+
+  it "has a longitude" do
+    patient = create(:patient)
+    expect(patient.longitude).to eq(-83.9400696)
+  end
 end

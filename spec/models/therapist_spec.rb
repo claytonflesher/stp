@@ -149,4 +149,14 @@ RSpec.describe Therapist, type: :model do
     expect(therapist).not_to                  be_valid
     expect(therapist.errors[:purpose]).not_to be_empty
   end
+
+  it "has a latitude" do
+    therapist = create(:therapist)
+    expect(therapist.latitude).to eq(40.7572638)
+  end
+
+  it "has a longitude" do
+    therapist = create(:therapist)
+    expect(therapist.longitude).to eq(-73.9552266)
+  end
 end
