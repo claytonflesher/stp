@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def ensire_therapist_not_signed_in
+  def ensure_therapist_not_signed_in
     if current_therapist
       redirect_to therapist_dashboard_path
     end
