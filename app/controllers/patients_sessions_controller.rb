@@ -1,6 +1,6 @@
 class PatientsSessionsController < ApplicationController
-  before_filter :ensure_not_signed_in, except: :destroy
-  before_filter :ensure_signed_in, only: :destroy
+  before_filter :ensure_patient_not_signed_in, except: :destroy
+  before_filter :ensure_patient_signed_in, only: :destroy
 
   def new
     @patient = Patient.new
