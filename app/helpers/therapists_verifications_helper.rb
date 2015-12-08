@@ -1,0 +1,2 @@
+module TherapistsVerificationsHelper
+end
