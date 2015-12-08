@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208015051) do
+ActiveRecord::Schema.define(version: 20151208114654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,21 +27,22 @@ ActiveRecord::Schema.define(version: 20151208015051) do
   add_index "patient_therapist_relationships", ["therapist_id"], name: "index_patient_therapist_relationships_on_therapist_id", using: :btree
 
   create_table "patients", force: :cascade do |t|
-    t.string   "username",        null: false
-    t.string   "password_digest", null: false
+    t.string   "username",           null: false
+    t.string   "password_digest",    null: false
     t.string   "name"
     t.string   "phone"
-    t.string   "email",           null: false
-    t.string   "zipcode",         null: false
+    t.string   "email",              null: false
+    t.string   "zipcode",            null: false
     t.string   "gender"
-    t.string   "former_religion", null: false
-    t.string   "description",     null: false
-    t.integer  "distance",        null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "former_religion",    null: false
+    t.string   "description",        null: false
+    t.integer  "distance",           null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "verified_at"
+    t.string   "verification_token"
   end
 
   create_table "therapists", force: :cascade do |t|
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 20151208015051) do
     t.float    "longitude"
     t.string   "geo_address"
     t.datetime "verified_at"
+    t.string   "verification_token"
   end
 
   add_foreign_key "patient_therapist_relationships", "patients"
