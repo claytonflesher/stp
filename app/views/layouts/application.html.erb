@@ -2,8 +2,9 @@
 <html>
 <head>
   <title><%= full_title(yield(:title))%></title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag "all" %>
   <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,200' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <%= yield %>
