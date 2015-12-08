@@ -16,6 +16,6 @@ class TherapistsVerificationsController < ApplicationController
     @therapist.save!
     TherapistMailer.confirm(@therapist).deliver_now
     flash[:notice] = "Email verified. New therapist emailed confirmation."
-    redirect_to therapists_signin_path
+    redirect_to therapist_signin_path
   end
 end
