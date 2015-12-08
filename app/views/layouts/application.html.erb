@@ -7,9 +7,10 @@
   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,200' rel='stylesheet' type='text/css'>
 </head>
 <body>
+  <%= render 'layouts/partials/nav' %>
   <div id="main">
-    <%= render 'layouts/partials/nav' %>
     <%= yield %>
-    <%= render 'layouts/partials/footer' %>
+  </div>
+  <%= render 'layouts/partials/footer' %>
 </body>
 </html>

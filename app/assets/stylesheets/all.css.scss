@@ -3,3 +3,10 @@
 @import "bourbon";
 @import "base/base";
 @import "neat";
+
+@import "partials/_nav.scss";
+@import "partials/_footer.scss";
+
+#main {
+  @include outer-container();
+}

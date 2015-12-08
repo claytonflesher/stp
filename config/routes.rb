@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   delete "signout"                         => "patients_sessions#destroy"
   get    "verify/:patient_id"              => "patients_verifications#new",      as: :patient_verify
   post   "verify/confirm/:token"           => "patients_verifications#create",   as: :patient_confirm
-
+  get    "patient_dashboard"   => "patients#show"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def ensure_patient_signed_in
     unless current_patient
       session[:return_to] = request.url
-      redirect_to patient_signin_path
+      redirect_to signin_path
     end
   end
 
