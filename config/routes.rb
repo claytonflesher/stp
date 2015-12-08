@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get    "landing_page"                    => "landing_page#index"
   get    "therapist_signup"                => "therapists#new",                  as: :therapist_signup
   post   "therapist_signup"                => "therapists#create"
   get    "therapist_signin"                => "therapists_sessions#new",         as: :therapist_signin
