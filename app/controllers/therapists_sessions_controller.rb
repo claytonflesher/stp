@@ -12,10 +12,15 @@ class TherapistsSessionsController < ApplicationController
       params[:username]).first
     if @therapist && @therapist.authenticate(params[:password])
       session[:therapist_id] = @therapist.id
-      redirect_to therapist_dashboards_path
+      redirect_to therapist_dashboard_path
     else
       flash.now[:alert] = "Email or password didn't match."
       render :new
     end
+  end
+
+  def destroy
+    reset_session
+    redirect_to therapist_signin_path
   end
 end

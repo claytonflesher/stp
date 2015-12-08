@@ -12,10 +12,15 @@ class PatientsSessionsController < ApplicationController
       params[:username]).first
     if @patient && @patient.authenticate(params[:password])
       session[:patient_id] = @patient.id
-      redirect_to patient_dashboards_path
+      redirect_to patient_dashboard_path
     else
       flash.now[:alert] = "Email or password didn't match."
       render :new
     end
+  end
+
+  def destroy
+    reset_session
+    redirect_to patient_signin_path
   end
 end
