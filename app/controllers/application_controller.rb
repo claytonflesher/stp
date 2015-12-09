@@ -31,11 +31,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_patient
-    session[:patient_id] && Patient.find[:patient_id]
+    session[:patient_id] && Patient.find(session[:patient_id])
   end
 
   def current_therapist
-    session[:therapist_id] && Therapist.find[:therapist_id]
+    session[:therapist_id] && Therapist.find(session[:therapist_id])
   end
 
   def patient_logged_in?
