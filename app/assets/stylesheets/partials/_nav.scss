@@ -1,8 +1,15 @@
 nav {
-  padding: em(20) 0;
-  background-color: green;
+  padding: em(10) 0;
+  background-color: $light-blue;
 }
 
 a {
-  color: black;
+  color: $light-black;
+}
+
+#logo {
+  font-size: 1.5em;
+  font-style: bold;
+  margin-left: 10px;
+  font-family: 'Alfa Slab One', cursive;
 }

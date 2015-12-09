@@ -1,7 +1,22 @@
 <nav>
-  <ul>
-    <li>
-      <%= link_to "Secular Therapy Project", landing_page_path %>
-    </li>
-  </ul>
+  <div id="logo">
+    <ul>
+      <li>
+        <%= link_to "Secular Therapy Project", home_path %>
+      </li>
+    </ul>
+  </div>
+  <div id="nav-links">
+    <ul>
+      <li>
+        <%= link_to "About Us", about_path %>
+      </li>
+      <li>
+        <%= link_to "Contact", contact_path %>
+      </li>
+      <li>
+        <%= link_to current_patient.username, patient_dashboard_path %>
+      </li>
+    </ul>
+  </div>
 </nav>

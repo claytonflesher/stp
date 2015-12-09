@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
 
   def current_patient
     session[:patient_id] && Patient.find(session[:patient_id])
+    @patient = Patient.find(session[:patient_id])
   end
 
   def current_therapist

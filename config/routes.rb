@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  get    "landing_page"                    => "landing_page#index"
+  get    "home"                            => "static_pages#home"
+  get    "about"                           => "static_pages#about"
+  get    "contact"                         => "static_pages#contact"
   get    "therapist_signup"                => "therapists#new",                  as: :therapist_signup
   post   "therapist_signup"                => "therapists#create"
   get    "therapist_signin"                => "therapists_sessions#new",         as: :therapist_signin
@@ -21,7 +23,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'landing_page#index'
+  root 'static_pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
