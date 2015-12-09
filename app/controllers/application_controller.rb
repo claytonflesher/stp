@@ -32,7 +32,9 @@ class ApplicationController < ActionController::Base
 
   def current_patient
     session[:patient_id] && Patient.find(session[:patient_id])
-    @patient = Patient.find(session[:patient_id])
+    if session[:patient_id] && Patient.find(session[:patient_id])
+      @patient = Patient.find(session[:patient_id])
+    end
   end
 
   def current_therapist
