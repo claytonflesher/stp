@@ -12,9 +12,9 @@ class PatientsVerificationsController < ApplicationController
 
   def create
     @patient = Patient.find_by(verification_token: params[:token])
-    @patient.verified_at = Timenow
+    @patient.verified_at = Time.now
     @patient.save!
     flash[:notice] = "Email verified. Please sign in."
-    redirect_to patient_signin_path
+    redirect_to signin_path
   end
 end

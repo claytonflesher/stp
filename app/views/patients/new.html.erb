@@ -1,7 +1,7 @@
 <% provide(:title, "Sign Up") %>
 <h1>Sign Up</h1>
 
-<%= form_for(:session, url: signin_path) do |f| %>
+<%= form_for(@patient, url: signup_path) do |f| %>
 
   <%= f.label :username %>
   <%= f.text_field :username %>
