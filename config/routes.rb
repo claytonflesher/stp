@@ -10,13 +10,13 @@ Rails.application.routes.draw do
   delete "therapist_signout"               => "therapists_sessions#destroy"
   get    "therapist_verify/:therapist_id"  => "therapists_verifications#new",    as: :therapist_verify
   get    "therapist_verify/confirm/:token" => "therapists_verifications#create", as: :therapist_confirm
-  get    "signup"                          => "patients#new",                    as: :signup
-  post   "signup"                          => "patients#create"
-  get    "signin"                          => "patients_sessions#new",           as: :signin
-  post   "signin"                          => "patients_sessions#create"
-  delete "signout"                         => "patients_sessions#destroy"
-  get    "verify/:patient_id"              => "patients_verifications#new",      as: :patient_verify
-  get    "verify/confirm/:token"           => "patients_verifications#create",   as: :patient_confirm
+  get    "patient_signup"                  => "patients#new",                    as: :patient_signup
+  post   "patient_signup"                  => "patients#create"
+  get    "patient_signin"                  => "patients_sessions#new",           as: :patient_signin
+  post   "patient_signin"                  => "patients_sessions#create"
+  delete "patient_signout"                 => "patients_sessions#destroy"
+  get    "patient_verify/:patient_id"      => "patients_verifications#new",      as: :patient_verify
+  get    "patient_verify/confirm/:token"   => "patients_verifications#create",   as: :patient_confirm
   get    "patient_dashboard"               => "patients#show"
 
   # The priority is based upon order of creation: first created -> highest priority.
