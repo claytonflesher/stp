@@ -12,9 +12,17 @@
               <li><a href="javascrip:void(0)">Edit Profile</a></li>
               <li><a href="javascrip:void(0)">Inbox</a></li>
               <li><%= link_to "Sign Out", patient_signout_path, method: :delete %></li>
+        <% elsif therapist_logged_in? %>
+          <li class="nav-link more"><%= link_to current_therapist.username, therapist_dashboard_path %>
+            <ul class="submenu">
+              <li><a href="javascrip:void(0)">Edit Profile</a></li>
+              <li><a href="javascrip:void(0)">Inbox</a></li>
+              <li><%= link_to "Sign Out", therapist_signout_path, method: :delete %></li>
         <% else %>
-            <li class="nav-link"><%= link_to("Sign In", patient_signin_path) %></li>
-            <li class="nav-link"><%= link_to("Sign Up", patient_signup_path) %></li>
+            <li class="nav-link"><%= link_to("Patient Sign In", patient_signin_path) %></li>
+            <li class="nav-link"><%= link_to("Therapist Sign In", therapist_signin_path) %></li>
+            <li class="nav-link"><%= link_to("Register as a Patient", patient_signup_path) %></li>
+            <li class="nav-link"><%= link_to("Register as a Therapist", therapist_signup_path) %></li>
               <!--
               <li class="more"><a href="javascript:void(0)">Item with submenu</a>
                 <ul class="submenu">
