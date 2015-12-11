@@ -1,7 +1,7 @@
 require "securerandom"
 
 class TherapistsVerificationsController < ApplicationController
-  before_filter :ensure_not_signed_in
+  before_filter :ensure_therapist_not_signed_in
 
   def new
     @therapist = Therapist.find(params[:therapist_id])

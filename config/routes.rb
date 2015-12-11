@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   delete "therapist_signout"               => "therapists_sessions#destroy"
   get    "therapist_verify/:therapist_id"  => "therapists_verifications#new",    as: :therapist_verify
   get    "therapist_verify/confirm/:token" => "therapists_verifications#create", as: :therapist_confirm
+  get    "therapist_dashboard"             => "therapists#show"
   get    "patient_signup"                  => "patients#new",                    as: :patient_signup
   post   "patient_signup"                  => "patients#create"
   get    "patient_signin"                  => "patients_sessions#new",           as: :patient_signin
