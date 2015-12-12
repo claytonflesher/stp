@@ -26,7 +26,7 @@ class Therapist < ActiveRecord::Base
   validates :religion,            presence: true
   validates :licenses,            presence: true
   validates :main_license,        presence: true
-  validates :distance_counseling, presence: true
+  validates :distance_counseling, inclusion: { in: [true, false] }
   validates :purpose,             presence: true
 
   validates :username, 

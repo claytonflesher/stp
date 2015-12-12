@@ -72,17 +72,11 @@
   <%= f.label :main_license %>
   <%= f.text_field :main_license %>
 
-  <!--
-  For some reason, this submits as blank no matter what is selected...
-  <%= f.label :distance_counseling %>
-  <%= f.select :distance_counseling, ["Yes", "No"] %>
--->
+  <%= f.label "Would you like to participate in distance counseling?" %>
+  <%= f.select :distance_counseling, options_for_select([["Yes", true], ["No", false]]) %>
 
   <%= f.label :purpose %>
   <%= f.text_field :purpose %>
-
-  <%= f.label :distance_counseling %>
-  <%= f.text_field :distance_counseling %>
 
   <%= f.submit "Create my account" %>
 <% end %>
