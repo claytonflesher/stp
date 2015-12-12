@@ -1,0 +1,49 @@
+<% provide(:title, "Patient Dashboard") %>
+
+<h1><%= @patient.username %></h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @patient.name %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @patient.phone %>
+</p>
+
+<p>
+  <strong>E-mail:</strong>
+  <%= @patient.email %>
+</p>
+
+<p>
+  <strong>Zipcode:</strong>
+  <%= @patient.zipcode %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @patient.gender %>
+</p>
+
+<p>
+  <strong>Former Religion:</strong>
+  <%= @patient.former_religion %>
+</p>
+
+<p>
+  <strong>About you:</strong>
+  <%= @patient.description %>
+</p>
+
+<p>
+  <strong>Search for Therapists Within:</strong>
+  <%= @patient.distance %> miles
+</p>
+
+
+
+<%= link_to 'Edit', edit_patient_path(@patient) %>

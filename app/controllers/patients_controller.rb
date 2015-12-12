@@ -22,6 +22,10 @@ class PatientsController < ApplicationController
   def update
   end
 
+  def edit
+    @patient = Patient.find(session[:patient_id])
+  end
+
   private
 
   def patient_params

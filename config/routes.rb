@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get    "patient_verify/:patient_id"      => "patients_verifications#new",      as: :patient_verify
   get    "patient_verify/confirm/:token"   => "patients_verifications#create",   as: :patient_confirm
   get    "patient_dashboard"               => "patients#show"
+  get    "edit_patient"                    => "patients#edit"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
