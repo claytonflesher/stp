@@ -1,5 +1,5 @@
-<% provide(:title, "Therapist Registration") %>
-<h1>Therapist Registration</h1>
+<% provide(:title, "Edit Therapist Profile") %>
+<h1>Edit Therapist Profile</h1>
 
 <% if @therapist.errors.any? %>
   <div id="error_explanation">
@@ -14,15 +14,6 @@
 <% end %>
 
 <%= form_for(@therapist, url: therapist_signup_path) do |f| %>
-
-  <%= f.label :username %>
-  <%= f.text_field :username %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
 
   <%= f.label :email %>
   <%= f.email_field :email %>
@@ -78,7 +69,7 @@
   <%= f.label :purpose %>
   <%= f.text_field :purpose %>
 
-    <!--Optional Fields -->
+  <!--Optional Fields -->
 
   <%= f.label :website %>
   <%= f.text_field :website %>
@@ -95,5 +86,5 @@
   <%= f.label :approach %>
   <%= f.text_area :approach %>
 
-  <%= f.submit "Create my account" %>
+  <%= f.submit %>
 <% end %>
