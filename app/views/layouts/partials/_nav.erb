@@ -1,0 +1,46 @@
+<header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        <li class="nav-link"><%= link_to "Secular Therapy Project", home_path %></li>
+        <li class="nav-link"><%= link_to "About Us", about_path %></li>
+        <li class="nav-link"><%= link_to "Contact", contact_path %></li>
+        <% if patient_logged_in? %>
+          <li class="nav-link more"><%= link_to current_patient.username, patient_dashboard_path %>
+            <ul class="submenu">
+              <li><a href="javascrip:void(0)">Edit Profile</a></li>
+              <li><a href="javascrip:void(0)">Inbox</a></li>
+              <li><%= link_to "Sign Out", patient_signout_path, method: :delete %></li>
+        <% elsif therapist_logged_in? %>
+          <li class="nav-link more"><%= link_to current_therapist.username, therapist_dashboard_path %>
+            <ul class="submenu">
+              <li><a href="javascrip:void(0)">Edit Profile</a></li>
+              <li><a href="javascrip:void(0)">Inbox</a></li>
+              <li><%= link_to "Sign Out", therapist_signout_path, method: :delete %></li>
+        <% else %>
+            <li class="nav-link"><%= link_to("Patient Sign In", patient_signin_path) %></li>
+            <li class="nav-link"><%= link_to("Therapist Sign In", therapist_signin_path) %></li>
+            <li class="nav-link"><%= link_to("Register as a Patient", patient_signup_path) %></li>
+            <li class="nav-link"><%= link_to("Register as a Therapist", therapist_signup_path) %></li>
+              <!--
+              <li class="more"><a href="javascript:void(0)">Item with submenu</a>
+                <ul class="submenu">
+                  <li><a href="javascript:void(0)">Sub-submenu Item</a></li>
+                  <li><a href="javascript:void(0)">Another Item</a></li>
+                </ul>
+              </li>
+              <li class="more"><a href="javascript:void(0)">Another submenu</a>
+                <ul class="submenu">
+                  <li><a href="javascript:void(0)">Sub-submenu</a></li>
+                  <li><a href="javascript:void(0)">An Item</a></li>
+                </ul>
+              </li>
+            -->
+            </ul>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

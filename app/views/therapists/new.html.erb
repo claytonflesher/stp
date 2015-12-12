@@ -1,0 +1,88 @@
+<% provide(:title, "Therapist Registration") %>
+<h1>Therapist Registration</h1>
+
+<% if @therapist.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@therapist.errors.count, "error") %> prohibited you from being saved:</h2>
+
+    <ul>
+      <% @therapist.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for(@therapist, url: therapist_signup_path) do |f| %>
+
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+
+  <%= f.label :zipcode %>
+  <%= f.text_field :zipcode %>
+
+  <%= f.label :phone %>
+  <%= f.text_field :phone %>
+
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
+
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+
+  <%= f.label :state %>
+  <%= f.text_field :state %>
+
+  <%= f.label :country %>
+  <%= f.text_field :country %>
+
+  <%= f.label :practice %>
+  <%= f.text_field :practice %>
+
+  <%= f.label :years_experience %>
+  <%= f.text_field :years_experience %>
+
+  <%= f.label :qualifications %>
+  <%= f.text_area :qualifications %>
+
+  <%= f.label :gender %>
+  <%= f.select :gender, ["Male", "Female"] %>
+
+  <%= f.label :religion %>
+  <%= f.text_field :religion %>
+
+  <%= f.label :licenses %>
+  <%= f.text_area :licenses %>
+
+  <%= f.label :main_license %>
+  <%= f.text_field :main_license %>
+
+  <!--
+  For some reason, this submits as blank no matter what is selected...
+  <%= f.label :distance_counseling %>
+  <%= f.select :distance_counseling, ["Yes", "No"] %>
+-->
+
+  <%= f.label :purpose %>
+  <%= f.text_field :purpose %>
+
+  <%= f.label :distance_counseling %>
+  <%= f.text_field :distance_counseling %>
+
+  <%= f.submit "Create my account" %>
+<% end %>

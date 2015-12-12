@@ -6,7 +6,12 @@ body {
   line-height: $base-line-height;
 }
 
-h1,
+h1 {
+  font-family: $heading-font-family;
+  font-size: $heading1-font-size;
+  line-height: $heading-line-height;
+  margin: 0 0 $small-spacing;
+}
 h2,
 h3,
 h4,

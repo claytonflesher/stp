@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def ensure_patient_signed_in
     unless current_patient
       session[:return_to] = request.url
-      redirect_to patient_signin_path
+      redirect_to signin_path
     end
   end
 
@@ -31,11 +31,14 @@ class ApplicationController < ActionController::Base
   end
 
   def current_patient
-    session[:patient_id] && Patient.find[:patient_id]
+    session[:patient_id] && Patient.find(session[:patient_id])
+    if session[:patient_id] && Patient.find(session[:patient_id])
+      @patient = Patient.find(session[:patient_id])
+    end
   end
 
   def current_therapist
-    session[:therapist_id] && Therapist.find[:therapist_id]
+    session[:therapist_id] && Therapist.find(session[:therapist_id])
   end
 
   def patient_logged_in?
