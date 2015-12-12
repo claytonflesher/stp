@@ -22,8 +22,9 @@ class TherapistsPasswordResetsController < ApplicationController
   end
 
   def update
-    if params[:therapist][:password] == params[:therapist][:password_confirmation]
+    if params[:password] == params[:password_confirmation]
       @therapist = Therapist.find_by(password_reset_token: params[:token])
+      @therapist.password = params[:password]
       @therapist.save!
       flash[:notice] = "Password reset. Please sign in."
       redirect_to therapist_signin_path

@@ -22,10 +22,10 @@ Rails.application.routes.draw do
   delete "patient_signout"                      => "patients_sessions#destroy"
   get    "patient_verify/:patient_id"           => "patients_verifications#new",       as: :patient_verify
   get    "patient_verify/confirm/:token"        => "patients_verifications#create",    as: :patient_confirm
-  get    "patient_reset_password"               => "patients_reset_passwords#new",     as: :patient_reset_password
-  post   "patient_reset_password"               => "patients_reset_passwords#create"
-  get    "patient_reset_password/:token/edit"   => "patients_reset_passwords#edit",    as: :edit_patient_reset_password
-  post   "patient_reset_password/:token/edit"   => "patients_reset_passwords#update"
+  get    "patient_reset_password"               => "patients_password_resets#new",     as: :patient_reset_password
+  post   "patient_reset_password"               => "patients_password_resets#create"
+  get    "patient_reset_password/:token/edit"   => "patients_password_resets#edit",    as: :edit_patient_reset_password
+  post   "patient_reset_password/:token/edit"   => "patients_password_resets#update"
   get    "patient_dashboard"                    => "patients#show"
 
   # The priority is based upon order of creation: first created -> highest priority.
