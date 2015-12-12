@@ -1,7 +1,7 @@
-<% provide(:title, "Patient Registration") %>
-<h1>Patient Registration</h1>
+<% provide(:title, "Edit Profile") %>
+<h1>Edit Profile</h1>
 
-<%= form_for(@patient, url: patient_signup_path) do |f| %>
+<%= form_for(@patient, url: update_patient_path) do |f| %>
 
   <% if @patient.errors.any? %>
     <div id="error_explanation">
@@ -14,15 +14,6 @@
       </ul>
     </div>
   <% end %>
-
-  <%= f.label :username %>
-  <%= f.text_field :username %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
 
   <%= f.label :name %>
   <%= f.text_field :name %>

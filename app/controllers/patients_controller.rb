@@ -1,6 +1,6 @@
 class PatientsController < ApplicationController
-  before_filter :ensure_patient_signed_in, only: [:show, :update]
-  before_filter :ensure_patient_not_signed_in, except: [:show, :update]
+  before_filter :ensure_patient_signed_in, only: [:show, :update, :edit]
+  before_filter :ensure_patient_not_signed_in, except: [:show, :update, :edit]
 
   def new
     @patient = Patient.new
