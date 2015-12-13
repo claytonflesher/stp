@@ -1,0 +1,30 @@
+A new therapist has applied to participate in the Secular Therapy Project.
+
+Please review the information below and confirm, or click the following link to go to your dashboard.
+
+<%= admin_dashboard_url %>
+
+Therapist information:
+
+Name:             <%= [@therapist.first_name, @therapist.last_name].join(" ") %>
+Address:          <%= @therapist.address %>
+City:             <%= @therapist.city %>
+State:            <%= @therapist.state %>
+Country:          <%= @therapist.country %>
+Zipcode:          <%= @therapist.zipcode %>
+Practice:         <%= @therapist.practice %>
+Years Exp.:       <%= @therapist.years_experience %>
+Qualifications:   <%= @therapist.qualifications %>
+Gender:           <%= @therapist.gender %>
+Religion now:     <%= @therapist.religion %>
+Former Religion:  <%= @therapist.former_religion %>
+Licenses:         <%= @therapist.licenses %>
+Main License:     <%= @therapist.main_license %>
+Dist. Counseling: <%= @therapist.distance_counseling %>
+Languages:        <%= @therapist.languages %>
+Purpose:          <%= @therapist.purpose %>
+Description:      <%= @therapist.description %>
+Approach:         <%= @tgerapist.approach %>
+
+Confirm: 
+<%= therapist_confirm_url(token: @therapist.verification_token) %>
