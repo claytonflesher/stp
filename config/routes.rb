@@ -25,6 +25,14 @@ Rails.application.routes.draw do
   get    "edit_patient"                    => "patients#edit"
   put    "update_patient"                  => "patients#update"
   patch  "update_patient"                  => "patients#update"
+  get    "therapist_reset_password"             => "therapists_password_resets#new",   as: :therapist_reset_password
+  post   "therapist_reset_password"             => "therapists_password_resets#create"
+  get    "therapist_reset_password/:token/edit" => "therapists_password_resets#edit",  as: :edit_therapist_reset_password
+  post   "therapist_reset_password/:token/edit" => "therapists_password_resets#update"
+  get    "patient_reset_password"               => "patients_password_resets#new",     as: :patient_reset_password
+  post   "patient_reset_password"               => "patients_password_resets#create"
+  get    "patient_reset_password/:token/edit"   => "patients_password_resets#edit",    as: :edit_patient_reset_password
+  post   "patient_reset_password/:token/edit"   => "patients_password_resets#update"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
