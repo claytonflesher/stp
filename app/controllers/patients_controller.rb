@@ -20,6 +20,16 @@ class PatientsController < ApplicationController
   end
 
   def update
+    respond_to do |format|
+      if @patient.update(patient_params)
+        format.html { redirect_to patient_dashboard_path, notice: 'Profile was successfully updated' }
+        format.json { render :show, status: :ok, location: @patient }
+      else
+        format.html { render :edit }
+        format.json { render json: @patient.errors, status: :unprocessable_entity }
+      end
+    end
+    
   end
 
   def edit
