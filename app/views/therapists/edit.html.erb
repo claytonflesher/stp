@@ -13,7 +13,7 @@
   </div>
 <% end %>
 
-<%= form_for(@therapist, url: therapist_signup_path) do |f| %>
+<%= form_for(@therapist, url: update_therapist_path) do |f| %>
 
   <%= f.label :email %>
   <%= f.email_field :email %>
