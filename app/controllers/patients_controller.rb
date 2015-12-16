@@ -20,6 +20,11 @@ class PatientsController < ApplicationController
   end
 
   def update
+    if @patient.update(patient_params)
+      redirect_to patient_dashboard_path, notice: 'Profile was successfully updated'
+    else
+      render :edit 
+    end
   end
 
   def edit

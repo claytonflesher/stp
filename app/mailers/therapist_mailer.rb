@@ -1,7 +1,7 @@
 class TherapistMailer < ApplicationMailer
   def verify(therapist)
     @therapist = therapist
-    @admin = Admin.first
+    @admin = Admin.all
     mail_to @admin.email, subject: "[Secular Therapy Project] Therapist Application"
   end
 
