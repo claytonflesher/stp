@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
   before_filter :ensure_admin
 
   def index
-    @pending_therapists = Therapist.pending
+    @dashboard = PendingDashboard.new(current_admin)
   end
 
   def show
