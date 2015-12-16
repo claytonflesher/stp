@@ -43,8 +43,7 @@ class Therapist < ActiveRecord::Base
             format:     /\A[+0-9x]+\z/
 
   validates :zipcode,
-            presence:   true,
-            format:     /\A[-0-9 ]+\z/
+            presence:   true
 
   def geo_address
     if address != ""
