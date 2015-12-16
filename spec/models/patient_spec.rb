@@ -72,12 +72,6 @@ RSpec.describe Patient, type: :model do
     expect(patient.errors[:description]).not_to be_empty
   end
 
-  it "validates the presence of #distance" do
-    patient = build(:patient, distance: nil)
-    expect(patient).not_to                          be_valid
-    expect(patient.errors[:distance]).not_to be_empty
-  end
-
   it "has a lattitude" do
     patient = create(:patient)
     expect(patient.latitude).to eq(22.3909672)
