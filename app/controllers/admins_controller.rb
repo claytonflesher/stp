@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
   before_filter :ensure_admin
 
   def index
-    @admins = Therapist.find_by admin: true
+    @pending_therapists = Therapist.pending
   end
 
   def show
