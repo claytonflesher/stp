@@ -20,7 +20,6 @@ class Patient < ActiveRecord::Base
 
   validates :former_religion, presence: true
   validates :description,     presence: true
-  validates :distance,        presence: true
 
   def email=(email)
     write_attribute(:email, email.try(:downcase))

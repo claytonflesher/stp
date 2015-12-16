@@ -5,6 +5,8 @@ class Therapist < ActiveRecord::Base
     obj.geo_address.present? && obj.geo_address_changed? 
   }
 
+  scope :pending, -> { where(verified_at: nil).order("created_at DESC") }
+
   def phone=(phone)
     write_attribute(:phone, phone.try(:gsub, /[^+\dx]/, ""))
   end
@@ -43,8 +45,7 @@ class Therapist < ActiveRecord::Base
             format:     /\A[+0-9x]+\z/
 
   validates :zipcode,
-            presence:   true,
-            format:     /\A[-0-9 ]+\z/
+            presence:   true
 
   def geo_address
     if address != ""
