@@ -30,6 +30,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_admin
+    unless current_admin
+      session[:return_to] = request.url
+      redirect_to therapist_sign_in_path
+    end
+  end
+
   def current_patient
     session[:patient_id] && Patient.find(session[:patient_id])
     if session[:patient_id] && Patient.find(session[:patient_id])
@@ -39,6 +46,12 @@ class ApplicationController < ActionController::Base
 
   def current_therapist
     session[:therapist_id] && Therapist.find(session[:therapist_id])
+  end
+
+  def current_admin
+    if current_therapist
+      Therapist.find(session[:therapist_id]).admin?
+    end
   end
 
   def patient_logged_in?
