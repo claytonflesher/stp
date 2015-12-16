@@ -1,7 +1,7 @@
 class Therapist < ActiveRecord::Base
   has_secure_password
   geocoded_by :geo_address
-  acts_as_messageable :group_messages => true
+  acts_as_messageable
 
   after_validation :geocode, if: ->(obj){ 
     obj.geo_address.present? && obj.geo_address_changed? 
