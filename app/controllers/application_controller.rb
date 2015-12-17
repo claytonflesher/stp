@@ -30,8 +30,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def ensure_relationship_exists
-    unless patient_therapist_relationship_exists
+  def patient_therapist_relationship_exist
+    patient_id = params[:patient_id]
+    therapist_id = session[:therapist_id]
+    PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) != [] 
+  end
+
+  def ensure_relationship_exist
+    unless patient_therapist_relationship_exist
       session[:return_to] = request.url
       redirect_to therapist_dashboard_path
     end
@@ -54,12 +60,6 @@ class ApplicationController < ActionController::Base
 
   def therapist_logged_in?
     current_therapist != nil
-  end
-
-  def patient_therapist_relationship_exists?
-    patient_id = params[:patient_id]
-    therapist_id = session[:therapist_id]
-    PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) != nil
   end
 
   #When a therapist excepts a connection request, the updated_at record will be updated with the current time, therefore the connection is considered "accepted" when updated_at > created_at

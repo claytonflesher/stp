@@ -4,7 +4,7 @@ class PatientsController < ApplicationController
 
   # To see a patient's profile, you must be signed in as a therapist, and the patient must have sent the logged in therapist a connection request #
   before_filter :ensure_therapist_signed_in, only: [:profile]
-  before_filter :ensure_relationship_exists, only: [:profile]
+  before_filter :ensure_relationship_exist, only: [:profile]
   
   def new
     @patient = Patient.new
