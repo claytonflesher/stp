@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get    "edit_therapist"                  => "therapists#edit"
   put    "update_therapist"                => "therapists#update"
   patch  "update_therapist"                => "therapists#update"
+  get "therapist_profile/:therapist_id" => "therapists#profile"
   get    "patient_signup"                  => "patients#new",                    as: :patient_signup
   post   "patient_signup"                  => "patients#create"
   get    "patient_signin"                  => "patients_sessions#new",           as: :patient_signin
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
   get    "edit_patient"                    => "patients#edit"
   put    "update_patient"                  => "patients#update"
   patch  "update_patient"                  => "patients#update"
+  get "patient_profile/:patient_id" => "patients#profile"
   get    "therapist_reset_password"             => "therapists_password_resets#new",   as: :therapist_reset_password
   post   "therapist_reset_password"             => "therapists_password_resets#create"
   get    "therapist_reset_password/:token/edit" => "therapists_password_resets#edit",  as: :edit_therapist_reset_password
