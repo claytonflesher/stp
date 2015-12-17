@@ -49,6 +49,16 @@ class ApplicationController < ActionController::Base
     current_therapist != nil
   end
 
+  def patient_therapist_relationship_exists?(patient_id, therapist_id)
+    PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) != nil
+  end
+
+  #When a therapist excepts a connection request, the updated_at record will be updated with the current time, therefore the connection is considered "accepted" when updated_at > created_at
+  def connection_accepted?(patient_therapist_relationship_id)
+    connection = PatientTherapistRelationship.where(id: patient_therapist_relationship_id)
+    connection.updated_at > connection.created_at
+  end
+
   helper_method :current_patient, 
                 :current_therapist, 
                 :patient_logged_in?, 
