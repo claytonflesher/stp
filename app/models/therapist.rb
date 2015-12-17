@@ -62,10 +62,9 @@ class Therapist < ActiveRecord::Base
 
   has_many :patients, through: :patient_therapist_relationships
   has_many :patient_therapist_relationships
-  has_many :votes
-  has_many :voters, class_name: "Therapist",
-                    foreign_key: "votee_id"
-  has_many :votees, class_name: "Therapist",
-                    foreign_key: "voter_id"
+  has_many :cast_votes,     class_name: "Vote",
+                            foreign_key: "voter_id"
+  has_many :received_votes, class_name: "Vote",
+                            foreign_key: "votee_id"
 
 end
