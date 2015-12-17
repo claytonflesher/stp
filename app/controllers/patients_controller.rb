@@ -2,6 +2,10 @@ class PatientsController < ApplicationController
   before_filter :ensure_patient_signed_in, only: [:show, :update, :edit]
   before_filter :ensure_patient_not_signed_in, except: [:show, :update, :edit]
 
+  # To see a patient's profile, you must be signed in as a therapist, and the patient must have sent the logged in therapist a connection request #
+  before_filter :ensure_therapist_signed_in, only: [:profile]
+  before_filter :patient_therapist_relationship_exists(params[:patient_id], session[:therapist_id]), only: [:profile]
+  
   def new
     @patient = Patient.new
   end
@@ -17,6 +21,9 @@ class PatientsController < ApplicationController
 
   def show
     @patient = Patient.find(session[:patient_id])
+  end
+
+  def profile
   end
 
   def update
