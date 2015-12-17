@@ -62,4 +62,7 @@ class Therapist < ActiveRecord::Base
 
   has_many :patients, through: :patient_therapist_relationships
   has_many :patient_therapist_relationships
+  has_many :votes
+  has_many :voters, through: :votes
+  has_many :votees, through: :votes
 end
