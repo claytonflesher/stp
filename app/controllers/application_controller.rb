@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def ensure_patient_signed_in
     unless current_patient
       session[:return_to] = request.url
-      redirect_to signin_path
+      redirect_to patient_signin_path
     end
   end
 
@@ -30,6 +30,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_relationship_exists
+    unless patient_therapist_relationship_exists
+      session[:return_to] = request.url
+      redirect_to therapist_dashboard_path
+    end
+  end
+
   def current_patient
     session[:patient_id] && Patient.find(session[:patient_id])
     if session[:patient_id] && Patient.find(session[:patient_id])
@@ -49,7 +56,9 @@ class ApplicationController < ActionController::Base
     current_therapist != nil
   end
 
-  def patient_therapist_relationship_exists?(patient_id, therapist_id)
+  def patient_therapist_relationship_exists?
+    patient_id = params[:patient_id]
+    therapist_id = session[:therapist_id]
     PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) != nil
   end
 
