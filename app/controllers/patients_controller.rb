@@ -68,7 +68,7 @@ class PatientsController < ApplicationController
     @patient = Patient.find(session[:patient_id])
     # I'm pretty sure a therapist object is sent with the params, and I hope I can grab it this way
     @therapist = params[:therapist]
-    if @patient.send_message(message_params)
+    if @patient.send_message(message_params[:therapist], message_params[:topic], message_params[:body])
       redirect_to show_conversation_path(@therapist.id)
     else
       render :new_message
