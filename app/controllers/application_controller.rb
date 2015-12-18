@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def ensure_patient_not_signed_in
     if current_patient
       redirect_to patient_dashboard_path
@@ -30,16 +29,31 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def patient_therapist_relationship_exist
-    patient_id = params[:patient_id]
-    therapist_id = session[:therapist_id]
-    PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) != [] 
+  def ensure_relationship_exists
+    unless patient_therapist_relationship_exists
+      session[:return_to] = request.url
+      if current_patient
+        redirect_to patient_dashboard_path
+      elsif current_therapist
+        redirect_to therapist_dashboard_path
+      else
+        # Not logged in
+        redirect_to home_path
+      end
+    end
   end
 
-  def ensure_relationship_exist
-    unless patient_therapist_relationship_exist
+  def ensure_connection_accepted
+    unless connection_accepted
       session[:return_to] = request.url
-      redirect_to therapist_dashboard_path
+      if current_patient
+        redirect_to patient_dashboard_path
+      elsif current_therapist
+        redirect_to therapist_dashboard_path
+      else
+        # Not logged in
+        redirect_to home_path
+      end
     end
   end
 
@@ -54,6 +68,20 @@ class ApplicationController < ActionController::Base
     session[:therapist_id] && Therapist.find(session[:therapist_id])
   end
 
+  def patient_therapist_relationship_exists
+    if current_therapist
+      patient_id = params[:patient_id]
+      therapist_id = session[:therapist_id]
+    elsif current_patient
+      patient_id = session[:patient_id]
+      therapist_id = params[:patient_id]
+    else
+      # Not logged in
+      return false
+    end
+    PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) != [] 
+  end
+
   def patient_logged_in?
     current_patient != nil
   end
@@ -63,8 +91,22 @@ class ApplicationController < ActionController::Base
   end
 
   #When a therapist excepts a connection request, the updated_at record will be updated with the current time, therefore the connection is considered "accepted" when updated_at > created_at
-  def connection_accepted?(patient_therapist_relationship_id)
-    connection = PatientTherapistRelationship.where(id: patient_therapist_relationship_id)
+  def connection_accepted
+    if current_therapist
+      patient_id = params[:patient_id]
+      therapist_id = session[:therapist_id]
+    elsif current_patient
+      patient_id = session[:patient_id]
+      therapist_id = params[:patient_id]
+    else
+      # Not logged in
+      return false
+    end
+    connection = PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) 
+    if connection == []
+      # no relationship
+      return false
+    end
     connection.updated_at > connection.created_at
   end
 
