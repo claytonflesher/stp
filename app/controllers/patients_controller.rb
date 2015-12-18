@@ -1,13 +1,13 @@
 class PatientsController < ApplicationController
-  before_filter :ensure_patient_signed_in, only: [:show, :update, :edit]
-  before_filter :ensure_patient_not_signed_in, except: [:show, :update, :edit]
+  before_filter :ensure_patient_signed_in, only: [:show, :update, :edit, :new_message, :send_new_message, :show_conversation, :reply_to_message]
+  before_filter :ensure_patient_not_signed_in, except: [:show, :update, :edit, :new_message, :send_new_message, :show_conversation, :reply_to_message]
 
   # To see a patient's profile, you must be signed in as a therapist, and the patient must have sent the logged in therapist a connection request #
   before_filter :ensure_therapist_signed_in, only: [:profile]
   before_filter :ensure_relationship_exists, only: [:profile]
 
   # For messaging
-  before_filter :ensure_connection_accepted, only: [:new_message, :send_new_message, :show_conversation, :reply_to_message]
+  # before_filter :ensure_connection_accepted, only: [:new_message, :send_new_message, :show_conversation, :reply_to_message]
   
   # To view a conversation, 
   def new
@@ -90,6 +90,10 @@ class PatientsController < ApplicationController
 
   def patient_params
     params.require(:patient).permit(:username, :password, :password_confirmation, :name, :phone, :email, :zipcode, :gender, :former_religion, :description, :distance)
+  end
+
+  def message_params
+    params.require(:acts_as_messageable).permit(:therapist, :patient, :topic, :body)
   end
 end
 

@@ -1,4 +1,4 @@
-<%= form_tag {controller: patients, action: send_new_message, method: post} do %>
+<%= form_tag({controller: "patients", action: "send_new_message"}, method: "post", class: "custom_message") do %>
 
   <%= hidden_field_tag 'therapist', @therapist %>
   <%= hidden_field_tag 'patient', @patient %>
