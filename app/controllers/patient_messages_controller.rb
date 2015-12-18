@@ -90,5 +90,15 @@ class PatientMessagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
       params.require[:acts_as_messageable_message].permit[:therapist_id, :patient_id, :topic, :body]
+      #!!!!!!!!!!wrong number of arguments (0 for 1)
+      #Parameters:
+      #
+      #{"utf8"=>"✓",
+      # "authenticity_token"=>"FGFSS0SazqrVQoFanCkhUO/7c6bWP8tCC0fmjIXhdVNqgt1k87gVmqONlcbFU5orIMlC8oq/7eJGdac8uQevFQ==",
+      #  "acts_as_messageable_message"=>{"therapist_id"=>"1",
+      #   "patient_id"=>"2",
+      #    "topic"=>"sivinstest",
+      #     "body"=>"Hello!"},
+      #      "commit"=>"Send"}!
     end
 end
