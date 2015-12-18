@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :patient_messages
   get    "home"                            => "static_pages#home"
   get    "about"                           => "static_pages#about"
   get    "contact"                         => "static_pages#contact"
@@ -15,11 +14,11 @@ Rails.application.routes.draw do
   get    "edit_therapist"                  => "therapists#edit"
   put    "update_therapist"                => "therapists#update"
   patch  "update_therapist"                => "therapists#update"
-  get "therapist_profile/:therapist_id" => "therapists#profile"
-  get "therapist_new_message/:patient_id" => "therapists#new_message"
-  get "therapist_show_conversation/:patient_id" => "therapists#show_conversation"
-  post "therapist_send_new_message" => "therapists#send_new_message"
-  post "therapist_reply_to_message" => "therapists#reply_to_message"
+  #get "therapist_profile/:therapist_id" => "therapists#profile"
+  #get "therapist_new_message/:patient_id" => "therapists#new_message"
+  #get "therapist_show_conversation/:patient_id" => "therapists#show_conversation"
+  #post "therapist_send_new_message" => "therapists#send_new_message"
+  #post "therapist_reply_to_message" => "therapists#reply_to_message"
   get "therapist_profile/:therapist_id" => "therapists#profile"
   get    "patient_signup"                  => "patients#new",                    as: :patient_signup
   post   "patient_signup"                  => "patients#create"
@@ -33,10 +32,10 @@ Rails.application.routes.draw do
   put    "update_patient"                  => "patients#update"
   patch  "update_patient"                  => "patients#update"
   get "patient_profile/:patient_id" => "patients#profile"
-  get "patient_new_message/:therapist_id" => "patients#new_message"
-  get "patient_show_conversation/:therapist_id" => "patients#show_conversation"
-  post "patient_send_new_message" => "patients#send_new_message"
-  post "patient_reply_to_message" => "patients#reply_to_message"
+  get "patient_new_message/:therapist_id" => "patient_messages#new"
+  get "patient_show_conversation/:therapist_id" => "patient_messages#index"
+  post "patient_send_new_message" => "patient_messages#create"
+  post "patient_reply_to_message" => "patient_messages#reply_to_message"
   get    "therapist_reset_password"             => "therapists_password_resets#new",   as: :therapist_reset_password
   post   "therapist_reset_password"             => "therapists_password_resets#create"
   get    "therapist_reset_password/:token/edit" => "therapists_password_resets#edit",  as: :edit_therapist_reset_password
