@@ -4,8 +4,9 @@ class PatientsController < ApplicationController
 
   # To see a patient's profile, you must be signed in as a therapist, and the patient must have sent the logged in therapist a connection request #
   before_filter :ensure_therapist_signed_in, only: [:profile]
-  before_filter :ensure_relationship_exist, only: [:profile]
+  before_filter :ensure_relationship_exists, only: [:profile]
   
+  # To view a conversation, 
   def new
     @patient = Patient.new
   end
@@ -36,6 +37,45 @@ class PatientsController < ApplicationController
 
   def edit
     @patient = Patient.find(session[:patient_id])
+  end
+
+  def show_conversation
+    @patient = Patient.find(session[:patient_id])
+    @message = @patient.messages.where(sent_messageable_id: params[:therapist_id]).first
+    unless @message
+      redirect_to patient_new_message_path(params[:therapist_id])
+    end
+    @conversation = @message.conversation
+  end
+  
+  # GET
+  def new_message
+    @patient = Patient.find(session[:patient_id])
+    @therapist = Therapist.find(params[:therapist_id])
+    @topic = @patient.username.to_s + @therapist.username.to_s
+  end
+
+  # POST
+  def send_new_message
+    @patient = Patient.find(session[:patient_id])
+    # I'm pretty sure a therapist object is sent with the params, and I hope I can grab it this way
+    @therapist = params[:therapist]
+    if @patient.send_message(message_params)
+      redirect_to show_conversation_path(@therapist.id)
+    else
+      render :new_message
+    end
+  end
+
+  # POST
+  def reply_to_message
+    @patient = Patient.find(session[:patient_id])
+    @therapist = params[:therapist]
+    if @patient.reply_to(message_params)
+      redirect_to show_conversation_path(@therapist.id)
+    else
+      render :show_conversation # Need error messages
+    end
   end
 
   private
