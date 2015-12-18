@@ -5,6 +5,9 @@ class PatientsController < ApplicationController
   # To see a patient's profile, you must be signed in as a therapist, and the patient must have sent the logged in therapist a connection request #
   before_filter :ensure_therapist_signed_in, only: [:profile]
   before_filter :ensure_relationship_exists, only: [:profile]
+
+  # For messaging
+  before_filter :ensure_connection_accepted, only: [:new_message, :send_new_message, :show_conversation, :reply_to_message]
   
   # To view a conversation, 
   def new
@@ -38,6 +41,10 @@ class PatientsController < ApplicationController
   def edit
     @patient = Patient.find(session[:patient_id])
   end
+  
+  #####################
+  # MESSAGING ACTIONS #
+  #####################
 
   def show_conversation
     @patient = Patient.find(session[:patient_id])
@@ -49,6 +56,7 @@ class PatientsController < ApplicationController
   end
   
   # GET
+  #
   def new_message
     @patient = Patient.find(session[:patient_id])
     @therapist = Therapist.find(params[:therapist_id])
