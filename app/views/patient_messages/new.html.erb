@@ -1,5 +1,13 @@
 <h1>New Patient Message</h1>
 
-<%= render 'form' %>
+<%= form_for @message, url: patient_send_new_message_path do |f| %>
 
-<%= link_to 'Back', patient_messages_path %>
+  <%= f.hidden_field :therapist_id, { :value => @therapist_id } %>
+  <%= f.hidden_field :patient_id, { :value => @patient_id } %>
+  <%= f.hidden_field :topic, { :value => @topic } %>
+
+  <%= f.text_field :body %>
+
+  <%= f.submit "Send" %>
+
+<% end %>

@@ -34,8 +34,10 @@ class PatientMessagesController < ApplicationController
   def new
     @message = ActsAsMessageable::Message.new
 
-    @patient = Patient.find(session[:patient_id])
-    @therapist = Therapist.find(params[:therapist_id])
+    @patient_id = session[:patient_id]
+    @therapist_id = params[:therapist_id]
+    @patient = Patient.find(@patient_id)
+    @therapist = Therapist.find(@therapist_id)
     @topic = @patient.username.to_s + @therapist.username.to_s
   end
 
@@ -46,9 +48,9 @@ class PatientMessagesController < ApplicationController
  # # POST /messages
  # # POST /messages.json
   def create
-    @patient = Patient.find(session[:patient_id])
-    @therapist = params[:therapist]
-    if @patient.send_message(message_params[:therapist], message_params[:topic], message_params[:body])
+    @patient = Patient.find(params[:acts_as_messageable_message][:patient_id])
+    @therapist = Therapist.find(params[:acts_as_messageable_message][:therapist_id])
+    if @patient.send_message(@therapist, message_params[:acts_as_messageable_message][:topic], message_params[:acts_as_messageable_message][:body])
       redirect_to show_conversation_path(@therapist.id)
     else
       render :new
@@ -87,6 +89,6 @@ class PatientMessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require[:message].permit(:therapist, :patient, :topic, :body)
+      params.require[:acts_as_messageable_message].permit[:therapist_id, :patient_id, :topic, :body]
     end
 end
