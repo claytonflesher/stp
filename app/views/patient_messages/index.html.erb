@@ -2,24 +2,22 @@
 
 <h1>Listing Patient Messages</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
+<table>
   <tbody>
     <% @patient_messages.each do |patient_message| %>
       <tr>
-        <td><%= link_to 'Show', patient_message %></td>
-        <td><%= link_to 'Edit', edit_patient_message_path(patient_message) %></td>
-        <td><%= link_to 'Destroy', patient_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+        <% if patient_message.sent_messageable_type == "Therapist" %>
+          <%= @therapist.username %>:
+        <% else %>
+          <%= @patient.username %>:
+        <% end %>
+      </td>
+      <td>
+        <%= patient_message.body %>
+      </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Patient message', new_patient_message_path %>

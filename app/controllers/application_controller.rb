@@ -97,7 +97,7 @@ class ApplicationController < ActionController::Base
       therapist_id = session[:therapist_id]
     elsif current_patient
       patient_id = session[:patient_id]
-      therapist_id = params[:patient_id]
+      therapist_id = params[:therapist_id]
     else
       # Not logged in
       return false
@@ -107,7 +107,20 @@ class ApplicationController < ActionController::Base
       # no relationship
       return false
     end
-    connection.updated_at > connection.created_at
+    #if the connection has been updated after it was created, that means it was accepted by the therapist
+    connection.first.updated_at > connection.first.created_at
+  end
+
+  def patient_find_first_message
+    #Finds the first message between a patient and the therapist that seeds the conversation
+    #
+    #look for message where sent_type is therapist, sent_id is therapist id, and received_id is patient id
+    #if == [] look for message where received_type is therapist, received_id is therapist_id, and sent_id is patient_id
+    #if == [] return false 
+  end
+
+  def therapist_find_first_message
+    # Will probably have the exact same implementation, but look for therapist_id in the session and patient_id in the url params
   end
 
   helper_method :current_patient, 

@@ -1,17 +1,19 @@
 class PatientMessagesController < ApplicationController
   before_filter :ensure_patient_signed_in, only: [:index, :reply_to_message, :new, :create]
-  # before_filter :ensure_connection_accepted, only: [:index, :reply_to_message]
+  before_filter :ensure_connection_accepted, only: [:index, :reply_to_message, :new]
   # before_filter :ensure_connection_not_accepted, except: [:index, :reply_to_message]
   #
   # GET /messages
   # GET /messages.json
   def index
     @patient = Patient.find(session[:patient_id])
-    @message = @patient.messages.where(sent_messageable_id: params[:therapist_id]).first
+    @therapist = Therapist.find(params[:therapist_id])
+    @message = patient_find_first_message 
     unless @message
+      # They have not sent a message yet, go to form to send first message
       redirect_to patient_new_message_path(params[:therapist_id])
     end
-    @conversation = @message.conversation
+    @patient_messages = @message.conversation
   end
 
   # POST
@@ -19,7 +21,7 @@ class PatientMessagesController < ApplicationController
     @patient = Patient.find(session[:patient_id])
     @therapist = params[:therapist]
     if @patient.reply_to(message_params)
-      redirect_to show_conversation_path(@therapist.id)
+      redirect_to patient_show_conversation_path(@therapist.id)
     else
       render :show_conversation # Need error messages
     end
@@ -50,11 +52,8 @@ class PatientMessagesController < ApplicationController
   def create
     @patient = Patient.find(params[:acts_as_messageable_message][:patient_id])
     @therapist = Therapist.find(params[:acts_as_messageable_message][:therapist_id])
-    if @patient.send_message(@therapist, message_params[:acts_as_messageable_message][:topic], message_params[:acts_as_messageable_message][:body])
-      redirect_to show_conversation_path(@therapist.id)
-    else
-      render :new
-    end
+    @patient.send_message(@therapist, params[:acts_as_messageable_message][:topic], params[:acts_as_messageable_message][:body])
+    redirect_to patient_show_conversation_path(@therapist.id)
   end
 
  # # PATCH/PUT /messages/1
@@ -88,8 +87,8 @@ class PatientMessagesController < ApplicationController
     #end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def message_params
-      params.require[:acts_as_messageable_message].permit[:therapist_id, :patient_id, :topic, :body]
+   # def message_params
+   #   params.require[:acts_as_messageable_message].permit[:therapist_id, :patient_id, :topic, :body]
       #!!!!!!!!!!wrong number of arguments (0 for 1)
       #Parameters:
       #
@@ -100,5 +99,5 @@ class PatientMessagesController < ApplicationController
       #    "topic"=>"sivinstest",
       #     "body"=>"Hello!"},
       #      "commit"=>"Send"}!
-    end
+   # end
 end

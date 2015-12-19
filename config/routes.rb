@@ -32,8 +32,8 @@ Rails.application.routes.draw do
   put    "update_patient"                  => "patients#update"
   patch  "update_patient"                  => "patients#update"
   get "patient_profile/:patient_id" => "patients#profile"
-  get "patient_new_message/:therapist_id" => "patient_messages#new"
-  get "patient_show_conversation/:therapist_id" => "patient_messages#index"
+  get "patient_new_message/:therapist_id" => "patient_messages#new", as: :patient_new_message
+  get "patient_show_conversation/:therapist_id" => "patient_messages#index", as: :patient_show_conversation
   post "patient_send_new_message" => "patient_messages#create"
   post "patient_reply_to_message" => "patient_messages#reply_to_message"
   get    "therapist_reset_password"             => "therapists_password_resets#new",   as: :therapist_reset_password
