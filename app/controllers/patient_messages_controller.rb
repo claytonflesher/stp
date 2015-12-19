@@ -8,12 +8,12 @@ class PatientMessagesController < ApplicationController
   def index
     @patient = Patient.find(session[:patient_id])
     @therapist = Therapist.find(params[:therapist_id])
-    @message = patient_find_first_message 
+    @message = find_first_message 
     unless @message
       # They have not sent a message yet, go to form to send first message
       redirect_to patient_new_message_path(params[:therapist_id])
     end
-    @patient_messages = @message.conversation
+    @patient_messages = @message.first.conversation
   end
 
   # POST

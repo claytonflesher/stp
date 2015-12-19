@@ -111,20 +111,54 @@ class ApplicationController < ActionController::Base
     connection.first.updated_at > connection.first.created_at
   end
 
-  def patient_find_first_message
+  def find_first_message
     #Finds the first message between a patient and the therapist that seeds the conversation
-    #
-    #look for message where sent_type is therapist, sent_id is therapist id, and received_id is patient id
-    #if == [] look for message where received_type is therapist, received_id is therapist_id, and sent_id is patient_id
-    #if == [] return false 
+    if current_therapist
+      patient_id = params[:patient_id]
+      therapist_id = session[:therapist_id]
+    elsif current_patient
+      patient_id = session[:patient_id]
+      therapist_id = params[:therapist_id]
+    else
+      #Not logged in
+      return false
+    end
+
+    @patient = Patient.find(patient_id)
+    @therapist = Therapist.find(therapist_id)
+    
+    # Did the therapist send the first message?
+    @message = @therapist.messages.where(sent_messageable_type: "Therapist", 
+                                         sent_messageable_id: therapist_id, 
+                                         received_messageable_id: patient_id)
+    if @message != []
+      return @message
+    end
+
+    # No message was found, see if the patient has sent a message
+    @message = @therapist.messages.where(sent_messageable_type: "Patient",
+                                         sent_messageable_id: patient_id,
+                                         received_messageable_id: therapist_id)
+    if @message != []
+     return @message
+    end
+
+    # Still haven't found a message, so no one has sent one yet. 
+    # Return false will redirect user to the new_message path
+    return false
   end
 
   def therapist_find_first_message
     # Will probably have the exact same implementation, but look for therapist_id in the session and patient_id in the url params
   end
 
+  def get_ids
+   #For future refactoring 
+  end
+
   helper_method :current_patient, 
                 :current_therapist, 
                 :patient_logged_in?, 
-                :therapist_logged_in?
+                :therapist_logged_in?,
+                :find_first_message
 end
