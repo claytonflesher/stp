@@ -132,7 +132,7 @@ class ApplicationController < ActionController::Base
                                          sent_messageable_id: therapist_id, 
                                          received_messageable_id: patient_id)
     if @message != []
-      return @message
+      return @message.first
     end
 
     # No message was found, see if the patient has sent a message
@@ -140,7 +140,7 @@ class ApplicationController < ActionController::Base
                                          sent_messageable_id: patient_id,
                                          received_messageable_id: therapist_id)
     if @message != []
-     return @message
+     return @message.first
     end
 
     # Still haven't found a message, so no one has sent one yet. 

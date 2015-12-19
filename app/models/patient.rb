@@ -5,8 +5,7 @@ class Patient < ActiveRecord::Base
     obj.zipcode.present? && obj.zipcode_changed? 
   }
 
-  acts_as_messageable :class_name => "CustomMessage",
-                      :table_name => "messages",
+  acts_as_messageable :table_name => "messages",
                       :dependent  => :destroy
 
   validates :username,        

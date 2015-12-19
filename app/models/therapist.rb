@@ -5,8 +5,7 @@ class Therapist < ActiveRecord::Base
     obj.geo_address.present? && obj.geo_address_changed? 
   }
 
-  acts_as_messageable :class_name => "CustomMessage",
-                      :table_name => "messages",
+  acts_as_messageable :table_name => "messages",
                       :dependent  => :destroy
 
   def phone=(phone)

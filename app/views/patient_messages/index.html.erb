@@ -1,7 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Patient Messages</h1>
+<h1>Convesation With <%= @therapist.username %></h1>
 
+<%= form_tag patient_reply_to_message_path, method: "post" do %>
+
+  <%= hidden_field_tag :therapist_id, @therapist.id %>
+  <%= hidden_field_tag :patient_id, @patient.id %>
+  <%= hidden_field_tag :message_id, @message.id %>
+  
+  <%= text_field_tag :body %>
+
+  <%= submit_tag "Send" %>
+
+<% end %>
 
 <table>
   <tbody>

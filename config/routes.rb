@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get "patient_new_message/:therapist_id" => "patient_messages#new", as: :patient_new_message
   get "patient_show_conversation/:therapist_id" => "patient_messages#index", as: :patient_show_conversation
   post "patient_send_new_message" => "patient_messages#create"
-  post "patient_reply_to_message" => "patient_messages#reply_to_message"
+  post "patient_reply_to_message" => "patient_messages#reply_to_message", as: :patient_reply_to_message
   get    "therapist_reset_password"             => "therapists_password_resets#new",   as: :therapist_reset_password
   post   "therapist_reset_password"             => "therapists_password_resets#create"
   get    "therapist_reset_password/:token/edit" => "therapists_password_resets#edit",  as: :edit_therapist_reset_password
