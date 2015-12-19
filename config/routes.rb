@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get    "edit_therapist"                  => "therapists#edit"
   put    "update_therapist"                => "therapists#update"
   patch  "update_therapist"                => "therapists#update"
+  get    "votes"                            => "votes#index"
+  post   "votes"                            => "votes#create"
   get    "patient_signup"                  => "patients#new",                    as: :patient_signup
   post   "patient_signup"                  => "patients#create"
   get    "patient_signin"                  => "patients_sessions#new",           as: :patient_signin

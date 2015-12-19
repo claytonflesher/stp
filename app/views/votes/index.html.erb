@@ -3,6 +3,7 @@
 <h1>Pending Therapists</h1>
 
 <% @dashboard.pending_therapists.each do |therapist| %>
+  <p>
   <ul>
     <li>name:                <%= therapist.full_name %></li>
     <li>gender:              <%= therapist.gender %></li>
@@ -18,19 +19,26 @@
     <li>purpose:             <%= therapist.purpose %></li>
     <li>email:               <%= therapist.email %></li>
   </ul>
+  </p>
+  <h2>Current Votes</h2>
+  <p>
+    <% therapist.received_votes.each do |vote| %>
   <ul>
-    <% therapist.votes_received.each do |vote| %>
-      <li><%= vote %></li>
-    <% end %>
+      <li><%= vote.voter.full_name %></li>
+      <li><%= vote.decision %></li>
+      <li><%= vote.comment %></li>
   </ul>
-
-  <% form_tag do %>
-    <%= label_tag :vote %>
-    <%= select_tag :vote, options_for_select([["Accept", "Accept"], ["Decline", "Decline"], ["Need more info", "Need more info"]]) %>
+    <% end %>
+  </p>
+  <%= form_tag do %>
+    <%= label_tag :decision, "Vote" %>
+    <%= select_tag :decision, options_for_select([["Accept", "Accept"], ["Decline", "Decline"], ["Need more info", "Need more info"]]) %>
 
     <%= label_tag :comment, "Comments" %>
     <%= text_field_tag :comment %>
 
-    <%= submit_tag %>
+    <%= hidden_field_tag :votee_id, therapist.id %>
+
+    <%= submit_tag "Vote" %>
   <% end %>
 <% end %>

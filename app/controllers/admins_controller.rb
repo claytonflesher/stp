@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
   before_filter :ensure_admin
 
   def index
-    @dashboard = PendingDashboard.new(current_admin)
+    @admins = Admin.find_each
   end
 
   def show
