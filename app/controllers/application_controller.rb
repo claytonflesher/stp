@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   def ensure_admin
     unless current_admin
       session[:return_to] = request.url
-      redirect_to therapist_sign_in_path
+      redirect_to therapist_signin_path
     end
   end
 

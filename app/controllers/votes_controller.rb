@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  before_filter :ensure_admin
+
   def index
     @dashboard = PendingDashboard.new(current_admin)
   end
