@@ -14,12 +14,11 @@ Rails.application.routes.draw do
   get    "edit_therapist"                  => "therapists#edit"
   put    "update_therapist"                => "therapists#update"
   patch  "update_therapist"                => "therapists#update"
-  #get "therapist_profile/:therapist_id" => "therapists#profile"
-  #get "therapist_new_message/:patient_id" => "therapists#new_message"
-  #get "therapist_show_conversation/:patient_id" => "therapists#show_conversation"
-  #post "therapist_send_new_message" => "therapists#send_new_message"
-  #post "therapist_reply_to_message" => "therapists#reply_to_message"
   get "therapist_profile/:therapist_id" => "therapists#profile"
+  get "therapist_new_message/:patient_id" => "therapist_messages#new", as: :therapist_new_message
+  get "therapist_show_conversation/:patient_id" => "therapist_messages#index", as: :therapist_show_conversation
+  post "therapist_send_new_message" => "therapist_messages#create", as: :therapist_send_new_message
+  post "therapist_reply_to_message" => "therapist_messages#reply_to_message", as: :therapist_reply_to_message
   get    "patient_signup"                  => "patients#new",                    as: :patient_signup
   post   "patient_signup"                  => "patients#create"
   get    "patient_signin"                  => "patients_sessions#new",           as: :patient_signin
