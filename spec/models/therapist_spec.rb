@@ -160,4 +160,9 @@ RSpec.describe Therapist, type: :model do
     therapist.update_attribute :admin, true
     expect(therapist.admin?).to eq(true)
   end
+
+  it "has a full_name" do
+    therapist = create(:therapist)
+    expect(therapist.full_name).to eq("Sigmund Freud")
+  end
 end

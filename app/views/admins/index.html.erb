@@ -1,0 +1,36 @@
+<% provide(:title, "Pending Therapists") %>
+
+<h1>Pending Therapists</h1>
+
+<% @dashboard.pending_therapists.each do |therapist| %>
+  <ul>
+    <li>name:                <%= therapist.full_name %></li>
+    <li>gender:              <%= therapist.gender %></li>
+    <li>address:             <%= therapist.geo_address %></li>
+    <li>phone:               <%= therapist.phone %></li>
+    <li>practice:            <%= therapist.practice %></li>
+    <li>years:               <%= therapist.years_experience %></li>
+    <li>qualifications:      <%= therapist.qualifications %></li>
+    <li>religion:            <%= therapist.religion %></li>
+    <li>licenses:            <%= therapist.licenses %></li>
+    <li>main license:        <%= therapist.main_license %></li>
+    <li>distance counseling: <%= therapist.distance_counseling %></li>
+    <li>purpose:             <%= therapist.purpose %></li>
+    <li>email:               <%= therapist.email %></li>
+  </ul>
+  <ul>
+    <% therapist.votes_received.each do |vote| %>
+      <li><%= vote %></li>
+    <% end %>
+  </ul>
+
+  <% form_tag do %>
+    <%= label_tag :vote %>
+    <%= select_tag :vote, options_for_select([["Accept", "Accept"], ["Decline", "Decline"], ["Need more info", "Need more info"]]) %>
+
+    <%= label_tag :comment, "Comments" %>
+    <%= text_field_tag :comment %>
+
+    <%= submit_tag %>
+  <% end %>
+<% end %>

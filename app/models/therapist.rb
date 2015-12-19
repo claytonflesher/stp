@@ -67,4 +67,7 @@ class Therapist < ActiveRecord::Base
   has_many :received_votes, class_name: "Vote",
                             foreign_key: "votee_id"
 
+  def full_name
+    [first_name, last_name].join(" ")
+  end
 end
