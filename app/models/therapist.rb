@@ -1,13 +1,15 @@
 class Therapist < ActiveRecord::Base
   has_secure_password
   geocoded_by :geo_address
-  acts_as_messageable
 
   after_validation :geocode, if: ->(obj){ 
     obj.geo_address.present? && obj.geo_address_changed? 
   }
 
   scope :pending, -> { where(verified_at: nil).order("created_at DESC") }
+
+  acts_as_messageable :table_name => "messages",
+                      :dependent  => :destroy
 
   def phone=(phone)
     write_attribute(:phone, phone.try(:gsub, /[^+\dx]/, ""))

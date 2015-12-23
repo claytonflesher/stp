@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get    "home"                            => "static_pages#home"
   get    "about"                           => "static_pages#about"
   get    "contact"                         => "static_pages#contact"
+
   get    "therapist_signup"                => "therapists#new",                  as: :therapist_signup
   post   "therapist_signup"                => "therapists#create"
   get    "therapist_signin"                => "therapists_sessions#new",         as: :therapist_signin
@@ -16,6 +17,16 @@ Rails.application.routes.draw do
   patch  "update_therapist"                => "therapists#update"
   get    "votes"                            => "votes#index"
   post   "votes"                            => "votes#create"
+  get "therapist_profile/:therapist_id" => "therapists#profile"
+  get "therapist_new_message/:patient_id" => "therapist_messages#new", as: :therapist_new_message
+  get "therapist_show_conversation/:patient_id" => "therapist_messages#index", as: :therapist_show_conversation
+  post "therapist_send_new_message" => "therapist_messages#create", as: :therapist_send_new_message
+  post "therapist_reply_to_message" => "therapist_messages#reply_to_message", as: :therapist_reply_to_message
+  get    "therapist_reset_password"             => "therapists_password_resets#new",   as: :therapist_reset_password
+  post   "therapist_reset_password"             => "therapists_password_resets#create"
+  get    "therapist_reset_password/:token/edit" => "therapists_password_resets#edit",  as: :edit_therapist_reset_password
+  post   "therapist_reset_password/:token/edit" => "therapists_password_resets#update"
+
   get    "patient_signup"                  => "patients#new",                    as: :patient_signup
   post   "patient_signup"                  => "patients#create"
   get    "patient_signin"                  => "patients_sessions#new",           as: :patient_signin
@@ -27,10 +38,11 @@ Rails.application.routes.draw do
   get    "edit_patient"                    => "patients#edit"
   put    "update_patient"                  => "patients#update"
   patch  "update_patient"                  => "patients#update"
-  get    "therapist_reset_password"             => "therapists_password_resets#new",   as: :therapist_reset_password
-  post   "therapist_reset_password"             => "therapists_password_resets#create"
-  get    "therapist_reset_password/:token/edit" => "therapists_password_resets#edit",  as: :edit_therapist_reset_password
-  post   "therapist_reset_password/:token/edit" => "therapists_password_resets#update"
+  get "patient_profile/:patient_id" => "patients#profile"
+  get "patient_new_message/:therapist_id" => "patient_messages#new", as: :patient_new_message
+  get "patient_show_conversation/:therapist_id" => "patient_messages#index", as: :patient_show_conversation
+  post "patient_send_new_message" => "patient_messages#create"
+  post "patient_reply_to_message" => "patient_messages#reply_to_message", as: :patient_reply_to_message
   get    "patient_reset_password"               => "patients_password_resets#new",     as: :patient_reset_password
   post   "patient_reset_password"               => "patients_password_resets#create"
   get    "patient_reset_password/:token/edit"   => "patients_password_resets#edit",    as: :edit_patient_reset_password

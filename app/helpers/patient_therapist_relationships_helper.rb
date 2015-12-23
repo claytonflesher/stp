@@ -1,0 +1,2 @@
+module PatientTherapistRelationshipsHelper
+end
