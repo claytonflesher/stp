@@ -33,9 +33,6 @@ gem 'geocoder', '~> 1.2', '>= 1.2.12'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# Use acts-as-messageable to create a message system
-gem 'acts-as-messageable'
-
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -49,6 +46,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   
+end
+
+group :test do
+    gem 'shoulda-matchers', '~> 3.0'
 end
 
 group :development do
