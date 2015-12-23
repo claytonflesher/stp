@@ -1,0 +1,118 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AddGeoAddressToTherapists	db/migrate/20151206182927_add_geo_address_to_therapists.rb	/^class AddGeoAddressToTherapists < ActiveRecord::Migration$/;"	c
+AddLatitudeAndLongitudeToPatient	db/migrate/20151206173737_add_latitude_and_longitude_to_patient.rb	/^class AddLatitudeAndLongitudeToPatient < ActiveRecord::Migration$/;"	c
+AddLatitudeAndLongitudeToTherapist	db/migrate/20151206173551_add_latitude_and_longitude_to_therapist.rb	/^class AddLatitudeAndLongitudeToTherapist < ActiveRecord::Migration$/;"	c
+AddPasswordResetTokenToPatients	db/migrate/20151212183100_add_password_reset_token_to_patients.rb	/^class AddPasswordResetTokenToPatients < ActiveRecord::Migration$/;"	c
+AddPasswordResetTokenToTherapists	db/migrate/20151212183132_add_password_reset_token_to_therapists.rb	/^class AddPasswordResetTokenToTherapists < ActiveRecord::Migration$/;"	c
+AddVerificationTokenToPatients	db/migrate/20151208114611_add_verification_token_to_patients.rb	/^class AddVerificationTokenToPatients < ActiveRecord::Migration$/;"	c
+AddVerificationTokenToTherapists	db/migrate/20151208114654_add_verification_token_to_therapists.rb	/^class AddVerificationTokenToTherapists < ActiveRecord::Migration$/;"	c
+AddVerifiedAtToPatients	db/migrate/20151208015009_add_verified_at_to_patients.rb	/^class AddVerifiedAtToPatients < ActiveRecord::Migration$/;"	c
+AddVerifiedAtToTherapists	db/migrate/20151208015051_add_verified_at_to_therapists.rb	/^class AddVerifiedAtToTherapists < ActiveRecord::Migration$/;"	c
+Application	config/application.rb	/^  class Application < Rails::Application$/;"	c	class:Stp
+ApplicationController	app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+ApplicationHelper	app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+ApplicationMailer	app/mailers/application_mailer.rb	/^class ApplicationMailer < ActionMailer::Base$/;"	c
+CreatePatientTherapistRelationships	db/migrate/20151202174744_create_patient_therapist_relationships.rb	/^class CreatePatientTherapistRelationships < ActiveRecord::Migration$/;"	c
+CreatePatients	db/migrate/20151202135552_create_patients.rb	/^class CreatePatients < ActiveRecord::Migration$/;"	c
+CreateTherapists	db/migrate/20151202141022_create_therapists.rb	/^class CreateTherapists < ActiveRecord::Migration$/;"	c
+FixLanguageNameOnTherapists	db/migrate/20151212191308_fix_language_name_on_therapists.rb	/^class FixLanguageNameOnTherapists < ActiveRecord::Migration$/;"	c
+Patient	app/models/patient.rb	/^class Patient < ActiveRecord::Base$/;"	c
+PatientMailer	app/mailers/patient_mailer.rb	/^class PatientMailer < ApplicationMailer$/;"	c
+PatientMailerPreview	spec/mailers/previews/patient_mailer_preview.rb	/^class PatientMailerPreview < ActionMailer::Preview$/;"	c
+PatientTherapistRelationship	app/models/patient_therapist_relationship.rb	/^class PatientTherapistRelationship < ActiveRecord::Base$/;"	c
+PatientTherapistRelationshipsController	app/controllers/patient_therapist_relationships_controller.rb	/^class PatientTherapistRelationshipsController < ApplicationController$/;"	c
+PatientTherapistRelationshipsHelper	app/helpers/patient_therapist_relationships_helper.rb	/^module PatientTherapistRelationshipsHelper$/;"	m
+PatientsController	app/controllers/patients_controller.rb	/^class PatientsController < ApplicationController$/;"	c
+PatientsHelper	app/helpers/patients_helper.rb	/^module PatientsHelper$/;"	m
+PatientsPasswordResetsController	app/controllers/patients_password_resets_controller.rb	/^class PatientsPasswordResetsController < ApplicationController$/;"	c
+PatientsPasswordResetsHelper	app/helpers/patients_password_resets_helper.rb	/^module PatientsPasswordResetsHelper$/;"	m
+PatientsSessionsController	app/controllers/patients_sessions_controller.rb	/^class PatientsSessionsController < ApplicationController$/;"	c
+PatientsSessionsHelper	app/helpers/patients_sessions_helper.rb	/^module PatientsSessionsHelper$/;"	m
+PatientsVerificationsController	app/controllers/patients_verifications_controller.rb	/^class PatientsVerificationsController < ApplicationController$/;"	c
+PatientsVerificationsHelper	app/helpers/patients_verifications_helper.rb	/^module PatientsVerificationsHelper$/;"	m
+StaticPagesController	app/controllers/static_pages_controller.rb	/^class StaticPagesController < ApplicationController$/;"	c
+Stp	config/application.rb	/^module Stp$/;"	m
+Therapist	app/models/therapist.rb	/^class Therapist < ActiveRecord::Base$/;"	c
+TherapistMailer	app/mailers/therapist_mailer.rb	/^class TherapistMailer < ApplicationMailer$/;"	c
+TherapistMailerPreview	spec/mailers/previews/therapist_mailer_preview.rb	/^class TherapistMailerPreview < ActionMailer::Preview$/;"	c
+TherapistsController	app/controllers/therapists_controller.rb	/^class TherapistsController < ApplicationController$/;"	c
+TherapistsHelper	app/helpers/therapists_helper.rb	/^module TherapistsHelper$/;"	m
+TherapistsPasswordResetsController	app/controllers/therapists_password_resets_controller.rb	/^class TherapistsPasswordResetsController < ApplicationController$/;"	c
+TherapistsPasswordResetsHelper	app/helpers/therapists_password_resets_helper.rb	/^module TherapistsPasswordResetsHelper$/;"	m
+TherapistsSessionsController	app/controllers/therapists_sessions_controller.rb	/^class TherapistsSessionsController < ApplicationController$/;"	c
+TherapistsSessionsHelper	app/helpers/therapists_sessions_helper.rb	/^module TherapistsSessionsHelper$/;"	m
+TherapistsVerificationsController	app/controllers/therapists_verifications_controller.rb	/^class TherapistsVerificationsController < ApplicationController$/;"	c
+TherapistsVerificationsHelper	app/helpers/therapists_verifications_helper.rb	/^module TherapistsVerificationsHelper$/;"	m
+about	app/controllers/static_pages_controller.rb	/^  def about$/;"	f	class:StaticPagesController
+change	db/migrate/20151202135552_create_patients.rb	/^  def change$/;"	f	class:CreatePatients
+change	db/migrate/20151202141022_create_therapists.rb	/^  def change$/;"	f	class:CreateTherapists
+change	db/migrate/20151202174744_create_patient_therapist_relationships.rb	/^  def change$/;"	f	class:CreatePatientTherapistRelationships
+change	db/migrate/20151206173551_add_latitude_and_longitude_to_therapist.rb	/^  def change$/;"	f	class:AddLatitudeAndLongitudeToTherapist
+change	db/migrate/20151206173737_add_latitude_and_longitude_to_patient.rb	/^  def change$/;"	f	class:AddLatitudeAndLongitudeToPatient
+change	db/migrate/20151206182927_add_geo_address_to_therapists.rb	/^  def change$/;"	f	class:AddGeoAddressToTherapists
+change	db/migrate/20151208015009_add_verified_at_to_patients.rb	/^  def change$/;"	f	class:AddVerifiedAtToPatients
+change	db/migrate/20151208015051_add_verified_at_to_therapists.rb	/^  def change$/;"	f	class:AddVerifiedAtToTherapists
+change	db/migrate/20151208114611_add_verification_token_to_patients.rb	/^  def change$/;"	f	class:AddVerificationTokenToPatients
+change	db/migrate/20151208114654_add_verification_token_to_therapists.rb	/^  def change$/;"	f	class:AddVerificationTokenToTherapists
+change	db/migrate/20151212183100_add_password_reset_token_to_patients.rb	/^  def change$/;"	f	class:AddPasswordResetTokenToPatients
+change	db/migrate/20151212183132_add_password_reset_token_to_therapists.rb	/^  def change$/;"	f	class:AddPasswordResetTokenToTherapists
+change	db/migrate/20151212191308_fix_language_name_on_therapists.rb	/^  def change$/;"	f	class:FixLanguageNameOnTherapists
+confirm	app/mailers/therapist_mailer.rb	/^  def confirm(therapist)$/;"	f	class:TherapistMailer
+connection_accepted?	app/controllers/application_controller.rb	/^  def connection_accepted?(patient_therapist_relationship_id)$/;"	f	class:ApplicationController
+contact	app/controllers/static_pages_controller.rb	/^  def contact$/;"	f	class:StaticPagesController
+create	app/controllers/patients_controller.rb	/^  def create$/;"	f	class:PatientsController
+create	app/controllers/patients_password_resets_controller.rb	/^  def create$/;"	f	class:PatientsPasswordResetsController
+create	app/controllers/patients_sessions_controller.rb	/^  def create$/;"	f	class:PatientsSessionsController
+create	app/controllers/patients_verifications_controller.rb	/^  def create$/;"	f	class:PatientsVerificationsController
+create	app/controllers/therapists_controller.rb	/^  def create$/;"	f	class:TherapistsController
+create	app/controllers/therapists_password_resets_controller.rb	/^  def create$/;"	f	class:TherapistsPasswordResetsController
+create	app/controllers/therapists_sessions_controller.rb	/^  def create$/;"	f	class:TherapistsSessionsController
+create	app/controllers/therapists_verifications_controller.rb	/^  def create$/;"	f	class:TherapistsVerificationsController
+current_patient	app/controllers/application_controller.rb	/^  def current_patient$/;"	f	class:ApplicationController
+current_therapist	app/controllers/application_controller.rb	/^  def current_therapist$/;"	f	class:ApplicationController
+destroy	app/controllers/patients_sessions_controller.rb	/^  def destroy$/;"	f	class:PatientsSessionsController
+destroy	app/controllers/therapists_sessions_controller.rb	/^  def destroy$/;"	f	class:TherapistsSessionsController
+edit	app/controllers/patients_controller.rb	/^  def edit$/;"	f	class:PatientsController
+edit	app/controllers/patients_password_resets_controller.rb	/^  def edit$/;"	f	class:PatientsPasswordResetsController
+edit	app/controllers/therapists_controller.rb	/^  def edit$/;"	f	class:TherapistsController
+edit	app/controllers/therapists_password_resets_controller.rb	/^  def edit$/;"	f	class:TherapistsPasswordResetsController
+email=	app/models/patient.rb	/^  def email=(email)$/;"	f	class:Patient
+email=	app/models/therapist.rb	/^  def email=(email)$/;"	f	class:Therapist
+ensure_patient_not_signed_in	app/controllers/application_controller.rb	/^  def ensure_patient_not_signed_in$/;"	f	class:ApplicationController
+ensure_patient_signed_in	app/controllers/application_controller.rb	/^  def ensure_patient_signed_in$/;"	f	class:ApplicationController
+ensure_relationship_exist	app/controllers/application_controller.rb	/^  def ensure_relationship_exist$/;"	f	class:ApplicationController
+ensure_therapist_not_signed_in	app/controllers/application_controller.rb	/^  def ensure_therapist_not_signed_in$/;"	f	class:ApplicationController
+ensure_therapist_signed_in	app/controllers/application_controller.rb	/^  def ensure_therapist_signed_in$/;"	f	class:ApplicationController
+full_title	app/helpers/application_helper.rb	/^  def full_title(page_title)$/;"	f	class:ApplicationHelper
+geo_address	app/models/therapist.rb	/^  def geo_address$/;"	f	class:Therapist
+home	app/controllers/static_pages_controller.rb	/^  def home$/;"	f	class:StaticPagesController
+new	app/controllers/patients_controller.rb	/^  def new$/;"	f	class:PatientsController
+new	app/controllers/patients_password_resets_controller.rb	/^  def new$/;"	f	class:PatientsPasswordResetsController
+new	app/controllers/patients_sessions_controller.rb	/^  def new$/;"	f	class:PatientsSessionsController
+new	app/controllers/patients_verifications_controller.rb	/^  def new$/;"	f	class:PatientsVerificationsController
+new	app/controllers/therapists_controller.rb	/^  def new$/;"	f	class:TherapistsController
+new	app/controllers/therapists_password_resets_controller.rb	/^  def new$/;"	f	class:TherapistsPasswordResetsController
+new	app/controllers/therapists_sessions_controller.rb	/^  def new$/;"	f	class:TherapistsSessionsController
+new	app/controllers/therapists_verifications_controller.rb	/^  def new$/;"	f	class:TherapistsVerificationsController
+patient_logged_in?	app/controllers/application_controller.rb	/^  def patient_logged_in?$/;"	f	class:ApplicationController
+patient_params	app/controllers/patients_controller.rb	/^  def patient_params$/;"	f	class:PatientsController
+patient_therapist_relationship_exist?	app/controllers/application_controller.rb	/^  def patient_therapist_relationship_exist?$/;"	f	class:ApplicationController
+phone=	app/models/therapist.rb	/^  def phone=(phone)$/;"	f	class:Therapist
+profile	app/controllers/patients_controller.rb	/^  def profile$/;"	f	class:PatientsController
+reset_password	app/mailers/patient_mailer.rb	/^  def reset_password(patient)$/;"	f	class:PatientMailer
+reset_password	app/mailers/therapist_mailer.rb	/^  def reset_password(therapist)$/;"	f	class:TherapistMailer
+show	app/controllers/patients_controller.rb	/^  def show$/;"	f	class:PatientsController
+show	app/controllers/therapists_controller.rb	/^  def show$/;"	f	class:TherapistsController
+therapist_logged_in?	app/controllers/application_controller.rb	/^  def therapist_logged_in?$/;"	f	class:ApplicationController
+therapist_params	app/controllers/therapists_controller.rb	/^  def therapist_params$/;"	f	class:TherapistsController
+update	app/controllers/patients_controller.rb	/^  def update$/;"	f	class:PatientsController
+update	app/controllers/patients_password_resets_controller.rb	/^  def update$/;"	f	class:PatientsPasswordResetsController
+update	app/controllers/therapists_controller.rb	/^  def update$/;"	f	class:TherapistsController
+update	app/controllers/therapists_password_resets_controller.rb	/^  def update$/;"	f	class:TherapistsPasswordResetsController
+verify	app/mailers/patient_mailer.rb	/^  def verify(patient)$/;"	f	class:PatientMailer
+verify	app/mailers/therapist_mailer.rb	/^  def verify(therapist)$/;"	f	class:TherapistMailer

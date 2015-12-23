@@ -5,6 +5,9 @@ class Therapist < ActiveRecord::Base
     obj.geo_address.present? && obj.geo_address_changed? 
   }
 
+  acts_as_messageable :table_name => "messages",
+                      :dependent  => :destroy
+
   def phone=(phone)
     write_attribute(:phone, phone.try(:gsub, /[^+\dx]/, ""))
   end
