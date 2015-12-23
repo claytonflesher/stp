@@ -1,6 +1,8 @@
 class Patient < ActiveRecord::Base
   has_secure_password
   geocoded_by :zipcode
+  acts_as_messageable
+                      
   after_validation :geocode, if: ->(obj){ 
     obj.zipcode.present? && obj.zipcode_changed? 
   }
@@ -23,7 +25,6 @@ class Patient < ActiveRecord::Base
 
   validates :former_religion, presence: true
   validates :description,     presence: true
-  validates :distance,        presence: true
 
   def email=(email)
     write_attribute(:email, email.try(:downcase))

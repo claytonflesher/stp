@@ -8,6 +8,7 @@ class TherapistsVerificationsController < ApplicationController
     @therapist.verification_token = SecureRandom.hex(20)
     @therapist.save!
     TherapistMailer.verify(@therapist).deliver_now
+    redirect_to vote_path
   end
 
   def create

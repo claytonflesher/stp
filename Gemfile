@@ -33,6 +33,9 @@ gem 'geocoder', '~> 1.2', '>= 1.2.12'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# Use acts-as-messageable to create a message system
+gem 'acts-as-messageable'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

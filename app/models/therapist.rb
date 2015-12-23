@@ -1,9 +1,12 @@
 class Therapist < ActiveRecord::Base
   has_secure_password
   geocoded_by :geo_address
+
   after_validation :geocode, if: ->(obj){ 
     obj.geo_address.present? && obj.geo_address_changed? 
   }
+
+  scope :pending, -> { where(verified_at: nil).order("created_at DESC") }
 
   acts_as_messageable :table_name => "messages",
                       :dependent  => :destroy
@@ -46,8 +49,7 @@ class Therapist < ActiveRecord::Base
             format:     /\A[+0-9x]+\z/
 
   validates :zipcode,
-            presence:   true,
-            format:     /\A[-0-9 ]+\z/
+            presence:   true
 
   def geo_address
     if address != ""
@@ -62,4 +64,12 @@ class Therapist < ActiveRecord::Base
 
   has_many :patients, through: :patient_therapist_relationships
   has_many :patient_therapist_relationships
+  has_many :cast_votes,     class_name: "Vote",
+                            foreign_key: "voter_id"
+  has_many :received_votes, class_name: "Vote",
+                            foreign_key: "votee_id"
+
+  def full_name
+    [first_name, last_name].join(" ")
+  end
 end

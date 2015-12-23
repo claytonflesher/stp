@@ -1,8 +1,10 @@
 class TherapistMailer < ApplicationMailer
   def verify(therapist)
     @therapist = therapist
-    @admin = Admin.all
-    mail_to @admin.email, subject: "[Secular Therapy Project] Therapist Application"
+    @admins    = Therapist.where(admin: true)
+    @admins.each do |admin|
+      mail_to admin.email, subject: "[Secular Therapy Project] Therapist Application"
+    end
   end
 
   def confirm(therapist)

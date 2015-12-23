@@ -29,6 +29,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_admin
+    unless current_admin
+      session[:return_to] = request.url
+      redirect_to therapist_signin_path
+    end
+  end
+
   def ensure_relationship_exists
     unless patient_therapist_relationship_exists
       session[:return_to] = request.url
@@ -66,6 +73,12 @@ class ApplicationController < ActionController::Base
 
   def current_therapist
     session[:therapist_id] && Therapist.find(session[:therapist_id])
+  end
+
+  def current_admin
+    if current_therapist
+      Therapist.find(session[:therapist_id]).admin?
+    end
   end
 
   def patient_therapist_relationship_exists

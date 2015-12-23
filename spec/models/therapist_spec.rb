@@ -54,12 +54,6 @@ RSpec.describe Therapist, type: :model do
     expect(therapist.errors[:zipcode]).not_to be_empty
   end
 
-  it "validates the format of a #zipcode" do
-    therapist = build(:therapist, zipcode: "11234four")
-    expect(therapist).not_to                  be_valid
-    expect(therapist.errors[:zipcode]).not_to be_empty
-  end
-
   it "validates the presence of a #first_name" do
     therapist = build(:therapist, first_name: nil)
     expect(therapist).not_to                     be_valid
@@ -158,5 +152,17 @@ RSpec.describe Therapist, type: :model do
   it "has a longitude" do
     therapist = create(:therapist)
     expect(therapist.longitude).to eq(-73.9552266)
+  end
+
+  it "has an admin?" do
+    therapist = create(:therapist)
+    expect(therapist.admin?).to eq(false)
+    therapist.update_attribute :admin, true
+    expect(therapist.admin?).to eq(true)
+  end
+
+  it "has a full_name" do
+    therapist = create(:therapist)
+    expect(therapist.full_name).to eq("Sigmund Freud")
   end
 end
