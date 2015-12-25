@@ -70,6 +70,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -211,6 +212,7 @@ DEPENDENCIES
   byebug
   capybara
   coffee-rails (~> 4.1)
+  database_cleaner
   factory_girl_rails (~> 4.5)
   geocoder (~> 1.2, >= 1.2.12)
   jbuilder (~> 2.0)
