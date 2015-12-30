@@ -39,6 +39,14 @@
   <%= @patient.description %>
 </p>
 
+<h2>Therapists Near You</h2>
+<% @results.each do |t| %>
+  <p><%= t.first_name %> <%= t.last_name %></p>
+  <p><%= t.city %>, <%= t.state %></p>
+<% end %>
+
+
+
 
 
 <%= link_to 'Edit', edit_patient_path %>
