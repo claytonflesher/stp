@@ -52,10 +52,6 @@ class Therapist < ActiveRecord::Base
   validates :zipcode,
             presence:   true
 
-  def geo_address=(geo_address)
-    write_attribute(:geo_address, geo_address)
-  end
-
   has_many :patients, through: :patient_therapist_relationships
   has_many :patient_therapist_relationships
   has_many :cast_votes,     class_name: "Vote",
