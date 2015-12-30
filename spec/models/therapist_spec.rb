@@ -156,4 +156,10 @@ RSpec.describe Therapist, type: :model do
       expect(therapist.full_name).to eq("Sigmund Freud")
     end
   end
+
+  describe Therapist, ".geo_address" do
+    it do
+      should validate_presence_of(:geo_address)
+    end
+  end
 end
