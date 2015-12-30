@@ -163,3 +163,4 @@ RSpec.describe Therapist, type: :model do
     end
   end
 end
+

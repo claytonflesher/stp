@@ -40,6 +40,24 @@ class TherapistsController < ApplicationController
   private
 
   def therapist_params
-    params.require(:therapist).permit(:username, :password, :password_confirmation, :first_name, :last_name, :phone, :email, :address, :city, :state, :country, :zipcode, :practice, :years_experience, :qualifications, :website, :gender, :religion, :previous_religion, :licenses, :main_license, :distance_counseling, :languages, :purpose, :public_description, :secular_evidence)
+    params.require(:therapist).permit(:username, :password, :password_confirmation, :first_name, :last_name, :phone, :email, :address, :city, :state, :country, :zipcode, :practice, :years_experience, :qualifications, :website, :gender, :religion, :previous_religion, :licenses, :main_license, :distance_counseling, :languages, :purpose, :public_description, :secular_evidence).merge(geo_address: geo_address)
+  end
+
+  def geo_address
+    if params[:therapist][:address] == ""
+      ""
+    elsif params[:therapist][:state] != "Not Applicable"
+      [params[:therapist][:address],
+       params[:therapist][:city],
+       params[:therapist][:country],
+       params[:therapist][:zipcode]
+      ].join(", ")
+    else
+      [params[:therapist][:address],
+       params[:therapist][:city],
+       params[:therapist][:state],
+       params[:therapist][:zipcode]
+      ].join(", ")
+    end
   end
 end
