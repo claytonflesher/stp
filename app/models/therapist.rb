@@ -34,6 +34,7 @@ class Therapist < ActiveRecord::Base
   validates :main_license,        presence: true
   validates :distance_counseling, inclusion: { in: [true, false] }
   validates :purpose,             presence: true
+  validates :geo_address,         presence: true
 
   validates :username, 
             presence:   true,
@@ -51,15 +52,8 @@ class Therapist < ActiveRecord::Base
   validates :zipcode,
             presence:   true
 
-  def geo_address
-    if address != ""
-      if state != "Not Applicable"
-        geo_address = [address, city, state, zipcode].join(", ")
-      else
-        geo_address = [address, city, country, zipcode].join(", ")
-      end
-      geo_address
-    end
+  def geo_address=(geo_address)
+    write_attribute(:geo_address, geo_address)
   end
 
   has_many :patients, through: :patient_therapist_relationships

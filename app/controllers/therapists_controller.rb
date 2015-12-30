@@ -8,7 +8,25 @@ class TherapistsController < ApplicationController
 
 
   def create
-    @therapist = Therapist.create(therapist_params)
+    @therapist = Therapist.build(therapist_params)
+    if @therapist.address != ""
+      if @therapist.state != "Not Applicable"
+        @therapist.geo_address = [
+          params[:therapist][:address],
+          params[:therapist][:city],
+          params[:therapist][:state],
+          params[:therapist][:zipcode].join(", ")
+        ]
+      else
+        @therapist.geo_address = [
+          params[:therapist][:address],
+          params[:therapist][:city],
+          params[:therapist][:country],
+          params[:therapist][:zipcode].join(", ")
+        ]
+      end
+    end
+    @therapist.save
     if @therapist.id
       redirect_to therapist_verify_path(therapist_id: @therapist.id)
     else
