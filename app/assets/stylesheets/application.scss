@@ -6,10 +6,8 @@
 
 @import "partials/_nav.scss";
 @import "partials/_footer.scss";
+@import "static_pages.scss";
 
-#main {
-  @include outer-container();
-}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.

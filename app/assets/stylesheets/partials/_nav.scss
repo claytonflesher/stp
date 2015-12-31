@@ -6,6 +6,8 @@ header.navigation {
   min-height: $navigation-height;
   width: 100%;
   z-index: 999;
+  font-size: 1.15em;
+  font-weight: bold;
 
   .navigation-wrapper {
     @include clearfix;
@@ -17,7 +19,7 @@ header.navigation {
   .logo {
     float: left;
     max-height: $navigation-height;
-    padding-left: $navigation-padding;
+    padding-left: 2em;
     padding-right: 2em;
     
 
@@ -73,7 +75,6 @@ header.navigation {
     z-index: 9999;
 
     &.show {
-      display: block;
     }
 
     @include media ($horizontal-bar-mode) {
