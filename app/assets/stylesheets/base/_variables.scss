@@ -1,6 +1,6 @@
 // Typography
-$base-font-family: $helvetica;
-$heading-font-family: $base-font-family;
+$base-font-family: 'Open Sans', sans-serif;
+$heading-font-family: 'Merriweather', serif;
 
 // Font Sizes
 $base-font-size: 1em;
@@ -53,16 +53,16 @@ $base-timing: ease;
 
 $large-screen: em(860) !default;
 $navigation-padding: 1em;
-$navigation-background: $red;
-$navigation-color: $light-green;
-$navigation-color-hover: #fff;
+$navigation-background: #fff;
+$navigation-color: $red;
+$navigation-color-hover: darken($navigation-color, 10%);
 $navigation-height: 60px;
 $navigation-nav-button-background: $action-color;
 $navigation-nav-button-background-hover: lighten($navigation-background, 10%);
 $navigation-nav-button-border: 1px solid lighten($navigation-nav-button-background, 20%);
 $navigation-search-background: lighten($navigation-background, 5);
 $navigation-search-border: 1px solid darken($navigation-background, 5);
-$navigation-active-link-color: #fff;
+$navigation-active-link-color: darken($navigation-color, 10%);
 $navigation-submenu-padding: 1em;
 $navigation-submenu-width: 12em;
 $horizontal-bar-mode: $large-screen;
