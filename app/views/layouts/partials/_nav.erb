@@ -1,17 +1,11 @@
 <header class="navigation" role="banner">
   <div class="navigation-wrapper">
+    <%= link_to "Secular Therapist Project", home_path, class: "logo" %>
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
     <nav role="navigation">
-      <ul id="js-navigation-menu" class="logo">
-        <li class="nav-link"><%= link_to "Secular Therapist Project", home_path %></li>
-      </ul>
       <ul id="js-navigation-menu" class="navigation-menu show">
         <li class="nav-link"><%= link_to "About Us", about_path %></li>
         <li class="nav-link"><%= link_to "Contact", contact_path %></li>
-      </ul>
-    </nav>
-    <div class="navigation-tools">
-      <ul>
         <% if patient_logged_in? %>
           <li class="nav-link more"><%= link_to current_patient.username, patient_dashboard_path %>
             <ul class="submenu">
@@ -27,24 +21,8 @@
         <% else %>
             <li class="nav-link"><%= link_to("Sign Up", patient_signup_path) %></li>  
             <li class="nav-link"><%= link_to("Sign In", patient_signin_path) %></li>
-              <!--
-              <li class="more"><a href="javascript:void(0)">Item with submenu</a>
-                <ul class="submenu">
-                  <li><a href="javascript:void(0)">Sub-submenu Item</a></li>
-                  <li><a href="javascript:void(0)">Another Item</a></li>
-                </ul>
-              </li>
-              <li class="more"><a href="javascript:void(0)">Another submenu</a>
-                <ul class="submenu">
-                  <li><a href="javascript:void(0)">Sub-submenu</a></li>
-                  <li><a href="javascript:void(0)">An Item</a></li>
-                </ul>
-              </li>
-              -->
-            </ul>
-          <% end %>
-        </li>
+        <% end %>
       </ul>
     </nav>
-  </div>
+    
 </header>

@@ -10,8 +10,6 @@ header.navigation {
   font-weight: bold;
 
   .navigation-wrapper {
-    @include clearfix;
-    @include outer-container;
     position: relative;
     z-index: 9999;
   }
@@ -19,8 +17,7 @@ header.navigation {
   .logo {
     float: left;
     max-height: $navigation-height;
-    padding-left: 2em;
-    padding-right: 2em;
+    padding: 0;
     
 
     img {
@@ -56,12 +53,15 @@ header.navigation {
 // Nav menu
 
   nav {
-    float: none;
-    min-height: $navigation-height;
-    z-index: 9999999;
+    background: #505050;
+    clear: both;
+    display: block;
+    height: $navigation-height;
 
-    @include media ($horizontal-bar-mode) {
-      float: left;
+    @include media($horizontal-bar-mode) {
+      background: transparent;
+      clear: none;
+      float: right;
     }
   }
 
