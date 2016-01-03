@@ -1,6 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Therapist, type: :model do
+  before(:all) do 
+    Geocoder.configure(:lookup => :test)
+
+    Geocoder::Lookup::Test.add_stub(
+      "111 Main St, New York, NY, 10001", [
+        {
+          'latitude'     => 40.7572638,
+          'longitude'    => -73.9552266,
+          'address'      => 'New York, NY, USA',
+          'state'        => 'New York',
+          'state_code'   => 'NY',
+          'country'      => 'United States',
+          'country_code' => 'US'
+        }
+      ]
+    )
+  end
   describe Therapist, ".username" do
     it do
       create(:therapist)
