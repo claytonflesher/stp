@@ -18,3 +18,4 @@
 # Ignore hidden files and directories
 .*
 !/.gitignore
+!/.travis.yml
