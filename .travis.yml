@@ -7,8 +7,8 @@ rvm:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database bill_tracker_test;' -U postgres
+  - psql -c 'create database stp_test;' -U postgres
 test:
   adapter: postgresql
-  database: bill_tracker_test
+  database: stp_test
   username: postgres
