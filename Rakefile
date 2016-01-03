@@ -3,5 +3,5 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Rails.application.load_tasks
 task :default => :test
+Rails.application.load_tasks
