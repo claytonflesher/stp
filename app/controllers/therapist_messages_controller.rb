@@ -1,7 +1,6 @@
 class TherapistMessagesController < ApplicationController
   before_filter :ensure_therapist_signed_in, only: [:index, :reply_to_message, :new, :create]
-  # before_filter :ensure_connection_accepted, only: [:index, :new]
-  # before_filter :ensure_connection_not_accepted, except: [:index, :reply_to_message]
+  before_filter :ensure_connection_accepted, only: [:index, :new]
   #
   # GET /therapist_show_converation/:therapist_id
   def index
@@ -27,8 +26,12 @@ class TherapistMessagesController < ApplicationController
     end
   end
 
- # GET /therapist_new_message/:therapist_id
+ # GET /therapist_new_message/:patient_id
   def new
+    if find_first_message
+      #Conversation already exists, should be in conversation view
+      redirect_to therapist_show_conversation_path(params[:patient_id])
+    end
     @message = ActsAsMessageable::Message.new
 
     @therapist_id = session[:therapist_id]

@@ -29,6 +29,11 @@ class PatientMessagesController < ApplicationController
 
  # GET /patient_new_message/:therapist_id
   def new
+    if find_first_message
+      #There is already a conversation, should be at conversation view
+      redirect_to patient_show_conversation_path(params[:therapist_id])
+    end
+
     @message = ActsAsMessageable::Message.new
 
     @patient_id = session[:patient_id]
