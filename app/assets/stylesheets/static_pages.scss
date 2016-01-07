@@ -1,0 +1,99 @@
+header {
+  @include row();
+  @include clearfix();
+  background-color: $red;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  z-index: 999;
+
+  .title {
+    padding: 3em 3em 5em 3em;
+
+    .header {
+      font-size: 3em;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .row {
+    @include outer-container();
+  
+    .left {
+      @include media(700px) {
+        @include span-columns(6);
+    }
+      .button {
+        background-color: #fff;
+        a {
+          color: $red;
+        }
+        @include media(700px) {
+          @include span-columns(2 of 6);
+          @include shift(2);
+      }
+        padding: .5em;
+        font-weight: bold;
+      }
+
+      
+      .blurb {
+        @include media(700px) {
+          @include span-columns(6 of 6);
+        }
+        padding: .5em;
+        padding-bottom: 1.25em;
+        font-size: 1.25em;
+      }
+    }
+
+    .right {
+      @include span-columns(4);
+      @include shift(2);
+  .button {
+    background-color: #fff;
+    a {
+      color: $red;
+    }
+    @include span-columns(2 of 4);
+    @include shift(1);
+    padding: .5em;
+    font-weight: bold;
+  }
+
+      
+      .blurb {
+        @include span-columns(4 of 4);
+        padding: .5em;
+        padding-bottom: 1.25em;
+        font-size: 1.25em;
+      }
+    }
+  }
+}
+
+.content {
+  @include outer-container();
+  padding-top: 2em;
+
+  section {
+    padding: 1.5em 0 1.5em 0;
+  }
+}
+
+.media {
+  h3 {
+    font-size: 1.15em;
+    padding: 0.5em;
+  }
+
+  background-color: $light-gray;
+  @include row;
+  text-align: center;
+
+  .logo {
+    @include span-columns(4);
+  }
+}
+
