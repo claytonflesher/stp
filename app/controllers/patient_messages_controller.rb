@@ -13,6 +13,10 @@ class PatientMessagesController < ApplicationController
       redirect_to patient_new_message_path(params[:therapist_id])
     end
     @patient_messages = @message.conversation
+    #If they're opening a conversation, mark the messages as read
+    @patient_messages.each do |m|
+      m.update(opened: true)
+    end
   end
 
   # POST /patient_reply_to_message
