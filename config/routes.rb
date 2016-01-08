@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get "patient_profile/:patient_id" => "patients#profile"
   get "patient_new_message/:therapist_id" => "patient_messages#new", as: :patient_new_message
   get "patient_show_conversation/:therapist_id" => "patient_messages#index", as: :patient_show_conversation
+  get "patient_inbox" => "patient_messages#inbox", as: :patient_inbox
   post "patient_send_new_message" => "patient_messages#create"
   post "patient_reply_to_message" => "patient_messages#reply_to_message", as: :patient_reply_to_message
   get    "patient_reset_password"               => "patients_password_resets#new",     as: :patient_reset_password

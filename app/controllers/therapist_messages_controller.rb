@@ -6,7 +6,7 @@ class TherapistMessagesController < ApplicationController
   def index
     @therapist = Therapist.find(session[:therapist_id])
     @patient = Patient.find(params[:patient_id])
-    @message = find_first_message
+    @message = find_first_message(@patient.id, @therapist.id)
     unless @message
       # They have not sent a message yet, go to form to send first message
       redirect_to therapist_new_message_path(params[:patient_id])
@@ -28,14 +28,15 @@ class TherapistMessagesController < ApplicationController
 
  # GET /therapist_new_message/:patient_id
   def new
-    if find_first_message
+    @therapist_id = session[:therapist_id]
+    @patient_id = params[:patient_id]
+
+    if find_first_message(@patient_id, @therapist_id)
       #Conversation already exists, should be in conversation view
       redirect_to therapist_show_conversation_path(params[:patient_id])
     end
     @message = ActsAsMessageable::Message.new
 
-    @therapist_id = session[:therapist_id]
-    @patient_id = params[:patient_id]
     @patient = Patient.find(@patient_id)
     @therapist = Therapist.find(@therapist_id)
     @topic = @therapist.username.to_s + @therapist.username.to_s

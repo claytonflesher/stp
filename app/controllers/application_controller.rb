@@ -124,18 +124,8 @@ class ApplicationController < ActionController::Base
     connection.first.updated_at > connection.first.created_at
   end
 
-  def find_first_message
+  def find_first_message patient_id, therapist_id
     #Finds the first message between a patient and the therapist that seeds the conversation
-    if current_therapist
-      patient_id = params[:patient_id]
-      therapist_id = session[:therapist_id]
-    elsif current_patient
-      patient_id = session[:patient_id]
-      therapist_id = params[:therapist_id]
-    else
-      #Not logged in
-      return false
-    end
 
     @patient = Patient.find(patient_id)
     @therapist = Therapist.find(therapist_id)
