@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get "therapist_profile/:therapist_id" => "therapists#profile"
   get "therapist_new_message/:patient_id" => "therapist_messages#new", as: :therapist_new_message
   get "therapist_show_conversation/:patient_id" => "therapist_messages#index", as: :therapist_show_conversation
+  get "therapist_inbox" => "therapist_messages#inbox", as: :therapist_inbox
   post "therapist_send_new_message" => "therapist_messages#create", as: :therapist_send_new_message
   post "therapist_reply_to_message" => "therapist_messages#reply_to_message", as: :therapist_reply_to_message
   get    "therapist_reset_password"             => "therapists_password_resets#new",   as: :therapist_reset_password

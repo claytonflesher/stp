@@ -50,4 +50,50 @@ class TherapistMessagesController < ApplicationController
     redirect_to therapist_show_conversation_path(@patient.id)
   end
 
+  def inbox
+    @therapist_id = session[:therapist_id]
+    @therapist = Therapist.find(@therapist_id)
+    @relationships = PatientTherapistRelationship.where(therapist_id: @therapist_id)
+    @messages = Array.new
+
+    @relationships.each do |r|
+      message = Hash.new
+      therapist = Therapist.find(r.therapist_id)
+      patient = Patient.find(r.patient_id)
+      
+      message[:patient_id] = r.patient_id
+
+      first_message = find_first_message(r.patient_id, r.therapist_id)
+
+      if first_message == []
+        #No message has been sent yet
+        message[:body] = "Click to send a message"
+        message[:opened] = true
+        break
+      end
+      if r.created_at == r.updated_at
+        message[:body] = "Connection request pending"
+        message[:opened] = true
+        break
+      end
+
+      conversation = first_message.conversation
+      newest_message = conversation.first
+      message[:body] = newest_message.body
+      message[:opened] = newest_message.opened
+
+      if newest_message.sent_messageable_type == "Therapist"
+        #To be implemented later
+        #message[:avatar] = therapist.avatar
+        message[:name] = therapist.username
+      else
+        #message[:avatar] = patient.avatar
+        message[:name] = patient.username
+      end
+      
+      @messages.append(message)
+    end
+
+  end
+
 end
