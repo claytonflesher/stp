@@ -1,4 +1,5 @@
 <% provide(:title, "Edit Profile") %>
+<div clas="edit-patient-body">
 <h1>Edit Profile</h1>
 
 <%= form_for(@patient, url: update_patient_path) do |f| %>
@@ -39,3 +40,4 @@
   <%= f.submit %>
  
 <% end %>
+</div>

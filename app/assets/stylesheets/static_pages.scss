@@ -1,3 +1,12 @@
+body {
+    margin: 0px;
+    padding-top: 0px;
+    padding-left: 0.75%;
+    padding-right:0.75%;
+    padding-bottom:0px;
+}
+
+
 header {
   @include row();
   @include clearfix();
@@ -6,6 +15,9 @@ header {
   text-align: center;
   width: 100%;
   z-index: 999;
+    margin:0px;
+    padding:0px;
+    margin-top:0.5%;
 
   .title {
     padding: 3em 3em 5em 3em;
@@ -26,6 +38,7 @@ header {
     }
       .button {
         background-color: #fff;
+        border-radius: 3%;
         a {
           color: $red;
         }
@@ -95,5 +108,10 @@ header {
   .logo {
     @include span-columns(4);
   }
+}
+
+.edit-patient-body {
+    overflow: hidden;
+    margin-left:1%;
 }
 
