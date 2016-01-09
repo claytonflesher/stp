@@ -1,0 +1,2 @@
+module TherapistTherapistSearchesHelper
+end

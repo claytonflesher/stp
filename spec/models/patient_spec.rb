@@ -1,6 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe Patient, type: :model do
+  before(:all) do 
+    Geocoder.configure(:lookup => :test)
+
+    Geocoder::Lookup::Test.add_stub(
+      "73110-111", [
+        {
+          'latitude'     => 35.45897739999999,
+          'longitude'    => -97.4056928
+        }
+      ]
+    )
+    Geocoder::Lookup::Test.add_stub(
+      "numbers1111", [
+        {
+          'latitude'     => 0,
+          'longitude'    => 0
+        }
+      ]
+    )
+  end
   describe Patient, '.username' do
     it do
       create(:patient)

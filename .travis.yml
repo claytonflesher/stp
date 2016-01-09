@@ -1,0 +1,11 @@
+before_install:
+    - sudo apt-get update -qq
+    - sudo apt-get install -y libxml2-dev
+language: ruby
+rvm:
+  - "2.2.3"
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database stp_test;' -U postgres
+  - bin/rake db:migrate
