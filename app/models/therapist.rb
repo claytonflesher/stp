@@ -8,6 +8,8 @@ class Therapist < ActiveRecord::Base
 
   scope :pending, -> { where(verified_at: nil).order("created_at DESC") }
 
+  scope :admins, -> { where(admin: true) }
+
   acts_as_messageable :table_name => "messages",
                       :dependent  => :destroy
 

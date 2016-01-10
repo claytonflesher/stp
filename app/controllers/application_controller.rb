@@ -36,6 +36,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_super_admin
+    unless current_super_admin
+      session[:return_to] = request.url
+      redirect_to therapist_signin_path
+    end
+  end
+
   def ensure_relationship_exists
     unless patient_therapist_relationship_exists
       session[:return_to] = request.url
@@ -78,6 +85,12 @@ class ApplicationController < ActionController::Base
   def current_admin
     if current_therapist
       Therapist.find(session[:therapist_id]).admin?
+    end
+  end
+
+  def current_super_admin
+    if current_therapist
+      Therapist.find(session[:therapist_id]).super_admin?
     end
   end
 

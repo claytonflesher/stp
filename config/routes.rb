@@ -49,6 +49,8 @@ Rails.application.routes.draw do
   post   "patient_reset_password"               => "patients_password_resets#create"
   get    "patient_reset_password/:token/edit"   => "patients_password_resets#edit",    as: :edit_patient_reset_password
   post   "patient_reset_password/:token/edit"   => "patients_password_resets#update"
+  get    "admins"                => "admins#index"
+  get    "admins/:therapist_id"  => "admins#show", as: :admin_show
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
