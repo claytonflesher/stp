@@ -2,7 +2,9 @@ class SuperAdminsController < ApplicationController
   before_filter :ensure_super_admin
 
   def index
-    @therapists = Therapist.find_each
+    @current_therapists = Therapist.current
+    @admins             = Therapist.admins
+    @super_admins       = Therapist.super_admins
   end
 
   def show
@@ -24,6 +26,6 @@ class SuperAdminsController < ApplicationController
       @therapist.admin = false
       @therapist.save
     end
-    redirect_to super_admins_index_path
+    redirect_to super_admins_path
   end
 end
