@@ -1,0 +1,29 @@
+<% provide(title: "Update Admin Status") %>
+
+<h1>Update Admin Status for <%= @therapist.full_name %></h1>
+
+<p>
+Set <%= @therapist.first_name %> as a normal therapist.
+<%= button_to "Set As Normal", 
+  { 
+  action: "update", 
+  therapist_id: @therapist.id,
+  super_admin: false,
+  admin: false
+} %>
+Set as an admin, but not as a super admin.
+<%= button_to "Set as Admin", 
+  {
+  action: "update",
+  therapist_id: @therapist.id,
+  super_admin: false,
+  admin: true
+} %>
+Set as a super admin. (If not already an admin, this therapist will become one.)
+<%= button_to "Set As Super Admin", 
+  {
+  action: "update",
+  therapist_id: @therapist.id,
+  super_admin: true,
+  admin: true
+} %>

@@ -23,6 +23,8 @@ class PatientsController < ApplicationController
 
   def show
     @patient = Patient.find(params[:patient_id])
+    @search ||= TherapistSearch.new(current_patient)
+    @results = @search.find
   end
 
   def update
