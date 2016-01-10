@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   delete "therapist_signout"               => "therapists_sessions#destroy"
   get    "therapist_verify/:therapist_id"  => "therapists_verifications#new",    as: :therapist_verify
   get    "therapist_verify/confirm/:token" => "therapists_verifications#create", as: :therapist_confirm
-  get    "therapist_dashboard"             => "therapists#show"
+  get    "therapist_dashboard/:therapist_id"             => "therapists#show", as: :therapist_dashboard
   get    "edit_therapist"                  => "therapists#edit"
   put    "update_therapist"                => "therapists#update"
   patch  "update_therapist"                => "therapists#update"
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   delete "patient_signout"                 => "patients_sessions#destroy"
   get    "patient_verify/:patient_id"      => "patients_verifications#new",      as: :patient_verify
   get    "patient_verify/confirm/:token"   => "patients_verifications#create",   as: :patient_confirm
-  get    "patient_dashboard"               => "patients#show"
+  get    "patient_dashboard/:patient_id"               => "patients#show", as: :patient_dashboard
   get    "edit_patient"                    => "patients#edit"
   put    "update_patient"                  => "patients#update"
   patch  "update_patient"                  => "patients#update"

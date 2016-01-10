@@ -16,8 +16,15 @@ class TherapistsController < ApplicationController
     end
   end
 
+  # GET /therapist_dashboard
   def show
-    @therapist = Therapist.find(session[:therapist_id])
+    @therapist = Therapist.find(params[:therapist_id])
+
+    #For the send message/connection request button
+    # if current_patient
+      #Patient is signed in, see if there is a connection request
+      # if PatientTherapistRelationship
+        #There is a connection request, see if it has been accepted
   end
 
   def update

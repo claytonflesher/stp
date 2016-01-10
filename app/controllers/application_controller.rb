@@ -19,13 +19,13 @@ class ApplicationController < ActionController::Base
 
   def ensure_patient_not_signed_in
     if current_patient
-      redirect_to patient_dashboard_path
+      redirect_to patient_dashboard_path(current_patient.id)
     end
   end
 
   def ensure_therapist_not_signed_in
     if current_therapist
-      redirect_to therapist_dashboard_path
+      redirect_to therapist_dashboard_path(current_patient.id)
     end
   end
 
@@ -40,9 +40,9 @@ class ApplicationController < ActionController::Base
     unless patient_therapist_relationship_exists
       session[:return_to] = request.url
       if current_patient
-        redirect_to patient_dashboard_path
+        redirect_to patient_dashboard_path(current_patient.id)
       elsif current_therapist
-        redirect_to therapist_dashboard_path
+        redirect_to therapist_dashboard_path(current_patient.id)
       else
         # Not logged in
         redirect_to home_path
@@ -54,12 +54,30 @@ class ApplicationController < ActionController::Base
     unless connection_accepted
       session[:return_to] = request.url
       if current_patient
-        redirect_to patient_dashboard_path
+        redirect_to patient_dashboard_path(current_patient.id)
       elsif current_therapist
-        redirect_to therapist_dashboard_path
+        redirect_to therapist_dashboard_path(current_therapist.id)
       else
         # Not logged in
         redirect_to home_path
+      end
+    end
+  end
+
+  def ensure_should_see_profile
+    if patient_logged_in?
+      unless current_patient.id.to_i == params[:patient_id].to_i
+        # Patients should not view other patient's profiles
+        session[:return_to] = request.url
+        redirect_to patient_dashboard_path(current_patient.id)
+      end
+    end
+
+    if therapist_logged_in?
+      unless patient_therapist_relationship_exists
+        # There is no relationship, so this therapist should not be viewing this patient's profile
+        session[:return_to] = request.url
+        redirect_to therapist_dashboard_path(current_therapist.id)
       end
     end
   end
@@ -149,10 +167,6 @@ class ApplicationController < ActionController::Base
     # Still haven't found a message, so no one has sent one yet. 
     # Return false will redirect user to the new_message path
     return false
-  end
-
-  def therapist_find_first_message
-    # Will probably have the exact same implementation, but look for therapist_id in the session and patient_id in the url params
   end
 
   def get_ids
