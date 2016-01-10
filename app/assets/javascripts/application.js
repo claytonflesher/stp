@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require patient_messages.js
 
 $(document).ready(function() {
   var menuToggle = $('#js-mobile-menu').unbind();
