@@ -1,0 +1,29 @@
+<% provide(title: "Super Admin") %>
+
+
+<h1>Current Admins</h1>
+<p>
+<ul>
+  <% @admins.each do |admin| %>
+    <li><%= link_to admin.full_name, super_admin_show_path(admin.id) %></li>
+  <% end %>
+</ul>
+</p>
+
+<h1>Current Super Admins</h1>
+<p>
+<ul>
+  <% @super_admins.each do |s| %>
+    <li><%= link_to s.full_name, super_admin_show_path(s.id) %></li>
+  <% end %>
+</ul>
+</p>
+
+<h1>Current Therapists</h1>
+<p>
+<ul>
+  <% @current_therapists.each do |therapist| %>
+    <li><%= link_to therapist.full_name, super_admin_show_path(therapist.id) %></li>
+  <% end %>
+</ul>
+</p>

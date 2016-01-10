@@ -1,0 +1,12 @@
+<% provide(:title, "Admins") %>
+
+<h1>Admins</h1>
+
+<p>
+<ul>
+  <% @admins.each do |admin| %>
+    <li><%= link_to admin.full_name, admin_show_path(admin.id) %></li>
+  <% end %>
+</ul>
+</p>
+

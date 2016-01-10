@@ -2,10 +2,10 @@ class AdminsController < ApplicationController
   before_filter :ensure_admin
 
   def index
-    @admins = Admin.find_each
+    @admins = Therapist.admins
   end
 
   def show
-    @admin = Therapist.find(session[:therapist_id])
+    @admin = Therapist.find(params[:therapist_id])
   end
 end
