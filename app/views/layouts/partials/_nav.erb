@@ -7,8 +7,9 @@
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
     <nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu show">
-        <li class="nav-link"><%= link_to "About Us", about_path %></li>
-        <li class="nav-link"><%= link_to "Contact", contact_path %></li>
+       
+         <li class="nav-link"><%= link_to "About Us", about_path %></li>
+         <li class="nav-link"><%= link_to "Contact", contact_path %></li>
         <% if patient_logged_in? %>
           <li class="nav-link more"><%= link_to current_patient.username, patient_dashboard_path %>
             <ul class="submenu">

@@ -12,22 +12,28 @@ header.navigation {
   .navigation-wrapper {
     position: relative;
     z-index: 9999;
+    width: 100%;
+    @include clearfix;
   }
     .branding {
-    background-size: cover;
-    max-width: 75%;
-    max-height: 75%;
-    margin: 0px;
-    margin-left:11%;
-        padding:0px;
-        padding-left:3%;
-        float:none;
-        padding-top: 1%;
+    background-size: contain;
+    max-width: 35%;
+    max-height: 149.233px;
+    margin: auto;
+    padding:auto;
+    padding-left:2%;
+    padding-top:2%;
+    float:left;
         
         svg{
             padding-left:1%;
+        }   
+    }
+    
+    @media screen and (max-width:860px){
+        .branding{
+            float:none;
         }
-        
     }
   .logo {
     float: left;
@@ -48,7 +54,9 @@ header.navigation {
     color: $navigation-color;
     display: block;
     line-height: $navigation-height;
-    margin: 0;
+    margin: auto;
+    padding:auto;
+    clear:left;
 
     text-decoration: none;
     text-transform: uppercase;
@@ -71,9 +79,9 @@ header.navigation {
     clear: both;
     display: block;
     height: auto;
-    margin-bottom:0px;
-      
-      
+      margin-top: 4%;
+      margin-right:10%;
+      float:right;      
     @include media($horizontal-bar-mode) {
       background: transparent;
       clear: none;

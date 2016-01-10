@@ -1,9 +1,6 @@
 body {
     margin: 0px;
-    padding-top: 0px;
-    padding-left: 0.75%;
-    padding-right:0.75%;
-    padding-bottom:0px;
+    padding: 0px;
 }
 
 
@@ -37,8 +34,13 @@ header {
         @include span-columns(6);
     }
       .button {
-        background-color: #fff;
-        border-radius: 3%;
+        background-color: white;
+        border-radius: 3%;   
+          &:hover{
+                filter:brightness(130%);
+              -webkit-filter:brightness(130%);
+              
+          }
         a {
           color: $red;
         }
@@ -88,8 +90,7 @@ header {
 
 .content {
   @include outer-container();
-  padding-top: 2em;
-
+padding-top:3%;
   section {
     padding: 1.5em 0 1.5em 0;
   }
