@@ -25,6 +25,8 @@ class PatientsController < ApplicationController
 
   def show
     @patient = Patient.find(session[:patient_id])
+    @search ||= TherapistSearch.new(current_patient)
+    @results = @search.find
   end
 
   def profile

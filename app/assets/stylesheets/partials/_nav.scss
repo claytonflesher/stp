@@ -1,24 +1,44 @@
 header.navigation {
-  
+    
 
   background-color: $navigation-background;
-  border-bottom: 1px solid darken($navigation-background, 10);
   min-height: $navigation-height;
   width: 100%;
   z-index: 999;
+  font-size: 1.15em;
+  font-weight: bold;
+  
 
   .navigation-wrapper {
-    @include clearfix;
-    @include outer-container;
     position: relative;
     z-index: 9999;
+    width: 100%;
+    @include clearfix;
   }
-
+    .branding {
+    background-size: contain;
+    max-width: 35%;
+    max-height: 149.233px;
+    margin: auto;
+    padding:auto;
+    padding-left:2%;
+    padding-top:2%;
+    float:left;
+        
+        svg{
+            padding-left:1%;
+        }   
+    }
+    
+    @media screen and (max-width:860px){
+        .branding{
+            float:none;
+        }
+    }
   .logo {
     float: left;
     max-height: $navigation-height;
-    padding-left: $navigation-padding;
-    padding-right: 2em;
+    padding: 1%;
     
 
     img {
@@ -33,10 +53,11 @@ header.navigation {
   .navigation-menu-button {
     color: $navigation-color;
     display: block;
-    float: right;
     line-height: $navigation-height;
-    margin: 0;
-    padding-right: 1em;
+    margin: auto;
+    padding:auto;
+    clear:left;
+
     text-decoration: none;
     text-transform: uppercase;
 
@@ -54,31 +75,37 @@ header.navigation {
 // Nav menu
 
   nav {
-    float: none;
-    min-height: $navigation-height;
-    z-index: 9999999;
 
-    @include media ($horizontal-bar-mode) {
-      float: left;
+    clear: both;
+    display: block;
+    height: auto;
+      margin-top: 4%;
+      margin-right:10%;
+      float:right;      
+    @include media($horizontal-bar-mode) {
+      background: transparent;
+      clear: none;
+      padding-top:0%;
     }
   }
 
   ul.navigation-menu {
     clear: both;
     display: none;
-    margin: 0 auto;
+    margin: 0;
     overflow: visible;
-    padding: 0;
+    margin-right:0px;
     width: 100%;
     z-index: 9999;
+    
 
     &.show {
-      display: block;
     }
 
     @include media ($horizontal-bar-mode) {
       display: inline;
       margin: 0;
+      margin-right:1%;
       padding: 0;
     }
   }
@@ -90,7 +117,7 @@ header.navigation {
     background: $navigation-background;
     display: block;
     line-height: $navigation-height;
-    overflow: hidden;
+    overflow: visible;
     padding-right: 0.8em;
     text-align: right;
     width: 100%;
@@ -108,15 +135,32 @@ header.navigation {
       color: $navigation-color;
       display: inline-block;
       text-decoration: none;
-
+      padding-bottom:5px;
+      margin-bottom:1%;
+    
       @include media ($horizontal-bar-mode) {
-        padding-right: 1em;
-      }
 
+      }
+     
+        &:after {
+        content: "" !important;
+		display: block;
+		margin: auto;
+		height: 3px;
+		width: 0px;
+		background: transparent;
+        @include transition(width 0.2s ease, background-color .5s ease);
+        }
       &:focus,
       &:hover {
-        color: $navigation-color-hover;
+          @include transform(scale(1.05));     
       }
+     &:hover::after {
+      width: 100%;
+      background: $red;
+     }
+
+        
     }
   }
 
@@ -136,27 +180,31 @@ header.navigation {
     }
 
     > ul > li:first-child a  {
-      padding-top: 1em;
+      padding-bottom: 0px;
     }
 
     a {
       margin-right: $navigation-submenu-padding;
+      margin-top:0px;
+      margin-bottom:0px;
     }
 
     > a {
-      padding-right: 0.6em;
+      padding-right: 0px;
     }
 
     > a:after {
       @include position(absolute, auto -0.4em auto auto);
       content: '\25BE';
       color: $navigation-color;
+      border-style:none;
     }
   }
 
   li.more {
-    overflow: visible;
+    overflow: hidden;
     padding-right: 0;
+    border-style:none;
 
     a {
       padding-right: 0.8em;
@@ -165,7 +213,8 @@ header.navigation {
     > a {
       padding-right: 1.6em;
       position: relative;
-
+        
+    
       @include media($horizontal-bar-mode) {
         margin-right: $navigation-submenu-padding;
       }
@@ -175,12 +224,14 @@ header.navigation {
         font-size: 1.2em;
         position: absolute;
         right: $navigation-submenu-padding / 2;
+        border-style:none;
       }
     }
 
     &:focus > .submenu,
     &:hover > .submenu {
       display: block;
+      border-style:none;
     }
 
     @include media($horizontal-bar-mode) {
@@ -192,7 +243,7 @@ header.navigation {
   ul.submenu {
     display: none;
     padding-left: 0;
-
+      
     @include media($horizontal-bar-mode) {
       left: -$navigation-submenu-padding;
       position: absolute;
@@ -226,13 +277,12 @@ header.navigation {
       }
 
       a {
-        background-color: darken($navigation-background, 3%);
+        background-color: white;
         display: inline-block;
-        text-align: right;
-        width: 100%;
+        text-align:right;
+        width: auto;
 
         @include media($horizontal-bar-mode) {
-          background-color: $navigation-background;
           padding-left: $navigation-submenu-padding;
           text-align: left;
           width: $navigation-submenu-width;
@@ -245,7 +295,7 @@ header.navigation {
 // Elements on the far right
 
   .navigation-tools {
-    background: #505050;
+    
     clear: both;
     display: block;
     height: $navigation-height;
@@ -253,7 +303,6 @@ header.navigation {
     @include media($horizontal-bar-mode) {
       background: transparent;
       clear: none;
-      float: right;
     }
   }
 

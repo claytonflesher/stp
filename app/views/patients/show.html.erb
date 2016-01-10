@@ -1,44 +1,41 @@
 <% provide(:title, "Patient Dashboard") %>
 
-<h1><%= @patient.username %></h1>
+<div class="notice">
+<h3 id="notice"><%= notice %></h3>
+</div>
 
-<p id="notice"><%= notice %></p>
+<div class="container patient-profile">
+    <div class="main">
+      <div class="avatar">
+        <img src="https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif">
+        Button Goes Here
+      </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @patient.name %>
-</p>
+      <div class="basic">
+        <p><%= @patient.name %></p>
+        <p><%= @patient.phone %></p>
+        <p><%= @patient.email %></p>
+        <p>Find City and State based on Zipcode.</p>
+        <p><%= @patient.gender %></p>
+      </div>
+      <div class="info">
+        <p>
+          <strong>Former Religion:</strong>
+          <%= @patient.former_religion %>
+        </p>
+        <p>
+          <strong>About you:</strong>
+          <%= @patient.description %>
+        </p>
+      </div>
+  </div>
+  <div class="search">
 
-<p>
-  <strong>Phone:</strong>
-  <%= @patient.phone %>
-</p>
+    <h2>Therapists Near You</h2>
+    <% @results.each do |t| %>
+      <p><%= t.first_name %> <%= t.last_name %></p>
+      <p><%= t.city %>, <%= t.state %></p>
+    <% end %>
 
-<p>
-  <strong>E-mail:</strong>
-  <%= @patient.email %>
-</p>
-
-<p>
-  <strong>Zipcode:</strong>
-  <%= @patient.zipcode %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @patient.gender %>
-</p>
-
-<p>
-  <strong>Former Religion:</strong>
-  <%= @patient.former_religion %>
-</p>
-
-<p>
-  <strong>About you:</strong>
-  <%= @patient.description %>
-</p>
-
-
-
-<%= link_to 'Edit', edit_patient_path %>
+  </div>
+</div>
