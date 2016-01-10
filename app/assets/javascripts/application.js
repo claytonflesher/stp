@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require patient_messages.js
 
 $(document).ready(function() {
     
@@ -14,4 +15,3 @@ $(document).ready(function() {
     });
   });
 });
-
