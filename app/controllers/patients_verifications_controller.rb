@@ -15,6 +15,6 @@ class PatientsVerificationsController < ApplicationController
     @patient.verified_at = Time.now
     @patient.save!
     flash[:notice] = "Email verified. Please sign in."
-    redirect_to signin_path
+    redirect_to patient_signin_path
   end
 end
