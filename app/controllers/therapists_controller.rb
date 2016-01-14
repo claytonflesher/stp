@@ -1,6 +1,6 @@
 class TherapistsController < ApplicationController
-  before_filter :ensure_therapist_signed_in, only: [:show, :update, :edit]
-  before_filter :ensure_therapist_not_signed_in, except: [:show, :update, :edit]
+  before_filter :ensure_therapist_signed_in, only: [:update, :edit]
+  before_filter :ensure_therapist_not_signed_in, except: [:update, :edit]
 
   def new
     @therapist = Therapist.new
@@ -19,12 +19,6 @@ class TherapistsController < ApplicationController
   # GET /therapist_dashboard
   def show
     @therapist = Therapist.find(params[:therapist_id])
-
-    #For the send message/connection request button
-    # if current_patient
-      #Patient is signed in, see if there is a connection request
-      # if PatientTherapistRelationship
-        #There is a connection request, see if it has been accepted
   end
 
   def update

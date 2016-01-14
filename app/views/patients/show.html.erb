@@ -1,14 +1,31 @@
 <% provide(:title, "Patient Dashboard") %>
 
-<div class="notice">
-<h3 id="notice"><%= notice %></h3>
-</div>
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
 
 <div class="container patient-profile">
     <div class="main">
       <div class="avatar">
         <img src="https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif">
-        Button Goes Here
+      </div>
+      <div class="dynamic button">
+        <% if therapist_logged_in? %>
+          <% if connection_request_pending? %>
+            <%= link_to accept_connection_request_path do %>
+              Accept Connection Request
+            <% end %>
+          <% elsif connection_accepted %>
+            <%= link_to therapist_show_conversation_path(params[:patient_id]) do %>
+              Send Message
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if patient_logged_in? %>
+          <%= link_to patient_inbox_path do %>
+            Inbox
+          <% end %>
+        <% end %>
       </div>
 
       <div class="basic">

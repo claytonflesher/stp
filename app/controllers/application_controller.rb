@@ -89,6 +89,26 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_only_two_per_month
+    @patient = current_patient
+    @num_requests = PatientTherapistRelationship.where('created_at > ? and patient_id = ?', 30.days.ago, @patient.id).count
+    if num_requests > 2
+      redirect_to exceeded_requests_path
+    end
+  end
+
+  def ensure_first_request
+    @patient = current_patient
+    # This may not be the right way to find the therapist id....
+    @therapist = Therapist.find(params[:therapist_id])
+    unless PatientTherapistRelationship.where('patient_id = ? and therapist_id = ?', @patient.id, @therapist.id)
+ == []
+      flash.notice = "You have already submitted a connection request to this therapist"
+      redirect_to therapist_dashboard_path(@therapist.id)
+    end
+  end
+
+
   def current_patient
     session[:patient_id] && Patient.find(session[:patient_id])
     if session[:patient_id] && Patient.find(session[:patient_id])
@@ -118,12 +138,32 @@ class ApplicationController < ActionController::Base
       therapist_id = session[:therapist_id]
     elsif current_patient
       patient_id = session[:patient_id]
-      therapist_id = params[:patient_id]
+      therapist_id = params[:therapist_id]
     else
       # Not logged in
       return false
     end
     PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) != [] 
+  end
+
+  def connection_request_pending?
+    unless patient_therapist_relationship_exists
+      return false
+    end
+
+    if current_therapist
+      patient_id = params[:patient_id]
+      therapist_id = session[:therapist_id]
+    elsif current_patient
+      patient_id = session[:patient_id]
+      therapist_id = params[:therapist_id]
+    else
+      # Not logged in
+      return false
+    end
+    
+    @relationship = PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id).first
+    @relationship.created_at == @relationship.updated_at
   end
 
   def patient_logged_in?
@@ -190,5 +230,8 @@ class ApplicationController < ActionController::Base
                 :current_therapist, 
                 :patient_logged_in?, 
                 :therapist_logged_in?,
-                :find_first_message
+                :find_first_message,
+                :patient_therapist_relationship_exists,
+                :connection_request_pending?,
+                :connection_accepted
 end
