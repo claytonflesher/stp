@@ -1,14 +1,40 @@
 <% provide(:title, "Patient Dashboard") %>
 
-<div class="notice">
-<h3 id="notice"><%= notice %></h3>
-</div>
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
 
 <div class="container patient-profile">
     <div class="main">
       <div class="avatar">
         <img src="https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif">
-        Button Goes Here
+      </div>
+      <div class="dynamic button">
+        <% if therapist_logged_in? %>
+          <% if connection_request_pending? %>
+            <%= form_tag({controller: "patient_therapist_relationships", action: "update"}, method: "post") do %>
+              <%= hidden_field_tag 'patient_id', params[:patient_id] %>
+              <%= hidden_field_tag 'therapist_id', current_therapist.id %>
+              <%= hidden_field_tag 'status', "accept" %>
+              <%= submit_tag "Accept" %>
+            <% end %>
+            <%= form_tag({controller: "patient_therapist_relationships", action: "update"}, method: "post") do %>
+              <%= hidden_field_tag 'patient_id', params[:patient_id] %>
+              <%= hidden_field_tag 'therapist_id', current_therapist.id %>
+              <%= hidden_field_tag 'status', "deny" %>
+              <%= submit_tag "Deny" %>
+            <% end %>
+          <% elsif connection_accepted %>
+            <%= link_to therapist_show_conversation_path(params[:patient_id]) do %>
+              Send Message
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if patient_logged_in? %>
+          <%= link_to patient_inbox_path do %>
+            Inbox
+          <% end %>
+        <% end %>
       </div>
 
       <div class="basic">
@@ -29,13 +55,15 @@
         </p>
       </div>
   </div>
-  <div class="search">
+  <% if patient_logged_in? %>
+    <div class="search">
 
-    <h2>Therapists Near You</h2>
-    <% @results.each do |t| %>
-      <p><%= t.first_name %> <%= t.last_name %></p>
-      <p><%= t.city %>, <%= t.state %></p>
-    <% end %>
+      <h2>Therapists Near You</h2>
+      <% @results.each do |t| %>
+        <p><%= t.first_name %> <%= t.last_name %></p>
+        <p><%= t.city %>, <%= t.state %></p>
+      <% end %>
 
-  </div>
+    </div>
+  <% end %>
 </div>

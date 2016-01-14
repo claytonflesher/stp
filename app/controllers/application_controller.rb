@@ -19,13 +19,13 @@ class ApplicationController < ActionController::Base
 
   def ensure_patient_not_signed_in
     if current_patient
-      redirect_to patient_dashboard_path
+      redirect_to patient_dashboard_path(current_patient.id)
     end
   end
 
   def ensure_therapist_not_signed_in
     if current_therapist
-      redirect_to therapist_dashboard_path
+      redirect_to therapist_dashboard_path(current_therapist.id)
     end
   end
 
@@ -47,9 +47,9 @@ class ApplicationController < ActionController::Base
     unless patient_therapist_relationship_exists
       session[:return_to] = request.url
       if current_patient
-        redirect_to patient_dashboard_path
+        redirect_to patient_dashboard_path(current_patient.id)
       elsif current_therapist
-        redirect_to therapist_dashboard_path
+        redirect_to therapist_dashboard_path(current_patient.id)
       else
         # Not logged in
         redirect_to home_path
@@ -61,13 +61,49 @@ class ApplicationController < ActionController::Base
     unless connection_accepted
       session[:return_to] = request.url
       if current_patient
-        redirect_to patient_dashboard_path
+        redirect_to patient_dashboard_path(current_patient.id)
       elsif current_therapist
-        redirect_to therapist_dashboard_path
+        redirect_to therapist_dashboard_path(current_therapist.id)
       else
         # Not logged in
         redirect_to home_path
       end
+    end
+  end
+
+  def ensure_should_see_profile
+    if patient_logged_in?
+      unless current_patient.id.to_i == params[:patient_id].to_i
+        # Patients should not view other patient's profiles
+        session[:return_to] = request.url
+        redirect_to patient_dashboard_path(current_patient.id)
+      end
+    end
+
+    if therapist_logged_in?
+      unless patient_therapist_relationship_exists
+        # There is no relationship, so this therapist should not be viewing this patient's profile
+        session[:return_to] = request.url
+        redirect_to therapist_dashboard_path(current_therapist.id)
+      end
+    end
+  end
+
+  def ensure_only_two_per_month
+    @patient = current_patient
+    @num_requests = PatientTherapistRelationship.where('created_at > ? and patient_id = ?', 30.days.ago, @patient.id).count
+    if @num_requests > 2
+      redirect_to exceeded_requests_path
+    end
+  end
+
+  def ensure_first_request
+    @patient = current_patient
+    # This may not be the right way to find the therapist id....
+    @therapist = Therapist.find(params[:therapist_id])
+    unless PatientTherapistRelationship.where('patient_id = ? and therapist_id = ?', @patient.id, @therapist.id) == []
+      flash.notice = "You have already submitted a connection request to this therapist"
+      redirect_to therapist_dashboard_path(@therapist.id)
     end
   end
 
@@ -100,12 +136,32 @@ class ApplicationController < ActionController::Base
       therapist_id = session[:therapist_id]
     elsif current_patient
       patient_id = session[:patient_id]
-      therapist_id = params[:patient_id]
+      therapist_id = params[:therapist_id]
     else
       # Not logged in
       return false
     end
     PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) != [] 
+  end
+
+  def connection_request_pending?
+    unless patient_therapist_relationship_exists
+      return false
+    end
+
+    if current_therapist
+      patient_id = params[:patient_id]
+      therapist_id = session[:therapist_id]
+    elsif current_patient
+      patient_id = session[:patient_id]
+      therapist_id = params[:therapist_id]
+    else
+      # Not logged in
+      return false
+    end
+    
+    @relationship = PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id).first
+    @relationship.status == "pending"
   end
 
   def patient_logged_in?
@@ -116,7 +172,6 @@ class ApplicationController < ActionController::Base
     current_therapist != nil
   end
 
-  #When a therapist excepts a connection request, the updated_at record will be updated with the current time, therefore the connection is considered "accepted" when updated_at > created_at
   def connection_accepted
     if current_therapist
       patient_id = params[:patient_id]
@@ -128,13 +183,13 @@ class ApplicationController < ActionController::Base
       # Not logged in
       return false
     end
-    connection = PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) 
-    if connection == []
+    @connection = PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id).first
+    if @connection == nil
       # no relationship
       return false
     end
-    #if the connection has been updated after it was created, that means it was accepted by the therapist
-    connection.first.updated_at > connection.first.created_at
+
+    @connection.status == "accept"
   end
 
   def find_first_message patient_id, therapist_id
@@ -164,10 +219,6 @@ class ApplicationController < ActionController::Base
     return false
   end
 
-  def therapist_find_first_message
-    # Will probably have the exact same implementation, but look for therapist_id in the session and patient_id in the url params
-  end
-
   def get_ids
    #For future refactoring 
   end
@@ -176,5 +227,8 @@ class ApplicationController < ActionController::Base
                 :current_therapist, 
                 :patient_logged_in?, 
                 :therapist_logged_in?,
-                :find_first_message
+                :find_first_message,
+                :patient_therapist_relationship_exists,
+                :connection_request_pending?,
+                :connection_accepted
 end

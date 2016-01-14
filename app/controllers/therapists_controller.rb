@@ -1,6 +1,6 @@
 class TherapistsController < ApplicationController
-  before_filter :ensure_therapist_signed_in, only: [:show, :update, :edit]
-  before_filter :ensure_therapist_not_signed_in, except: [:show, :update, :edit]
+  before_filter :ensure_therapist_signed_in, only: [:update, :edit]
+  before_filter :ensure_therapist_not_signed_in, except: [:update, :edit, :show]
 
   def new
     @therapist = Therapist.new
@@ -16,8 +16,9 @@ class TherapistsController < ApplicationController
     end
   end
 
+  # GET /therapist_dashboard
   def show
-    @therapist = Therapist.find(session[:therapist_id])
+    @therapist = Therapist.find(params[:therapist_id])
   end
 
   def update
