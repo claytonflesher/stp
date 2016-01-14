@@ -17,7 +17,7 @@ class PatientTherapistRelationshipsController < ApplicationController
   end
 
   def update
-    @relationship = PatientTherapistRelationship.find(params[:id])
+    @relationship = PatientTherapistRelationship.where("patient_id = ? and therapist_id = ?", params[:patient_id], params[:therapist_id]).first
     if @relationship.update(patient_therapist_relationship_params)
       if @relationship.status == "accept"
         # Mail an alert to patient
@@ -29,11 +29,6 @@ class PatientTherapistRelationshipsController < ApplicationController
       flash.notice = "Failed to update connection request"
     end
     redirect_to patient_dashboard_path(@relationship.patient_id)
-  end
-
-  # POST /deny_connection_request
-  def destroy
-
   end
 
   def only_two

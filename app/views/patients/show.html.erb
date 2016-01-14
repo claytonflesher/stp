@@ -12,8 +12,17 @@
       <div class="dynamic button">
         <% if therapist_logged_in? %>
           <% if connection_request_pending? %>
-            <%= link_to accept_connection_request_path do %>
-              Accept Connection Request
+            <%= form_tag({controller: "patient_therapist_relationships", action: "update"}, method: "post") do %>
+              <%= hidden_field_tag 'patient_id', params[:patient_id] %>
+              <%= hidden_field_tag 'therapist_id', current_therapist.id %>
+              <%= hidden_field_tag 'status', "accept" %>
+              <%= submit_tag "Accept" %>
+            <% end %>
+            <%= form_tag({controller: "patient_therapist_relationships", action: "update"}, method: "post") do %>
+              <%= hidden_field_tag 'patient_id', params[:patient_id] %>
+              <%= hidden_field_tag 'therapist_id', current_therapist.id %>
+              <%= hidden_field_tag 'status', "deny" %>
+              <%= submit_tag "Deny" %>
             <% end %>
           <% elsif connection_accepted %>
             <%= link_to therapist_show_conversation_path(params[:patient_id]) do %>

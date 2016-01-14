@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   post   "super_admins/:therapist_id"           => "super_admins#update"
 
   post "new_connection_request" => "patient_therapist_relationships#create", as: :new_connection_request
+  post "update_connection_request" => "patient_therapist_relationships#update", as: :update_connection_request
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

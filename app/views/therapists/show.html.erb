@@ -26,10 +26,12 @@
               Send Message
             <% end %>
           <% end %>
-        <% elsif current_therapist.id.to_i == params[:therapist_id].to_i %>
-          <!-- Therapist on their own dashboard, show inbox button -->
-          <%= link_to therapist_inbox_path do %>
-            Inbox
+        <% elsif therapist_logged_in? %>
+          <% if current_therapist.id.to_i == params[:therapist_id].to_i %>
+            <!-- Therapist on their own dashboard, show inbox button -->
+            <%= link_to therapist_inbox_path do %>
+              Inbox
+            <% end %>
           <% end %>
         <% end %>
       </div>
