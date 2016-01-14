@@ -16,13 +16,17 @@ class PatientTherapistRelationshipsController < ApplicationController
     end
   end
 
-  #POST /accept_connection_request
   def update
     @relationship = PatientTherapistRelationship.find(params[:id])
     if @relationship.update(patient_therapist_relationship_params)
-      flash.notice = "Connection request accepted"
+      if @relationship.status == "accept"
+        # Mail an alert to patient
+        flash.notice = "Connection request accepted"
+      elsif @relationship.status = "deny"
+        flash.notice = "Connection request rejected"
+      end
     else
-      flash.notice = "Failed to accept connection request"
+      flash.notice = "Failed to update connection request"
     end
     redirect_to patient_dashboard_path(@relationship.patient_id)
   end

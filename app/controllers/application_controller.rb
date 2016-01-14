@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def ensure_therapist_not_signed_in
     if current_therapist
-      redirect_to therapist_dashboard_path(current_patient.id)
+      redirect_to therapist_dashboard_path(current_therapist.id)
     end
   end
 
@@ -107,7 +107,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def current_patient
     session[:patient_id] && Patient.find(session[:patient_id])
     if session[:patient_id] && Patient.find(session[:patient_id])
@@ -162,7 +161,7 @@ class ApplicationController < ActionController::Base
     end
     
     @relationship = PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id).first
-    @relationship.created_at == @relationship.updated_at
+    @relationship.status == "pending"
   end
 
   def patient_logged_in?
@@ -173,7 +172,6 @@ class ApplicationController < ActionController::Base
     current_therapist != nil
   end
 
-  #When a therapist excepts a connection request, the updated_at record will be updated with the current time, therefore the connection is considered "accepted" when updated_at > created_at
   def connection_accepted
     if current_therapist
       patient_id = params[:patient_id]
@@ -185,13 +183,13 @@ class ApplicationController < ActionController::Base
       # Not logged in
       return false
     end
-    connection = PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) 
-    if connection == []
+    @connection = PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id).first
+    if @connection == nil
       # no relationship
       return false
     end
-    #if the connection has been updated after it was created, that means it was accepted by the therapist
-    connection.first.updated_at > connection.first.created_at
+
+    @connection.status == "accept"
   end
 
   def find_first_message patient_id, therapist_id

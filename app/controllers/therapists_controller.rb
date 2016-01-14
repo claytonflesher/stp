@@ -1,6 +1,6 @@
 class TherapistsController < ApplicationController
   before_filter :ensure_therapist_signed_in, only: [:update, :edit]
-  before_filter :ensure_therapist_not_signed_in, except: [:update, :edit]
+  before_filter :ensure_therapist_not_signed_in, except: [:update, :edit, :show]
 
   def new
     @therapist = Therapist.new
