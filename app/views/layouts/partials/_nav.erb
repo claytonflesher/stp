@@ -8,10 +8,10 @@
     <nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu show">
        
-         <li class="nav-link"><%= link_to "About Us", about_path %></li>
-         <li class="nav-link"><%= link_to "Contact", contact_path %></li>
+          <li class="nav-link"><i class="fa fa-info-circle"><%= link_to "About Us", about_path %></i></li>
+          <li class="nav-link"><i class="fa fa-phone"><%= link_to "Contact", contact_path %></i></li>
         <% if patient_logged_in? %>
-          <li class="nav-link more"><%= link_to current_patient.username, patient_dashboard_path %>
+          <li class="nav-link more"><i class="fa fa-bars"><%= link_to current_patient.username, patient_dashboard_path %></i>
             <ul class="submenu">
               <li><%= link_to "Edit Profile", edit_patient_path %></li>
               <li><a href="javascript:void(0)">Inbox</a></li>
@@ -19,7 +19,7 @@
         <% elsif therapist_logged_in? %>
           <li class="nav-link more"><%= link_to current_therapist.username, therapist_dashboard_path %>
             <ul class="submenu">
-              <li><%= link_to "Edit Profile", edit_therapist_path %></li>
+                <li><%= link_to "Edit Profile", edit_therapist_path %></i></li>
               <li><a href="javascript:void(0)">Inbox</a></li>
               <li><%= link_to "Sign Out", therapist_signout_path, method: :delete %></li>
         <% else %>

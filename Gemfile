@@ -18,6 +18,10 @@ gem 'therubyracer', platforms: :ruby
 gem 'neat'
 gem 'bitters'
 
+
+# Use font awesome for Icons and Glyphs in scss
+gem 'font-awesome-rails'
+gem 'font-awesome-sass', '~> 4.5.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes the following links in your web application faster. Read more https://github.com/rails/turbolinks

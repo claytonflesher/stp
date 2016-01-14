@@ -7,6 +7,7 @@
     <div class="left">
       <div class="button">
           <%= link_to (patient_signup_path) do %>
+          <i class="fa fa-location-arrow"></i>
             Find a <br/>
             Therapist
           <% end %>
@@ -18,7 +19,10 @@
     </div>
     <div class="left">
       <div class="button">
-        <%= link_to "Register as a Therapist", therapist_signup_path %>
+          <%= link_to (therapist_signup_path) do %>
+          <i class="fa fa-plus-square"></i>
+          Register As A Therapist
+          <%end%>
       </div>
       <div class="space"></div>
       <div class="blurb">

@@ -46,12 +46,18 @@ header {
           }
         a {
           color: $green;
+          
+            
+            i{
+                padding-right:3px;
+            }
         }
         @include media(700px) {
           @include span-columns(2 of 6);
           @include shift(2);
       }
         padding: .5em;
+        
         font-weight: bold;
       }
 
@@ -59,6 +65,7 @@ header {
       .blurb {
         background-color:rgba(255,255,255,0.8);
         color: darken($dark-green,10%);
+            
         @include media(700px) {
           @include span-columns(6 of 6);
         }
@@ -67,6 +74,7 @@ header {
         margin-bottom: 2%;
         margin-top: 2%;
         font-size: 1.25em;
+          
       }
     }
 
