@@ -15,6 +15,7 @@
             <%= form_tag({controller: "patient_therapist_relationships", action: "create"}, method: "post") do %>
               <%= hidden_field_tag 'patient_id', current_patient.id %>
               <%= hidden_field_tag 'therapist_id', params[:therapist_id] %>
+              <%= hidden_field_tag 'status', "pending" %>
               <%= submit_tag "Connect with this Therapist" %>
             <% end %>
           <% end %>

@@ -37,15 +37,10 @@ class PatientTherapistRelationshipsController < ApplicationController
     #view should have a form that allows the patient to voice their concerns about getting denied
   end
 
-  def not_first_request
-    flash.notice = "You have already submitted a connection request to this therapist"
-    redirect_to therapist_dashboard_path(params[:therapist_id])
-  end
-
   private
 
   def patient_therapist_relationship_params
-    params.require(:patient_therapist_relationship).permit(:patient_id, :therapist_id)
+    params.permit(:patient_id, :therapist_id, :status)
   end
     
 end

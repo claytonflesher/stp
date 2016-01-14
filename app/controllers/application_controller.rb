@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
   def ensure_only_two_per_month
     @patient = current_patient
     @num_requests = PatientTherapistRelationship.where('created_at > ? and patient_id = ?', 30.days.ago, @patient.id).count
-    if num_requests > 2
+    if @num_requests > 2
       redirect_to exceeded_requests_path
     end
   end
@@ -101,8 +101,7 @@ class ApplicationController < ActionController::Base
     @patient = current_patient
     # This may not be the right way to find the therapist id....
     @therapist = Therapist.find(params[:therapist_id])
-    unless PatientTherapistRelationship.where('patient_id = ? and therapist_id = ?', @patient.id, @therapist.id)
- == []
+    unless PatientTherapistRelationship.where('patient_id = ? and therapist_id = ?', @patient.id, @therapist.id) == []
       flash.notice = "You have already submitted a connection request to this therapist"
       redirect_to therapist_dashboard_path(@therapist.id)
     end
