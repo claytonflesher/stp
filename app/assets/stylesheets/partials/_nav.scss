@@ -1,4 +1,4 @@
-header.navigation {
+.navigation {
     
 
   background-color: $navigation-background;
@@ -21,7 +21,7 @@ header.navigation {
     max-height: 149.233px;
     margin: auto;
     padding:auto;
-    padding-left:2%;
+    padding-left:3%;
     padding-top:2%;
     float:left;
         
@@ -132,7 +132,8 @@ header.navigation {
     }
 
     a {
-      color: $navigation-color;
+      color: darken($light-green,5%);
+      opacity:1.2;  
       display: inline-block;
       text-decoration: none;
       padding-bottom:5px;
@@ -153,11 +154,12 @@ header.navigation {
         }
       &:focus,
       &:hover {
+          color: $eco-green;
           @include transform(scale(1.05));     
       }
      &:hover::after {
       width: 100%;
-      background: $red;
+      background: $green;
      }
 
         

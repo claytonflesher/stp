@@ -1,13 +1,16 @@
 body {
     margin: 0px;
     padding: 0px;
-}
+}   
 
 
 header {
   @include row();
   @include clearfix();
-  background-color: $red;
+  background-image: asset-data-url("file931243780850.jpg");
+  background-repeat: no-repeat;
+  background-size:  auto; 
+  background-position: 50% 41%;
   color: #fff;
   text-align: center;
   width: 100%;
@@ -42,7 +45,7 @@ header {
               
           }
         a {
-          color: $red;
+          color: $green;
         }
         @include media(700px) {
           @include span-columns(2 of 6);
@@ -54,11 +57,15 @@ header {
 
       
       .blurb {
+        background-color:rgba(255,255,255,0.8);
+        color: darken($dark-green,10%);
         @include media(700px) {
           @include span-columns(6 of 6);
         }
         padding: .5em;
         padding-bottom: 1.25em;
+        margin-bottom: 2%;
+        margin-top: 2%;
         font-size: 1.25em;
       }
     }
@@ -69,7 +76,7 @@ header {
   .button {
     background-color: #fff;
     a {
-      color: $red;
+      color: $green;
     }
     @include span-columns(2 of 4);
     @include shift(1);
@@ -90,13 +97,23 @@ header {
 
 .content {
   @include outer-container();
-padding-top:3%;
+  padding-top: 2em;
+  background-color: whitesmoke;
+  padding:auto;
+   border: 1px solid transparent;
+    border-left: 0.5px solid black;
+    box-shadow: 20px 8px 9px black;
+    margin:auto;
+    margin-top:2%;
+    margin-bottom:1%;
   section {
-    padding: 1.5em 0 1.5em 0;
+    padding: 2%;
+    padding-top:1%;  
   }
 }
 
 .media {
+    margin-top:2%;
   h3 {
     font-size: 1.15em;
     padding: 0.5em;
