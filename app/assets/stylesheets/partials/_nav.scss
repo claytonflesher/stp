@@ -16,18 +16,27 @@
     @include clearfix;
   }
     .branding {
-    background-size: contain;
-    max-width: 35%;
-    max-height: 149.233px;
+    background-size:100%;
+    background-image: asset-data-url("SecularTherapyProjectLogo.png");
+    background-repeat: none;
+    overflow: visible;
+    min-width: 650px;
+    min-height:160px;
     margin: auto;
+    margin-top:1%;
     padding:auto;
     padding-left:3%;
     padding-top:2%;
     float:left;
-        
-        svg{
-            padding-left:1%;
-        }   
+        @media screen and (max-width:860px){
+            background-size:contain;
+            background-size:70%;
+            background-repeat: no-repeat;
+            margin-top:3%;
+            margin-left:15%;
+            padding:auto;
+            float:none;
+        }
     }
     
     @media screen and (max-width:860px){
