@@ -54,9 +54,12 @@ Rails.application.routes.draw do
   get    "super_admins"                         => "super_admins#index"
   get    "super_admins/:therapist_id"           => "super_admins#show", as: :super_admin_show
   post   "super_admins/:therapist_id"           => "super_admins#update"
+  post   "super_admins/message"                 => "super_admins#message"
 
   post "new_connection_request" => "patient_therapist_relationships#create", as: :new_connection_request
   post "update_connection_request" => "patient_therapist_relationships#update", as: :update_connection_request
+
+  get "exceeded_requests" => "patient_therapist_relationships#exceeded_requests", as: :exceeded_requests
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

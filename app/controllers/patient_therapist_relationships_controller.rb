@@ -31,9 +31,17 @@ class PatientTherapistRelationshipsController < ApplicationController
     redirect_to patient_dashboard_path(@relationship.patient_id)
   end
 
-  def only_two
-    #create a relationship between the admins and this patient and update it so it is considered accepted.  This will allow the patient to approach the admins and vise versa 
-    #view should have a form that allows the patient to voice their concerns about getting denied
+  def exceeded_requests
+    @patient = current_patient
+
+    # The patient should only see the form to message the admins if they have not messaged them yet.
+    @godvirus = Therapist.where("username = ?", "godvirus").first
+    @message = @patient.messages.where("received_messageable_id = ?", @godvirus.id).first
+    if @message == nil
+      @show_form = true
+    else
+      @show_form = false
+    end
   end
 
   private
