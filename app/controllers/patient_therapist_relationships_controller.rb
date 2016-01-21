@@ -44,6 +44,20 @@ class PatientTherapistRelationshipsController < ApplicationController
     end
   end
 
+  def admin_message
+    # Patients have the option of sending a message to the admins when they have exceeded the allowed monthly request limit
+    @patient = Patient.find(params[:patient_id])
+    @admins = Therapist.where("super_admin = ?", true)
+    @message_body = "Patient exceeded two connection requests in 30 days: " + params[:body]
+    
+    @admins.each do |a|
+      @patient.send_message(a, "Exceeded Requests", params[:body])
+    end
+
+    flash.notice = "Your message has been sent.  The site administrators will review your concern and contact you soon."
+    redirect_to patient_dashboard_path(params[:patient_id])
+  end
+
   private
 
   def patient_therapist_relationship_params

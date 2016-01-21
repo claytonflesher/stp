@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   get    "super_admins"                         => "super_admins#index"
   get    "super_admins/:therapist_id"           => "super_admins#show", as: :super_admin_show
   post   "super_admins/:therapist_id"           => "super_admins#update"
-  post   "super_admins/message"                 => "super_admins#message"
+  post   "patient_therapist_relationships/admin_message"                 => "patient_therapist_relationships#admin_message"
 
   post "new_connection_request" => "patient_therapist_relationships#create", as: :new_connection_request
   post "update_connection_request" => "patient_therapist_relationships#update", as: :update_connection_request

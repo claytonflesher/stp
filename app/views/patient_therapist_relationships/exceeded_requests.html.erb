@@ -5,7 +5,7 @@ Your connection request was not submitted, as you have already submitted 2 conne
 <% if @show_form %>
   If you are concerned about this policy, please fill out this form to message the site administrators.
 
-  <%= form_tag({controller: "super_admins", action: "message"}, method: "post")do %>
+  <%= form_tag({controller: "patient_therapist_relationships", action: "admin_message"}, method: "post") do %>
     <%= hidden_field_tag :patient_id, @patient.id %>
     <%= text_area_tag "body" %>
     <%= submit_tag %>
