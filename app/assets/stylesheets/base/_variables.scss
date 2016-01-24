@@ -25,13 +25,16 @@ $light-gray: #ddd;
 $light-blue: #98dafc;
 $light-brown: #daad86;
 $light-black: #312c32;
-$red: #990033;
-$dark-green: #58582d;
-$light-green: #cccc99;
+$green: #990033;
+$dark-green: #426b49;
+$light-green: #92ca9d;
+$green : #0e713b;
+$lavender: #d2d0e8;
+$eco-green: #679370;
 
 // Font Colors
 $base-font-color: $dark-gray;
-$action-color: $red;
+$action-color: $green;
 
 // Border
 $base-border-color: $light-gray;
@@ -54,7 +57,7 @@ $base-timing: ease;
 $large-screen: em(860) !default;
 $navigation-padding: 1em;
 $navigation-background: #fff;
-$navigation-color: $red;
+$navigation-color: $green;
 $navigation-color-hover: darken($navigation-color, 10%);
 $navigation-height: 60px;
 $navigation-nav-button-background: $action-color;
