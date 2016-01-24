@@ -22,7 +22,17 @@ class PatientTherapistRelationshipsController < ApplicationController
       if @relationship.status == "accept"
         # Mail an alert to patient
         flash.notice = "Connection request accepted"
-      elsif @relationship.status = "deny"
+      elsif @relationship.status == "deny"
+        @admins = Therapist.where(super_admin: true)
+        @therapist = Therapist.find(params[:therapist_id])
+        @message_body = "Connection request denied: " + params[:comment]
+        @admins.each do |a|
+          @therapist.send_message(a, "Denied", @message_body)
+        end
+
+        @patient = Patient.find(params[:patient_id])
+        @therapist.send_message(@patient, "Denied", @message_body)
+
         flash.notice = "Connection request rejected"
       end
     else
