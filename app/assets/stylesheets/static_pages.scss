@@ -7,13 +7,13 @@ body {
 header {
   @include row();
   @include clearfix();
-background-color:darken($green,5%);
+  background-image: asset-data-url("1DEA8CC2AB.jpg");
+  @include linear-gradient(to bottom,green);
   background-repeat: no-repeat;
-  background-size:  auto; 
-  background-position: 50% 41%;
+  background-size:cover; 
+  width:100%;
   color: #fff;
   text-align: center;
-  width: 100%;
   z-index: 999;
     margin:0px;
     padding:0px;
