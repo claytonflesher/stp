@@ -28,4 +28,5 @@ class SuperAdminsController < ApplicationController
     end
     redirect_to super_admins_path
   end
+
 end

@@ -1,4 +1,4 @@
-header.navigation {
+.navigation {
     
 
   background-color: $navigation-background;
@@ -15,19 +15,33 @@ header.navigation {
     width: 100%;
     @include clearfix;
   }
+    a{
+        border:none;
+    }
     .branding {
-    background-size: contain;
-    max-width: 35%;
-    max-height: 149.233px;
+    background-size:100%;
+    background-image: asset-data-url("SecularTherapyProjectLogo.png");
+    border:none;    
+    background-repeat: none;
+    overflow: visible;
+    min-width: 650px;
+    min-height:160px;
     margin: auto;
+    margin-top:1%;
     padding:auto;
-    padding-left:2%;
+    padding-left:3%;
     padding-top:2%;
     float:left;
         
-        svg{
-            padding-left:1%;
-        }   
+        @media screen and (max-width:860px){
+            background-size:contain;
+            background-size:70%;
+            background-repeat: no-repeat;
+            margin-top:3%;
+            margin-left:15%;
+            padding:auto;
+            float:none;
+        }
     }
     
     @media screen and (max-width:860px){
@@ -45,6 +59,9 @@ header.navigation {
       max-height: $navigation-height;
       padding: 0.8em 0;
     }
+      
+      //Icons on the nav bar   
+      
   }
 
   
@@ -54,10 +71,10 @@ header.navigation {
     color: $navigation-color;
     display: block;
     line-height: $navigation-height;
-    margin: auto;
+    margin:auto;
+    margin-left:45%;
     padding:auto;
-    clear:left;
-
+    clear:right;  
     text-decoration: none;
     text-transform: uppercase;
 
@@ -80,7 +97,7 @@ header.navigation {
     display: block;
     height: auto;
       margin-top: 4%;
-      margin-right:10%;
+      margin-right:6%;
       float:right;      
     @include media($horizontal-bar-mode) {
       background: transparent;
@@ -108,6 +125,21 @@ header.navigation {
       margin-right:1%;
       padding: 0;
     }
+      
+    i {
+        color: $light-green;
+        &:hover {
+         color: $eco-green;
+          @include transform(scale(1.05));        
+        }
+        a{
+            font-family: $base-font-family;
+            font-weight:bold;
+            padding:5px;
+            padding-bottom:1%;
+        }
+        
+    }  
   }
 
   
@@ -132,7 +164,8 @@ header.navigation {
     }
 
     a {
-      color: $navigation-color;
+      color: darken($light-green,5%);
+      opacity:1.2;  
       display: inline-block;
       text-decoration: none;
       padding-bottom:5px;
@@ -146,6 +179,8 @@ header.navigation {
         content: "" !important;
 		display: block;
 		margin: auto;
+        margin-top:2%;
+        padding:auto;
 		height: 3px;
 		width: 0px;
 		background: transparent;
@@ -153,11 +188,12 @@ header.navigation {
         }
       &:focus,
       &:hover {
+          color: $eco-green;
           @include transform(scale(1.05));     
       }
      &:hover::after {
       width: 100%;
-      background: $red;
+      background: $green;
      }
 
         
@@ -306,7 +342,10 @@ header.navigation {
     }
   }
 
-  
+
+    
+    
+    
 // Search bar
 
   .search-bar {

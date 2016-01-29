@@ -92,7 +92,9 @@ class ApplicationController < ActionController::Base
   def ensure_only_two_per_month
     @patient = current_patient
     @num_requests = PatientTherapistRelationship.where('created_at > ? and patient_id = ?', 30.days.ago, @patient.id).count
-    if @num_requests > 2
+    Rails.logger.debug("@num_requests = #{@num_requests}")
+    
+    if @num_requests >= 2
       redirect_to exceeded_requests_path
     end
   end

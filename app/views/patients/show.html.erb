@@ -18,11 +18,15 @@
               <%= hidden_field_tag 'status', "accept" %>
               <%= submit_tag "Accept" %>
             <% end %>
+
+            <!-- FOR DANIEL: This form should be a dialog that opens after the user clicks a Deny button -->
+
             <%= form_tag({controller: "patient_therapist_relationships", action: "update"}, method: "post") do %>
               <%= hidden_field_tag 'patient_id', params[:patient_id] %>
               <%= hidden_field_tag 'therapist_id', current_therapist.id %>
               <%= hidden_field_tag 'status', "deny" %>
-              <%= submit_tag "Deny" %>
+              <%= text_area_tag 'comment' %>
+              <%= submit_tag "Send Response" %>
             <% end %>
           <% elsif connection_accepted %>
             <%= link_to therapist_show_conversation_path(params[:patient_id]) do %>

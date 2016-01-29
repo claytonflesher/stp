@@ -1,3 +1,9 @@
+<% provide(:title, "Sign In") %>
+
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
 <div class="sign-in">
 <% provide(:title, "Sign In To Your Patient Account") %>
 <h1>Sign In To Your Patient Account</h1>
@@ -13,3 +19,20 @@
   <%= submit_tag "Log In" %>
 <% end %>
 </div>
+
+<div class="sign-in">
+<% provide(:title, "Sign In To Your Therapist Account") %>
+<h1>Sign In To Your Therapist Account</h1>
+
+<%= form_tag({controller: "therapists_sessions", action: "create"}, method: "post") do %>
+
+  <%= label_tag :username %>
+  <%= text_field_tag :username %>
+
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+
+  <%= submit_tag "Log In" %>
+<% end %>
+</div>
+
