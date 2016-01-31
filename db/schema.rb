@@ -112,25 +112,25 @@ ActiveRecord::Schema.define(version: 20160131160602) do
     t.string   "password_reset_token"
     t.boolean  "admin",                   default: false
     t.boolean  "super_admin",             default: false
-    t.boolean  "adolescents"
-    t.boolean  "adults"
-    t.boolean  "children"
-    t.boolean  "coping_with_change"
-    t.boolean  "depression"
-    t.boolean  "existential"
-    t.boolean  "general_anxiety"
-    t.boolean  "grief_loss"
-    t.boolean  "marriage_family"
-    t.boolean  "mood_disorders"
-    t.boolean  "ocd"
-    t.boolean  "ptsd"
-    t.boolean  "relationship_counseling"
-    t.boolean  "self_improvement"
-    t.boolean  "sex_therapy"
-    t.boolean  "social_anxiety"
-    t.boolean  "stress_management"
-    t.boolean  "substance_abuse"
-    t.boolean  "trauma_recovery"
+    t.boolean  "adolescents",             default: false
+    t.boolean  "adults",                  default: false
+    t.boolean  "children",                default: false
+    t.boolean  "coping_with_change",      default: false
+    t.boolean  "depression",              default: false
+    t.boolean  "existential",             default: false
+    t.boolean  "general_anxiety",         default: false
+    t.boolean  "grief_loss",              default: false
+    t.boolean  "marriage_family",         default: false
+    t.boolean  "mood_disorders",          default: false
+    t.boolean  "ocd",                     default: false
+    t.boolean  "ptsd",                    default: false
+    t.boolean  "relationship_counseling", default: false
+    t.boolean  "self_improvement",        default: false
+    t.boolean  "sex_therapy",             default: false
+    t.boolean  "social_anxiety",          default: false
+    t.boolean  "stress_management",       default: false
+    t.boolean  "substance_abuse",         default: false
+    t.boolean  "trauma_recovery",         default: false
   end
 
   create_table "votes", force: :cascade do |t|
