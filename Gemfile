@@ -50,7 +50,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  gem 'shoulda-matchers', '~> 3.0'
+  gem 'shoulda-matchers', '~> 3.1.1'
 end
 
 group :development do
