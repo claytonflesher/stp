@@ -41,7 +41,53 @@ class TherapistsController < ApplicationController
   private
 
   def therapist_params
-    params.require(:therapist).permit(:username, :password, :password_confirmation, :first_name, :last_name, :phone, :email, :address, :city, :state, :country, :zipcode, :practice, :years_experience, :qualifications, :website, :gender, :religion, :previous_religion, :licenses, :main_license, :distance_counseling, :languages, :purpose, :public_description, :secular_evidence).merge(geo_address: geo_address)
+    params.require(:therapist).permit(
+      :username, 
+      :password, 
+      :password_confirmation, 
+      :first_name, 
+      :last_name, 
+      :phone, 
+      :email, 
+      :address, 
+      :city, 
+      :state, 
+      :country, 
+      :zipcode, 
+      :practice, 
+      :years_experience, 
+      :qualifications, 
+      :website, 
+      :gender, 
+      :religion, 
+      :previous_religion, 
+      :licenses, 
+      :main_license, 
+      :distance_counseling, 
+      :languages, 
+      :purpose, 
+      :public_description, 
+      :secular_evidence,
+      :adolescents,
+      :adults,
+      :children,
+      :coping_with_change,
+      :depression,
+      :existential,
+      :general_anxiety,
+      :grief_loss,
+      :marriage_family,
+      :mood_disorders,
+      :ocd,
+      :ptsd,
+      :relationship_counseling,
+      :self_improvement,
+      :sex_therapy,
+      :social_anxiety,
+      :stress_maagement,
+      :substance_abuse,
+      :trauma_recovery
+    ).merge(geo_address: geo_address)
   end
 
   def geo_address
