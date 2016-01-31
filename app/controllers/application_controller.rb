@@ -108,7 +108,23 @@ class ApplicationController < ActionController::Base
       redirect_to therapist_dashboard_path(@therapist.id)
     end
   end
-
+  
+  def ensure_application_accepted
+    @therapist = Therapist.find(params[:therapist_id])
+    unless current_admin
+      if @therapist.application_status == "denied" || @therapist.application_status == "pending"
+        if current_therapist
+          unless current_therapist.id == @therapist.id
+            redirect_to therapist_dashboard_path(current_therapist.id)
+          end
+        elsif current_patient
+          redirect_to patient_dashboard_path(current_patient.id)
+        else
+          redirect_to patient_signin_path
+        end
+      end
+    end
+  end
   def current_patient
     session[:patient_id] && Patient.find(session[:patient_id])
     if session[:patient_id] && Patient.find(session[:patient_id])

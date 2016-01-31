@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131160602) do
+ActiveRecord::Schema.define(version: 20160131201332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,33 +77,33 @@ ActiveRecord::Schema.define(version: 20160131160602) do
   end
 
   create_table "therapists", force: :cascade do |t|
-    t.string   "username",                                null: false
-    t.string   "password_digest",                         null: false
-    t.string   "first_name",                              null: false
-    t.string   "last_name",                               null: false
-    t.string   "phone",                                   null: false
-    t.string   "email",                                   null: false
-    t.string   "address",                                 null: false
-    t.string   "city",                                    null: false
-    t.string   "state",                                   null: false
-    t.string   "country",                                 null: false
-    t.string   "zipcode",                                 null: false
-    t.string   "practice",                                null: false
-    t.integer  "years_experience",                        null: false
-    t.string   "qualifications",                          null: false
+    t.string   "username",                                    null: false
+    t.string   "password_digest",                             null: false
+    t.string   "first_name",                                  null: false
+    t.string   "last_name",                                   null: false
+    t.string   "phone",                                       null: false
+    t.string   "email",                                       null: false
+    t.string   "address",                                     null: false
+    t.string   "city",                                        null: false
+    t.string   "state",                                       null: false
+    t.string   "country",                                     null: false
+    t.string   "zipcode",                                     null: false
+    t.string   "practice",                                    null: false
+    t.integer  "years_experience",                            null: false
+    t.string   "qualifications",                              null: false
     t.string   "website"
-    t.string   "gender",                                  null: false
-    t.string   "religion",                                null: false
+    t.string   "gender",                                      null: false
+    t.string   "religion",                                    null: false
     t.string   "former_religion"
-    t.string   "licenses",                                null: false
-    t.string   "main_license",                            null: false
-    t.boolean  "distance_counseling",                     null: false
+    t.string   "licenses",                                    null: false
+    t.string   "main_license",                                null: false
+    t.boolean  "distance_counseling",                         null: false
     t.string   "languages"
-    t.string   "purpose",                                 null: false
+    t.string   "purpose",                                     null: false
     t.string   "description"
     t.string   "approach"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "geo_address"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20160131160602) do
     t.boolean  "stress_management",       default: false
     t.boolean  "substance_abuse",         default: false
     t.boolean  "trauma_recovery",         default: false
+    t.string   "application_status",      default: "pending"
   end
 
   create_table "votes", force: :cascade do |t|
