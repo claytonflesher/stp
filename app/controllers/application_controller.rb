@@ -136,11 +136,11 @@ class ApplicationController < ActionController::Base
     unless current_super_admin
       if current_patient
         unless current_patient.id.to_i == params[:patient_id].to_i
-          redirect_to patient_profile_path(current_patient.id)
+          redirect_to patient_dashboard_path(current_patient.id)
         end
       elsif current_therapist
         unless current_therapist.id.to_i == params[:therapist_id].to_i
-          redirect_to therapist_profile_path(current_therapist.id)
+          redirect_to therapist_dashboard_path(current_therapist.id)
         end
       else
         #not logged in
@@ -157,8 +157,8 @@ class ApplicationController < ActionController::Base
     unless current_super_admin
       if current_patient
         Rails.logger.debug("*~*~*~*~**~current_patient*~*~*~*~*~*~*~*~*")
-        unless Current_patient.id.to_i == params[:patient_id].to_i
-          redirect_to patient_profile_path(Current_patient.id)
+        unless current_patient.id.to_i == params[:patient_id].to_i
+          redirect_to patient_dashboard_path(current_patient.id)
         end
       else
         #not logged in
@@ -168,11 +168,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def ensure_should_see_patient_inbox
+  def ensure_should_see_therapist_inbox
     unless current_super_admin
       if current_therapist
         unless current_therapist.id.to_i == params[:therapist_id].to_i
-          redirect_to therapist_profile_path(current_therapist.id)
+          redirect_to therapist_dashboard_path(current_therapist.id)
         end
       else
         #not logged in
