@@ -3,9 +3,9 @@ class PatientMessagesController < ApplicationController
   before_filter :ensure_connection_accepted, only: [:index, :new]
   # before_filter :ensure_connection_not_accepted, except: [:index, :reply_to_message]
   #
-  # GET /patient_show_converation/:therapist_id
+  # GET /patient_show_converation/:patient_id/:therapist_id
   def index
-    @patient = Patient.find(session[:patient_id])
+    @patient = Patient.find(params[:patient_id])
     @therapist = Therapist.find(params[:therapist_id])
     @message = find_first_message(@patient.id, @therapist.id)
     unless @message
@@ -25,7 +25,7 @@ class PatientMessagesController < ApplicationController
     @therapist = Therapist.find(params[:therapist_id])
     @message = ActsAsMessageable::Message.find(params[:message_id])
     if @patient.reply_to(@message, @message.topic, params[:body]) 
-      redirect_to patient_show_conversation_path(@therapist.id)
+      redirect_to patient_show_conversation_path(@patient.id, @therapist.id)
     else
       render :show_conversation # Need error messages
     end
@@ -57,7 +57,7 @@ class PatientMessagesController < ApplicationController
   end
 
   def inbox
-    @patient_id = session[:patient_id]
+    @patient_id = params[:patient_id]
     @patient = Patient.find(@patient_id)
     @relationships = PatientTherapistRelationship.where(patient_id: @patient_id)
     @messages = Array.new

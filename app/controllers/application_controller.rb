@@ -4,9 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def ensure_patient_signed_in
-    unless current_patient
-      session[:return_to] = request.url
-      redirect_to patient_signin_path
+    unless current_super_admin
+      unless current_patient
+        session[:return_to] = request.url
+        redirect_to patient_signin_path
+      end
     end
   end
 
@@ -58,33 +60,37 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_connection_accepted
-    unless connection_accepted
-      session[:return_to] = request.url
-      if current_patient
-        redirect_to patient_dashboard_path(current_patient.id)
-      elsif current_therapist
-        redirect_to therapist_dashboard_path(current_therapist.id)
-      else
-        # Not logged in
-        redirect_to home_path
+    unless current_super_admin
+      unless connection_accepted
+        session[:return_to] = request.url
+        if current_patient
+          redirect_to patient_dashboard_path(current_patient.id)
+        elsif current_therapist
+          redirect_to therapist_dashboard_path(current_therapist.id)
+        else
+          # Not logged in
+          redirect_to home_path
+        end
       end
     end
   end
 
   def ensure_should_see_profile
-    if patient_logged_in?
-      unless current_patient.id.to_i == params[:patient_id].to_i
-        # Patients should not view other patient's profiles
-        session[:return_to] = request.url
-        redirect_to patient_dashboard_path(current_patient.id)
+    unless current_super_admin
+      if patient_logged_in?
+        unless current_patient.id.to_i == params[:patient_id].to_i
+          # Patients should not view other patient's profiles
+          session[:return_to] = request.url
+          redirect_to patient_dashboard_path(current_patient.id)
+        end
       end
-    end
 
-    if therapist_logged_in?
-      unless patient_therapist_relationship_exists
-        # There is no relationship, so this therapist should not be viewing this patient's profile
-        session[:return_to] = request.url
-        redirect_to therapist_dashboard_path(current_therapist.id)
+      if therapist_logged_in?
+        unless patient_therapist_relationship_exists
+          # There is no relationship, so this therapist should not be viewing this patient's profile
+          session[:return_to] = request.url
+          redirect_to therapist_dashboard_path(current_therapist.id)
+        end
       end
     end
   end
@@ -125,6 +131,56 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def ensure_should_see_conversation
+    unless current_super_admin
+      if current_patient
+        unless current_patient.id.to_i == params[:patient_id].to_i
+          redirect_to patient_profile_path(current_patient.id)
+        end
+      elsif current_therapist
+        unless current_therapist.id.to_i == params[:therapist_id].to_i
+          redirect_to therapist_profile_path(current_therapist.id)
+        end
+      else
+        #not logged in
+        redirect_to patient_signin_path
+      end
+
+      unless patient_therapist_relationship_exists
+        redirect_to home_path
+      end
+    end
+  end
+
+  def ensure_should_see_patient_inbox
+    unless current_super_admin
+      if current_patient
+        Rails.logger.debug("*~*~*~*~**~current_patient*~*~*~*~*~*~*~*~*")
+        unless Current_patient.id.to_i == params[:patient_id].to_i
+          redirect_to patient_profile_path(Current_patient.id)
+        end
+      else
+        #not logged in
+        Rails.logger.debug("*~*~*~*~*~*IT THINKS I'M NOT LOGGED IN!!!!*~*~*~*~*~*~*")
+        redirect_to patient_signin_path
+      end
+    end
+  end
+
+  def ensure_should_see_patient_inbox
+    unless current_super_admin
+      if current_therapist
+        unless current_therapist.id.to_i == params[:therapist_id].to_i
+          redirect_to therapist_profile_path(current_therapist.id)
+        end
+      else
+        #not logged in
+        redirect_to patient_signin_path
+      end
+    end
+  end
+
   def current_patient
     session[:patient_id] && Patient.find(session[:patient_id])
     if session[:patient_id] && Patient.find(session[:patient_id])
@@ -243,6 +299,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_patient, 
                 :current_therapist, 
+                :current_super_admin,
                 :patient_logged_in?, 
                 :therapist_logged_in?,
                 :find_first_message,

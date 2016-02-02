@@ -22,14 +22,14 @@
           <% if connection_request_pending? %>
             Connection Request Pending
           <% elsif connection_accepted %>
-            <%= link_to patient_show_conversation_path(params[:therapist_id]) do %>
+            <%= link_to show_conversation_path(session[:patient_id], params[:therapist_id]) do %>
               Send Message
             <% end %>
           <% end %>
         <% elsif therapist_logged_in? %>
           <% if current_therapist.id.to_i == params[:therapist_id].to_i %>
             <!-- Therapist on their own dashboard, show inbox button -->
-            <%= link_to therapist_inbox_path do %>
+            <%= link_to therapist_inbox_path(params[:therapist_id]) do %>
               Inbox
             <% end %>
           <% end %>
