@@ -7,19 +7,19 @@
   <% @messages.each do |m| %>
     <tr>
       <td>
-        <% unless m[:opened] %>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Red_pog.svg/2000px-Red_pog.svg.png" height="10px" width="10px">
+        <% unless m.opened %>
+          <%= link_to image_tag('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Red_pog.svg/2000px-Red_pog.svg.png', height: '10px', width: '10px'), show_conversation_path(m.received_messageable_id, m.sent_messageable_id) %>
         <% end %>
       </td>
       <td>
         <!-- AVATAR WILL GO HERE -->
-        <img src="https://www.drupal.org/files/profile_default.jpg" height="30px" width="30px">
+        <%= link_to image_tag("https://www.drupal.org/files/profile_default.jpg", height: "30px", width: "30px"), therapist_dashboard_path(m.sent_messageable_id) %>
       </td>
       <td>
-        <%= m[:name] %>
+        <%= link_to Therapist.find(m.sent_messageable_id).full_name, therapist_dashboard_path(m.sent_messageable_id) %>
       </td>
       <td>
-        <%= m[:body] %>
+        <%= link_to m.body, show_conversation_path(m.received_messageable_id, m.sent_messageable_id) %>
       </td>
     </tr>
   <% end %>

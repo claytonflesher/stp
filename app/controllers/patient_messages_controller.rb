@@ -10,11 +10,11 @@ class PatientMessagesController < ApplicationController
     @message = find_first_message(@patient.id, @therapist.id)
     unless @message
       # They have not sent a message yet, go to form to send first message
-      redirect_to patient_new_message_path(params[:therapist_id])
+      redirect_to new_message_path(params[:patient_id], params[:therapist_id])
     end
-    @patient_messages = @message.conversation
+    @messages = @message.conversation
     #If they're opening a conversation, mark the messages as read
-    @patient_messages.each do |m|
+    @messages.each do |m|
       m.update(opened: true)
     end
   end

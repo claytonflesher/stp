@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
     @message = find_first_message(@patient.id, @therapist.id)
     unless @message
       # They have not sent a message yet, go to form to send first message
-      redirect_to patient_new_message_path(params[:therapist_id])
+      redirect_to new_message_path(params[:patient_id], params[:therapist_id])
     end
     @messages = @message.conversation
     #If they're opening a conversation, mark the messages as read
@@ -74,6 +74,7 @@ class MessagesController < ApplicationController
   def patient_inbox
     @patient_id = params[:patient_id]
     @patient = Patient.find(@patient_id)
+=begin
     @relationships = PatientTherapistRelationship.where(patient_id: @patient_id)
     @messages = Array.new
 
@@ -114,11 +115,14 @@ class MessagesController < ApplicationController
       
       @messages.append(message)
     end
+=end
+    @messages = @patient.messages.where(sent_messageable_type: "Therapist")
   end
 
   def therapist_inbox
     @therapist_id = params[:therapist_id]
     @therapist = Therapist.find(@therapist_id)
+=begin
     @relationships = PatientTherapistRelationship.where(therapist_id: @therapist_id)
     @messages = Array.new
 
@@ -159,6 +163,8 @@ class MessagesController < ApplicationController
       
       @messages.append(message)
     end
+=end
+    @messages = @therapist.messages.where(sent_messageable_type: "Patient")
   end
 
 end

@@ -63,7 +63,7 @@ Rails.application.routes.draw do
 
   get "show_conversation/:patient_id/:therapist_id" => "messages#index", as: :show_conversation
   post "reply_to_message" => "messages#reply_to_message", as: :reply_to_message
-  get "new_message" => "messages#new_message", as: :new_message
+  get "new_message/:patient_id/:therapist_id" => "messages#new", as: :new_message
   post "send_new_message" => "messages#create", as: :send_new_message
   get "patient_inbox/:patient_id" => "messages#patient_inbox", as: :patient_inbox
   get "therapist_inbox/:therapist_id" => "messages#therapist_inbox", as: :therapist_inbox
