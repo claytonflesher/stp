@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   #before_filter :ensure_patient_signed_in, only: [:index, :reply_to_message, :new, :create]
-  before_filter :ensure_connection_accepted, only: [:index, :new, :reply_to_message, :create]
+  before_filter :ensure_connection_accepted, only: [:new, :reply_to_message, :create]
   # before_filter :ensure_connection_not_accepted, except: [:index, :reply_to_message]
   before_filter :ensure_should_see_conversation, only: [:index]
   before_filter :ensure_should_see_patient_inbox, only: [:patient_inbox]
@@ -8,12 +8,13 @@ class MessagesController < ApplicationController
   #
   # GET /show_conversation/:patient_id/:therapist_id
   def index
-    @patient = Patient.find(params[:patient_id])
-    @therapist = Therapist.find(params[:therapist_id])
-    @message = find_first_message(@patient.id, @therapist.id)
-    unless @message
-      # They have not sent a message yet, go to form to send first message
-      redirect_to new_message_path(params[:patient_id], params[:therapist_id])
+    @message = ActsAsMessageable::Message.find(params[:message_id])
+    if @message.sent_messageable_type == "Patient"
+      @patient = Patient.find(@message.sent_messageable_id.to_i)
+      @therapist = Therapist.find(@message.received_messageable_id.to_i)
+    else
+      @patient = Patient.find(@message.received_messageable_id.to_i)
+      @therapist = Therapist.find(@message.sent_messageable_id.to_i)
     end
     @messages = @message.conversation
     #If they're opening a conversation, mark the messages as read

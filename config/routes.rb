@@ -61,7 +61,7 @@ Rails.application.routes.draw do
 
   get "exceeded_requests" => "patient_therapist_relationships#exceeded_requests", as: :exceeded_requests
 
-  get "show_conversation/:patient_id/:therapist_id" => "messages#index", as: :show_conversation
+  get "show_conversation/:message_id" => "messages#index", as: :show_conversation
   post "reply_to_message" => "messages#reply_to_message", as: :reply_to_message
   get "new_message/:patient_id/:therapist_id" => "messages#new", as: :new_message
   post "send_new_message" => "messages#create", as: :send_new_message

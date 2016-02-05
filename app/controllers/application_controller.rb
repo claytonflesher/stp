@@ -134,20 +134,52 @@ class ApplicationController < ActionController::Base
 
   def ensure_should_see_conversation
     unless current_super_admin
+      @message = ActsAsMessageable::Message.find(params[:message_id])
       if current_patient
-        unless current_patient.id.to_i == params[:patient_id].to_i
-          redirect_to patient_dashboard_path(current_patient.id)
+        @patient_id = current_patient.id.to_i
+        if @message == nil
+          redirect_to patient_inbox_path(@patient_id)
+        elsif @message.sent_messageable_type == "Therapist"
+          @therapist_id = @message.sent_messageable_id.to_i
+          unless @patient_id == @message.received_messageable_id.to_i
+            redirect_to patient_dashboard_path(@patient_id)
+          end
+        elsif @message.sent_messageable_type == "Patient"
+          @therapist_id = @message.received_messageable_id.to_i
+          unless @patient_id == @message.sent_messageable_id.to_i
+            redirect_to patient_dashboard_path(@patient_id)
+          end
         end
       elsif current_therapist
-        unless current_therapist.id.to_i == params[:therapist_id].to_i
-          redirect_to therapist_dashboard_path(current_therapist.id)
+        @therapist_id = current_therapist.id.to_i
+        if @message == nil
+          redirect_to therapist_inbox_path(@therapist_id)
+        elsif @message.sent_messageable_type == "Therapist"
+          @patient_id = @message.received_messageable_id.to_i
+          unless @therapist_id == @message.sent_messageable_id.to_i
+            redirect_to therapist_dashboard_path(@therapist_id)
+          end
+        elsif @message.sent_messageable_type == "Patient"
+          @patient_id = @message.sent_messageable_id.to_i
+          unless @therapist_id == @message.received_messageable_id.to_i
+            redirect_to therapist_dashboard_path(@therapist_id)
+          end
         end
       else
         #not logged in
         redirect_to patient_signin_path
       end
 
-      unless patient_therapist_relationship_exists
+      # If we've made it this far, we know that that someone is signed in, 
+      # and their user id matches the appropriate user id in the message.  
+      # Now we have to see if they have an active relationship
+      @relationship = PatientTherapistRelationship.where(patient_id: @patient_id, therapist_id: @therapist_id).first
+
+      if @relationship == nil
+        redirect_to home_path
+      end
+
+      unless @relationship.status == "accept"
         redirect_to home_path
       end
     end
