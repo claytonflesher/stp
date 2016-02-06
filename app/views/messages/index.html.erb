@@ -1,8 +1,9 @@
+
 <p id="notice"><%= notice %></p>
 
-<h1>Conversation With <%= @therapist.username %></h1>
+<h1>Conversation Between <%= @therapist.username %> and <%= @patient.username %></h1>
 
-<%= form_tag patient_reply_to_message_path, method: "post" do %>
+<%= form_tag reply_to_message_path, method: "post" do %>
 
   <%= hidden_field_tag :therapist_id, @therapist.id %>
   <%= hidden_field_tag :patient_id, @patient.id %>
@@ -16,17 +17,17 @@
 
 <table>
   <tbody>
-    <% @patient_messages.each do |patient_message| %>
+    <% @messages.each do |message| %>
       <tr>
         <td>
-        <% if patient_message.sent_messageable_type == "Therapist" %>
+        <% if message.sent_messageable_type == "Therapist" %>
           <%= @therapist.username %>:
         <% else %>
           <%= @patient.username %>:
         <% end %>
       </td>
       <td>
-        <%= patient_message.body %>
+        <%= message.body %>
       </td>
       </tr>
     <% end %>

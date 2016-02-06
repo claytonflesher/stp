@@ -42,7 +42,7 @@ class PatientsController < ApplicationController
   #####################
 
   def show_conversation
-    @patient = Patient.find(session[:patient_id])
+    @patient = Patient.find(params[:patient_id])
     @message = @patient.messages.where(sent_messageable_id: params[:therapist_id]).first
     unless @message
       redirect_to patient_new_message_path(params[:therapist_id])

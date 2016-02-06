@@ -22,14 +22,14 @@
           <% if connection_request_pending? %>
             Connection Request Pending
           <% elsif connection_accepted %>
-            <%= link_to patient_show_conversation_path(params[:therapist_id]) do %>
+            <%= link_to show_conversation_path(session[:patient_id], params[:therapist_id]) do %>
               Send Message
             <% end %>
           <% end %>
         <% elsif therapist_logged_in? %>
           <% if current_therapist.id.to_i == params[:therapist_id].to_i %>
             <!-- Therapist on their own dashboard, show inbox button -->
-            <%= link_to therapist_inbox_path do %>
+            <%= link_to therapist_inbox_path(params[:therapist_id]) do %>
               Inbox
             <% end %>
           <% end %>
@@ -55,4 +55,55 @@
         </p>
       </div>
   </div>
+
+  <% if current_admin && current_therapist.id == params[:therapist_id].to_i %>
+    <div class="admin-tools">
+      <h2>Admin Tools</h2>
+      <ul>
+        <% if current_super_admin %>
+          <li>Search for a Patient</li>
+          <li>List Admins</li>
+        <% end %>
+        <li>Search for a Therapist</li>
+        <li><%= link_to "Pending Therapist Applications", votes_path %></li>
+      </ul>
+    </div>
+  <% end %>
+  
+  <% if current_admin && @therapist.application_status == "pending" %>
+
+    <div class="votes">
+      <%= link_to "Back to Dashboard", votes_path %>
+      <h2>Current Votes</h2>
+      <% if voted_on?(@therapist) %>
+        <%= form_tag({controller: "votes", action: "delete"}, method: "post") do %>
+          <%= hidden_field_tag :votee_id, @therapist.id %>
+          <%= submit_tag "Change Vote" %>
+        <% end %>
+      <% end %>
+      <p>
+        <% @therapist.received_votes.each do |vote| %>
+          <ul>
+            <li><%= vote.voter.full_name %></li>
+            <li><%= vote.decision %></li>
+            <li><%= vote.comment %></li>
+          </ul>
+        <% end %>
+      </p>
+      <% if !voted_on?(@therapist) %>
+        <%= form_tag({controller: "votes", action: "create"}, method: "post") do %>
+          <%= label_tag :decision, "Vote" %>
+          <%= select_tag :decision, options_for_select([["Accept", "Accept"], ["Decline", "Decline"], ["Need more info", "Need more info"]]) %>
+
+          <%= label_tag :comment, "Comments" %>
+          <%= text_field_tag :comment %>
+
+          <%= hidden_field_tag :votee_id, @therapist.id %>
+
+          <%= submit_tag "Vote" %>
+        <% end %>
+      <% end %>
+    </div>
+
+  <% end %>
 </div>

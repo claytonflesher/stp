@@ -29,13 +29,13 @@
               <%= submit_tag "Send Response" %>
             <% end %>
           <% elsif connection_accepted %>
-            <%= link_to therapist_show_conversation_path(params[:patient_id]) do %>
+            <%= link_to show_conversation_path(params[:patient_id], session[:therapist_id]) do %>
               Send Message
             <% end %>
           <% end %>
         <% end %>
         <% if patient_logged_in? %>
-          <%= link_to patient_inbox_path do %>
+          <%= link_to patient_inbox_path(params[:patient_id]) do %>
             Inbox
           <% end %>
         <% end %>
@@ -45,7 +45,7 @@
         <p><%= @patient.name %></p>
         <p><%= @patient.phone %></p>
         <p><%= @patient.email %></p>
-        <p>Find City and State based on Zipcode.</p>
+        <p>!-- Find City and State based on Zipcode.--!</p>
         <p><%= @patient.gender %></p>
       </div>
       <div class="info">
@@ -64,10 +64,18 @@
 
       <h2>Therapists Near You</h2>
       <% @results.each do |t| %>
-        <p><%= t.first_name %> <%= t.last_name %></p>
-        <p><%= t.city %>, <%= t.state %></p>
+        <% if t.application_status == "accepted" %>
+          <p><%= t.first_name %> <%= t.last_name %></p>
+          <p><%= t.city %>, <%= t.state %></p>
+        <% end %>
       <% end %>
 
+    </div>
+  <% end %>
+
+  <% if current_super_admin %>
+    <div class="admin-tools">
+      <%= link_to "Show Connections and Conversation History", patient_inbox_path(params[:patient_id]) %>
     </div>
   <% end %>
 </div>

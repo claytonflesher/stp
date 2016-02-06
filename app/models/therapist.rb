@@ -6,9 +6,11 @@ class Therapist < ActiveRecord::Base
     obj.geo_address.present? && obj.geo_address_changed? 
   }
 
-  scope :pending, -> { where(verified_at: nil).order("created_at DESC") }
+  # Changing these from using the verified_at attribute to application_status
+  # because verified_at does not account for a denied application
+  scope :pending, -> { where(application_status: "pending").order("created_at DESC") }
 
-  scope :current, -> { where.not(verified_at: nil).order(:last_name) }
+  scope :current, -> { where(application_status: "accepted").order(:last_name) }
 
   scope :admins, -> { where(admin: true).order(:last_name) }
 

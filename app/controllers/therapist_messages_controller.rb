@@ -4,7 +4,7 @@ class TherapistMessagesController < ApplicationController
   #
   # GET /therapist_show_converation/:therapist_id
   def index
-    @therapist = Therapist.find(session[:therapist_id])
+    @therapist = Therapist.find(params[:therapist_id])
     @patient = Patient.find(params[:patient_id])
     @message = find_first_message(@patient.id, @therapist.id)
     unless @message
@@ -24,7 +24,7 @@ class TherapistMessagesController < ApplicationController
     @therapist = Therapist.find(params[:therapist_id])
     @message = ActsAsMessageable::Message.find(params[:message_id])
     if @therapist.reply_to(@message, @message.topic, params[:body]) 
-      redirect_to therapist_show_conversation_path(@patient.id)
+      redirect_to therapist_show_conversation_path(@patient.id, @therapist.id)
     else
       render :show_conversation # Need error messages
     end
