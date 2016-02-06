@@ -2,6 +2,7 @@ class PatientsController < ApplicationController
   before_filter :ensure_patient_signed_in, only: [:update, :edit, :new_message, :send_new_message, :show_conversation, :reply_to_message]
   before_filter :ensure_patient_not_signed_in, except: [:show, :update, :edit, :new_message, :send_new_message, :show_conversation, :reply_to_message]
   before_filter :ensure_should_see_profile, only: [:show]
+  before_filter :ensure_admin, only: [:destroy]
 
   def new
     @patient = Patient.new
@@ -35,6 +36,13 @@ class PatientsController < ApplicationController
 
   def edit
     @patient = Patient.find(session[:patient_id])
+  end
+
+  def destroy
+    @patient = Patient.find(params[:id])
+    @patient.destroy
+
+    redirect_to votes_path
   end
   
   #####################
