@@ -329,13 +329,28 @@ class ApplicationController < ActionController::Base
    #For future refactoring 
   end
 
+  def cast_votes
+    @cast_votes = Vote.where(voter_id: current_therapist.id)
+  end
+
+  def voted_on?(therapist)
+    cast_votes.each do |vote|
+      if therapist.id == vote.votee_id
+        return true
+      end
+    end
+    return false
+  end
+
   helper_method :current_patient, 
                 :current_therapist, 
+                :current_admin,
                 :current_super_admin,
                 :patient_logged_in?, 
                 :therapist_logged_in?,
                 :find_first_message,
                 :patient_therapist_relationship_exists,
                 :connection_request_pending?,
-                :connection_accepted
+                :connection_accepted,
+                :voted_on?
 end

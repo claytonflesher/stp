@@ -11,12 +11,13 @@ Rails.application.routes.draw do
   delete "therapist_signout"               => "therapists_sessions#destroy"
   get    "therapist_verify/:therapist_id"  => "therapists_verifications#new",    as: :therapist_verify
   get    "therapist_verify/confirm/:token" => "therapists_verifications#create", as: :therapist_confirm
-  get    "therapist_dashboard/:therapist_id"             => "therapists#show", as: :therapist_dashboard
+  get    "therapist_dashboard/:therapist_id"             => "therapists#show",   as: :therapist_dashboard
   get    "edit_therapist"                  => "therapists#edit"
   put    "update_therapist"                => "therapists#update"
   patch  "update_therapist"                => "therapists#update"
   get    "votes"                            => "votes#index"
   post   "votes"                            => "votes#create"
+  post   "change_vote"                     => "votes#delete",                    as: :change_vote
   get "therapist_profile/:therapist_id" => "therapists#profile"
   #get "therapist_new_message/:patient_id" => "therapist_messages#new", as: :therapist_new_message
   #get "therapist_show_conversation/:patient_id/:therapist_id" => "therapist_messages#index", as: :therapist_show_conversation
