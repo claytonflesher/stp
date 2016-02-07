@@ -2,6 +2,7 @@ class TherapistsController < ApplicationController
   before_filter :ensure_therapist_signed_in, only: [:update, :edit]
   before_filter :ensure_therapist_not_signed_in, except: [:update, :edit, :show]
   before_filter :ensure_application_accepted, only: [:show]
+  before_filter :ensure_admin, only: [:destroy]
 
   def new
     @therapist = Therapist.new
@@ -37,6 +38,13 @@ class TherapistsController < ApplicationController
 
   def edit
     @therapist = Therapist.find(session[:therapist_id])
+  end
+
+  def destroy
+    @therapist = Therapist.find(params[:id])
+    @therapist.destroy
+
+    redirect_to admins_path
   end
 
   private

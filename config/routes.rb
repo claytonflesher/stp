@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get    "votes"                            => "votes#index"
   post   "votes"                            => "votes#create"
   post   "change_vote"                     => "votes#delete",                    as: :change_vote
-  get "therapist_profile/:therapist_id" => "therapists#profile"
+  get    "therapist_profile/:therapist_id" => "therapists#profile"
   #get "therapist_new_message/:patient_id" => "therapist_messages#new", as: :therapist_new_message
   #get "therapist_show_conversation/:patient_id/:therapist_id" => "therapist_messages#index", as: :therapist_show_conversation
   #get "therapist_inbox/:therapist_id" => "therapist_messages#inbox", as: :therapist_inbox
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   get    "patient_signup"                  => "patients#new",                    as: :patient_signup
   post   "patient_signup"                  => "patients#create"
+  delete "patient_delete"                  => "patients#destroy",                as: :patient_delete
   get    "patient_signin"                  => "patients_sessions#new",           as: :patient_signin
   post   "patient_signin"                  => "patients_sessions#create"
   delete "patient_signout"                 => "patients_sessions#destroy"
