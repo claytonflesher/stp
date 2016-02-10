@@ -21,6 +21,6 @@ class TherapistsSessionsController < ApplicationController
 
   def destroy
     reset_session
-    redirect_to therapist_signin_path
+    redirect_to patient_signin_path
   end
 end
