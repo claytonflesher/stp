@@ -71,7 +71,7 @@ group :development do
   gem 'database_cleaner'
 
 end
-  gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails', '~> 4.5'
+gem 'rspec-rails', '~> 3.0'
+gem 'factory_girl_rails', '~> 4.5'
 
 ruby "2.3.0"
