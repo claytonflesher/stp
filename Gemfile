@@ -67,11 +67,11 @@ group :development do
   gem 'pry-rails', :group => :development
 
   # Use Rspec for spec testing and Capybara for feature testing
-  gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
-  gem 'factory_girl_rails', '~> 4.5'
   gem 'database_cleaner'
 
 end
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails', '~> 4.5'
 
 ruby "2.3.0"
