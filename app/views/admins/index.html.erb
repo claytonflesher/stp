@@ -5,7 +5,7 @@
 <p>
 <ul>
   <% @admins.each do |admin| %>
-    <li><%= link_to admin.full_name, admin_show_path(admin.id) %></li>
+    <li><%= link_to admin.full_name, therapist_dashboard_path(admin.id) %></li>
   <% end %>
 </ul>
 </p>
