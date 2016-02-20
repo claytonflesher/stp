@@ -18,6 +18,9 @@ gem 'therubyracer', platforms: :ruby
 gem 'neat'
 gem 'bitters'
 
+# Use heorku gem to test site in production
+gem 'rails_12factor', group: :production
+
 
 # Use font awesome for Icons and Glyphs in scss
 gem 'font-awesome-rails'
@@ -50,7 +53,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  gem 'shoulda-matchers', '~> 3.0'
+  gem 'shoulda-matchers', '~> 3.1.1'
 end
 
 group :development do
@@ -64,10 +67,11 @@ group :development do
   gem 'pry-rails', :group => :development
 
   # Use Rspec for spec testing and Capybara for feature testing
-  gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
-  gem 'factory_girl_rails', '~> 4.5'
   gem 'database_cleaner'
 
 end
+gem 'rspec-rails', '~> 3.0'
+gem 'factory_girl_rails', '~> 4.5'
 
+ruby "2.2.3"

@@ -1,6 +1,8 @@
 class TherapistsController < ApplicationController
-  before_filter :ensure_therapist_signed_in, only: [:show, :update, :edit]
-  before_filter :ensure_therapist_not_signed_in, except: [:show, :update, :edit]
+  before_filter :ensure_therapist_signed_in, only: [:update, :edit]
+  before_filter :ensure_therapist_not_signed_in, except: [:update, :edit, :show]
+  before_filter :ensure_application_accepted, only: [:show]
+  before_filter :ensure_admin, only: [:destroy]
 
   def new
     @therapist = Therapist.new
@@ -16,8 +18,9 @@ class TherapistsController < ApplicationController
     end
   end
 
+  # GET /therapist_dashboard
   def show
-    @therapist = Therapist.find(session[:therapist_id])
+    @therapist = Therapist.find(params[:therapist_id])
   end
 
   def update
@@ -37,10 +40,63 @@ class TherapistsController < ApplicationController
     @therapist = Therapist.find(session[:therapist_id])
   end
 
+  def destroy
+    @therapist = Therapist.find(params[:id])
+    @therapist.destroy
+
+    redirect_to admins_path
+  end
+
   private
 
   def therapist_params
-    params.require(:therapist).permit(:username, :password, :password_confirmation, :first_name, :last_name, :phone, :email, :address, :city, :state, :country, :zipcode, :practice, :years_experience, :qualifications, :website, :gender, :religion, :previous_religion, :licenses, :main_license, :distance_counseling, :languages, :purpose, :public_description, :secular_evidence).merge(geo_address: geo_address)
+    params.require(:therapist).permit(
+      :username, 
+      :password, 
+      :password_confirmation, 
+      :first_name, 
+      :last_name, 
+      :phone, 
+      :email, 
+      :address, 
+      :city, 
+      :state, 
+      :country, 
+      :zipcode, 
+      :practice, 
+      :years_experience, 
+      :qualifications, 
+      :website, 
+      :gender, 
+      :religion, 
+      :previous_religion, 
+      :licenses, 
+      :main_license, 
+      :distance_counseling, 
+      :languages, 
+      :purpose, 
+      :public_description, 
+      :secular_evidence,
+      :adolescents,
+      :adults,
+      :children,
+      :coping_with_change,
+      :depression,
+      :existential,
+      :general_anxiety,
+      :grief_loss,
+      :marriage_family,
+      :mood_disorders,
+      :ocd,
+      :ptsd,
+      :relationship_counseling,
+      :self_improvement,
+      :sex_therapy,
+      :social_anxiety,
+      :stress_maagement,
+      :substance_abuse,
+      :trauma_recovery
+    ).merge(geo_address: geo_address)
   end
 
   def geo_address

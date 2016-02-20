@@ -1,6 +1,6 @@
-<h1>New Patient Message</h1>
+<h1>New Message</h1>
 
-<%= form_for @message, url: patient_send_new_message_path do |f| %>
+<%= form_for @message, url: send_new_message_path do |f| %>
 
   <%= f.hidden_field :therapist_id, { :value => @therapist_id } %>
   <%= f.hidden_field :patient_id, { :value => @patient_id } %>

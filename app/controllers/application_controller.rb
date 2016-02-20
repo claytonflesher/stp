@@ -4,9 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def ensure_patient_signed_in
-    unless current_patient
-      session[:return_to] = request.url
-      redirect_to patient_signin_path
+    unless current_super_admin
+      unless current_patient
+        session[:return_to] = request.url
+        redirect_to patient_signin_path
+      end
     end
   end
 
@@ -19,13 +21,13 @@ class ApplicationController < ActionController::Base
 
   def ensure_patient_not_signed_in
     if current_patient
-      redirect_to patient_dashboard_path
+      redirect_to patient_dashboard_path(current_patient.id)
     end
   end
 
   def ensure_therapist_not_signed_in
     if current_therapist
-      redirect_to therapist_dashboard_path
+      redirect_to therapist_dashboard_path(current_therapist.id)
     end
   end
 
@@ -36,13 +38,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_super_admin
+    unless current_super_admin
+      session[:return_to] = request.url
+      redirect_to therapist_signin_path
+    end
+  end
+
   def ensure_relationship_exists
     unless patient_therapist_relationship_exists
       session[:return_to] = request.url
       if current_patient
-        redirect_to patient_dashboard_path
+        redirect_to patient_dashboard_path(current_patient.id)
       elsif current_therapist
-        redirect_to therapist_dashboard_path
+        redirect_to therapist_dashboard_path(current_patient.id)
       else
         # Not logged in
         redirect_to home_path
@@ -51,15 +60,155 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_connection_accepted
-    unless connection_accepted
-      session[:return_to] = request.url
+    unless current_super_admin
+      unless connection_accepted
+        session[:return_to] = request.url
+        if current_patient
+          redirect_to patient_dashboard_path(current_patient.id)
+        elsif current_therapist
+          redirect_to therapist_dashboard_path(current_therapist.id)
+        else
+          # Not logged in
+          redirect_to home_path
+        end
+      end
+    end
+  end
+
+  def ensure_should_see_profile
+    unless current_super_admin
+      if patient_logged_in?
+        unless current_patient.id.to_i == params[:patient_id].to_i
+          # Patients should not view other patient's profiles
+          session[:return_to] = request.url
+          redirect_to patient_dashboard_path(current_patient.id)
+        end
+      end
+
+      if therapist_logged_in?
+        unless patient_therapist_relationship_exists
+          # There is no relationship, so this therapist should not be viewing this patient's profile
+          session[:return_to] = request.url
+          redirect_to therapist_dashboard_path(current_therapist.id)
+        end
+      end
+    end
+  end
+
+  def ensure_only_two_per_month
+    @patient = current_patient
+    @num_requests = PatientTherapistRelationship.where('created_at > ? and patient_id = ?', 30.days.ago, @patient.id).count
+    Rails.logger.debug("@num_requests = #{@num_requests}")
+    
+    if @num_requests >= 2
+      redirect_to exceeded_requests_path
+    end
+  end
+
+  def ensure_first_request
+    @patient = current_patient
+    # This may not be the right way to find the therapist id....
+    @therapist = Therapist.find(params[:therapist_id])
+    unless PatientTherapistRelationship.where('patient_id = ? and therapist_id = ?', @patient.id, @therapist.id) == []
+      flash.notice = "You have already submitted a connection request to this therapist"
+      redirect_to therapist_dashboard_path(@therapist.id)
+    end
+  end
+  
+  def ensure_application_accepted
+    @therapist = Therapist.find(params[:therapist_id])
+    unless current_admin
+      if @therapist.application_status == "denied" || @therapist.application_status == "pending"
+        if current_therapist
+          unless current_therapist.id == @therapist.id
+            redirect_to therapist_dashboard_path(current_therapist.id)
+          end
+        elsif current_patient
+          redirect_to patient_dashboard_path(current_patient.id)
+        else
+          redirect_to patient_signin_path
+        end
+      end
+    end
+  end
+
+  def ensure_should_see_conversation
+    unless current_super_admin
+      @message = ActsAsMessageable::Message.find(params[:message_id])
       if current_patient
-        redirect_to patient_dashboard_path
+        @patient_id = current_patient.id.to_i
+        if @message == nil
+          redirect_to patient_inbox_path(@patient_id)
+        elsif @message.sent_messageable_type == "Therapist"
+          @therapist_id = @message.sent_messageable_id.to_i
+          unless @patient_id == @message.received_messageable_id.to_i
+            redirect_to patient_dashboard_path(@patient_id)
+          end
+        elsif @message.sent_messageable_type == "Patient"
+          @therapist_id = @message.received_messageable_id.to_i
+          unless @patient_id == @message.sent_messageable_id.to_i
+            redirect_to patient_dashboard_path(@patient_id)
+          end
+        end
       elsif current_therapist
-        redirect_to therapist_dashboard_path
+        @therapist_id = current_therapist.id.to_i
+        if @message == nil
+          redirect_to therapist_inbox_path(@therapist_id)
+        elsif @message.sent_messageable_type == "Therapist"
+          @patient_id = @message.received_messageable_id.to_i
+          unless @therapist_id == @message.sent_messageable_id.to_i
+            redirect_to therapist_dashboard_path(@therapist_id)
+          end
+        elsif @message.sent_messageable_type == "Patient"
+          @patient_id = @message.sent_messageable_id.to_i
+          unless @therapist_id == @message.received_messageable_id.to_i
+            redirect_to therapist_dashboard_path(@therapist_id)
+          end
+        end
       else
-        # Not logged in
+        #not logged in
+        redirect_to patient_signin_path
+      end
+
+      # If we've made it this far, we know that that someone is signed in, 
+      # and their user id matches the appropriate user id in the message.  
+      # Now we have to see if they have an active relationship
+      @relationship = PatientTherapistRelationship.where(patient_id: @patient_id, therapist_id: @therapist_id).first
+
+      if @relationship == nil
         redirect_to home_path
+      end
+
+      unless @relationship.status == "accept"
+        redirect_to home_path
+      end
+    end
+  end
+
+  def ensure_should_see_patient_inbox
+    unless current_super_admin
+      if current_patient
+        Rails.logger.debug("*~*~*~*~**~current_patient*~*~*~*~*~*~*~*~*")
+        unless current_patient.id.to_i == params[:patient_id].to_i
+          redirect_to patient_dashboard_path(current_patient.id)
+        end
+      else
+        #not logged in
+        Rails.logger.debug("*~*~*~*~*~*IT THINKS I'M NOT LOGGED IN!!!!*~*~*~*~*~*~*")
+        redirect_to patient_signin_path
+      end
+    end
+  end
+
+  def ensure_should_see_therapist_inbox
+    unless current_super_admin
+      if current_therapist
+        unless current_therapist.id.to_i == params[:therapist_id].to_i
+          redirect_to therapist_dashboard_path(current_therapist.id)
+        end
+      else
+        #not logged in
+        redirect_to patient_signin_path
       end
     end
   end
@@ -81,18 +230,44 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_super_admin
+    if current_therapist
+      Therapist.find(session[:therapist_id]).super_admin?
+    end
+  end
+
   def patient_therapist_relationship_exists
     if current_therapist
       patient_id = params[:patient_id]
       therapist_id = session[:therapist_id]
     elsif current_patient
       patient_id = session[:patient_id]
-      therapist_id = params[:patient_id]
+      therapist_id = params[:therapist_id]
     else
       # Not logged in
       return false
     end
     PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) != [] 
+  end
+
+  def connection_request_pending?
+    unless patient_therapist_relationship_exists
+      return false
+    end
+
+    if current_therapist
+      patient_id = params[:patient_id]
+      therapist_id = session[:therapist_id]
+    elsif current_patient
+      patient_id = session[:patient_id]
+      therapist_id = params[:therapist_id]
+    else
+      # Not logged in
+      return false
+    end
+    
+    @relationship = PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id).first
+    @relationship.status == "pending"
   end
 
   def patient_logged_in?
@@ -103,7 +278,6 @@ class ApplicationController < ActionController::Base
     current_therapist != nil
   end
 
-  #When a therapist excepts a connection request, the updated_at record will be updated with the current time, therefore the connection is considered "accepted" when updated_at > created_at
   def connection_accepted
     if current_therapist
       patient_id = params[:patient_id]
@@ -115,13 +289,13 @@ class ApplicationController < ActionController::Base
       # Not logged in
       return false
     end
-    connection = PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id) 
-    if connection == []
+    @connection = PatientTherapistRelationship.where(patient_id: patient_id, therapist_id: therapist_id).first
+    if @connection == nil
       # no relationship
       return false
     end
-    #if the connection has been updated after it was created, that means it was accepted by the therapist
-    connection.first.updated_at > connection.first.created_at
+
+    @connection.status == "accept"
   end
 
   def find_first_message patient_id, therapist_id
@@ -151,17 +325,32 @@ class ApplicationController < ActionController::Base
     return false
   end
 
-  def therapist_find_first_message
-    # Will probably have the exact same implementation, but look for therapist_id in the session and patient_id in the url params
-  end
-
   def get_ids
    #For future refactoring 
   end
 
+  def cast_votes
+    @cast_votes = Vote.where(voter_id: current_therapist.id)
+  end
+
+  def voted_on?(therapist)
+    cast_votes.each do |vote|
+      if therapist.id == vote.votee_id
+        return true
+      end
+    end
+    return false
+  end
+
   helper_method :current_patient, 
                 :current_therapist, 
+                :current_admin,
+                :current_super_admin,
                 :patient_logged_in?, 
                 :therapist_logged_in?,
-                :find_first_message
+                :find_first_message,
+                :patient_therapist_relationship_exists,
+                :connection_request_pending?,
+                :connection_accepted,
+                :voted_on?
 end

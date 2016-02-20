@@ -1,15 +1,9 @@
 class PatientsController < ApplicationController
-  before_filter :ensure_patient_signed_in, only: [:show, :update, :edit, :new_message, :send_new_message, :show_conversation, :reply_to_message]
+  before_filter :ensure_patient_signed_in, only: [:update, :edit, :new_message, :send_new_message, :show_conversation, :reply_to_message]
   before_filter :ensure_patient_not_signed_in, except: [:show, :update, :edit, :new_message, :send_new_message, :show_conversation, :reply_to_message]
+  before_filter :ensure_should_see_profile, only: [:show]
+  before_filter :ensure_admin, only: [:destroy]
 
-  # To see a patient's profile, you must be signed in as a therapist, and the patient must have sent the logged in therapist a connection request #
-  before_filter :ensure_therapist_signed_in, only: [:profile]
-  before_filter :ensure_relationship_exists, only: [:profile]
-
-  # For messaging
-  # before_filter :ensure_connection_accepted, only: [:new_message, :send_new_message, :show_conversation, :reply_to_message]
-  
-  # To view a conversation, 
   def new
     @patient = Patient.new
   end
@@ -24,17 +18,17 @@ class PatientsController < ApplicationController
   end
 
   def show
-    @patient = Patient.find(session[:patient_id])
-    @search ||= TherapistSearch.new(current_patient)
-    @results = @search.find
-  end
-
-  def profile
+    @patient = Patient.find(params[:patient_id])
+    if patient_logged_in?
+      @search ||= TherapistSearch.new(current_patient)
+      @results = @search.find
+    end
   end
 
   def update
     if @patient.update(patient_params)
-      redirect_to patient_dashboard_path, notice: 'Profile was successfully updated'
+      flash.notice = "Profile successfully update"
+      redirect_to patient_dashboard_path 
     else
       render :edit 
     end
@@ -43,13 +37,20 @@ class PatientsController < ApplicationController
   def edit
     @patient = Patient.find(session[:patient_id])
   end
+
+  def destroy
+    @patient = Patient.find(params[:id])
+    @patient.destroy
+
+    redirect_to admins_path
+  end
   
   #####################
   # MESSAGING ACTIONS #
   #####################
 
   def show_conversation
-    @patient = Patient.find(session[:patient_id])
+    @patient = Patient.find(params[:patient_id])
     @message = @patient.messages.where(sent_messageable_id: params[:therapist_id]).first
     unless @message
       redirect_to patient_new_message_path(params[:therapist_id])
