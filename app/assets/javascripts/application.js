@@ -3,7 +3,23 @@
 //= require patient_messages.js
 
 $(document).ready(function() {
+    //button redirects to top of page
+    $('.top').on('click',function (e) {
+	    e.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+	});
     
+    //changes the nav to fixed whenever user scrolls down past the nav
+    
+    var scrollTop     = $(window).scrollTop(),
+  
+    var interval = setInterval(function(){
+        if(scrollTop>170){
+            
+        }
+    },1000);
+    
+    //toggle for mobile menu click
       var menuToggle = $('#js-mobile-menu').unbind();
     $('#js-navigation-menu').removeClass("show");
     menuToggle.on('click', function(e) {
