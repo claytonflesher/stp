@@ -29,7 +29,7 @@
               <%= submit_tag "Send Response" %>
             <% end %>
           <% elsif connection_accepted %>
-            <%= link_to show_conversation_path(params[:patient_id], session[:therapist_id]) do %>
+            <%= link_to show_conversation_path(@message) do %>
               Send Message
             <% end %>
           <% end %>
@@ -65,7 +65,7 @@
       <h2>Therapists Near You</h2>
       <% @results.each do |t| %>
         <% if t.application_status == "accepted" %>
-          <p><%= t.first_name %> <%= t.last_name %></p>
+          <p><%= t.full_name %></p>
           <p><%= t.city %>, <%= t.state %></p>
         <% end %>
       <% end %>

@@ -23,6 +23,9 @@ class PatientsController < ApplicationController
       @search ||= TherapistSearch.new(current_patient)
       @results = @search.find
     end
+    if current_therapist
+      @message = find_first_message(params[:patient_id], session[:therapist_id])
+    end
   end
 
   def update
