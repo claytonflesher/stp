@@ -1,5 +1,5 @@
 .navigation {
-    
+
 
   background-color: $navigation-background;
   min-height: $navigation-height;
@@ -7,7 +7,10 @@
   z-index: 999;
   font-size: 1.15em;
   font-weight: bold;
-  
+    border: 1px solid transparent;
+    box-shadow: 5px 5px 20px black;
+    
+  margin-bottom:40px;
 
   .navigation-wrapper {
     position: relative;

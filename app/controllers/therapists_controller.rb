@@ -21,6 +21,9 @@ class TherapistsController < ApplicationController
   # GET /therapist_dashboard
   def show
     @therapist = Therapist.find(params[:therapist_id])
+    if current_patient
+      @message = find_first_message(session[:patient_id], params[:therapist_id])
+    end
   end
 
   def update

@@ -22,7 +22,7 @@
           <% if connection_request_pending? %>
             Connection Request Pending
           <% elsif connection_accepted %>
-            <%= link_to show_conversation_path(session[:patient_id], params[:therapist_id]) do %>
+            <%= link_to show_conversation_path(@message) do %>
               Send Message
             <% end %>
           <% end %>
