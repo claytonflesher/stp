@@ -13,12 +13,6 @@ $(document).ready(function() {
     
     var scrollTop     = $(window).scrollTop(),
   
-    var interval = setInterval(function(){
-        if(scrollTop>170){
-            
-        }
-    },1000);
-    
     //toggle for mobile menu click
       var menuToggle = $('#js-mobile-menu').unbind();
     $('#js-navigation-menu').removeClass("show");
