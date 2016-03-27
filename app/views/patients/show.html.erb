@@ -45,7 +45,7 @@
         <p><%= @patient.name %></p>
         <p><%= @patient.phone %></p>
         <p><%= @patient.email %></p>
-        <p>!-- Find City and State based on Zipcode.--!</p>
+        <p><%= @patient.zipcode %></p>
         <p><%= @patient.gender %></p>
       </div>
       <div class="info">
@@ -67,6 +67,7 @@
         <% if t.application_status == "accepted" %>
           <p><%= t.full_name %></p>
           <p><%= t.city %>, <%= t.state %></p>
+          <p><%= button_to 'Send Contact Request', new_connection_request_path(patient_id: session[:patient_id], therapist_id: t.id, status: 'pending') %></p>
         <% end %>
       <% end %>
 

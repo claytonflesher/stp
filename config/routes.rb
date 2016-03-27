@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   get    "edit_therapist"                  => "therapists#edit"
   put    "update_therapist"                => "therapists#update"
   patch  "update_therapist"                => "therapists#update"
-  get    "votes"                            => "votes#index"
-  post   "votes"                            => "votes#create"
+  get    "votes"                           => "votes#index"
+  post   "votes"                           => "votes#create"
   post   "change_vote"                     => "votes#delete",                    as: :change_vote
   get    "therapist_profile/:therapist_id" => "therapists#profile"
   #get "therapist_new_message/:patient_id" => "therapist_messages#new", as: :therapist_new_message
@@ -37,11 +37,11 @@ Rails.application.routes.draw do
   delete "patient_signout"                 => "patients_sessions#destroy"
   get    "patient_verify/:patient_id"      => "patients_verifications#new",      as: :patient_verify
   get    "patient_verify/confirm/:token"   => "patients_verifications#create",   as: :patient_confirm
-  get    "patient_dashboard/:patient_id"               => "patients#show", as: :patient_dashboard
+  get    "patient_dashboard/:patient_id"   => "patients#show",                   as: :patient_dashboard
   get    "edit_patient"                    => "patients#edit"
   put    "update_patient"                  => "patients#update"
   patch  "update_patient"                  => "patients#update"
-  get "patient_profile/:patient_id" => "patients#profile"
+  get    "patient_profile/:patient_id"     => "patients#profile"
   #get "patient_new_message/:therapist_id" => "patient_messages#new", as: :patient_new_message
   #get "patient_show_conversation/:patient_id/:therapist_id" => "patient_messages#index", as: :patient_show_conversation
   #get "patient_inbox/:patient_id" => "patient_messages#inbox", as: :patient_inbox
@@ -70,60 +70,9 @@ Rails.application.routes.draw do
   get "patient_inbox/:patient_id" => "messages#patient_inbox", as: :patient_inbox
   get "therapist_inbox/:therapist_id" => "messages#therapist_inbox", as: :therapist_inbox
 
-
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'static_pages#home'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end
