@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :patient_therapist_relationship do
-    conversation
+    patient
+    therapist
   end
 end

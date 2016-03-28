@@ -4,6 +4,7 @@ class PatientTherapistRelationship < ActiveRecord::Base
   has_one    :conversation
   has_many   :messages, through: :conversation
 
+  
   validates :patient_id,
             presence: true,
             uniqueness: { scope: :therapist_id }

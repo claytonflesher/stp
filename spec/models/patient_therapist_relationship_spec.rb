@@ -13,8 +13,17 @@ RSpec.describe PatientTherapistRelationship, type: :model do
       ]
     )
   end
-  it "creates associations between therapists and patients" do
-    create(:patient_therapist_relationship)
-    expect(:patient_therapist_relationship).to be_valid
+  it "has a therapist_id" do
+    ptr = create(:patient_therapist_relationship)
+    should validate_presence_of(:therapist_id)
+    should validate_uniqueness_of(:therapist_id).scoped_to(:patient_id)
+    expect(ptr.therapist_id).to be_an_integer
+  end
+
+  it "has a patient_id" do
+    ptr = create(:patient_therapist_relationship)
+    should validate_presence_of(:patient_id)
+    should validate_uniqueness_of(:patient_id).scoped_to(:therapist_id)
+    expect(ptr.patient_id).to be_an_integer
   end
 end
