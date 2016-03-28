@@ -1,7 +1,5 @@
 class MessagesController < ApplicationController
   #before_filter :ensure_patient_signed_in, only: [:index, :reply_to_message, :new, :create]
-  before_filter :ensure_connection_accepted, only: [:new, :reply_to_message, :create]
-  # before_filter :ensure_connection_not_accepted, except: [:index, :reply_to_message]
   before_filter :ensure_should_see_conversation, only: [:index]
   before_filter :ensure_should_see_patient_inbox, only: [:patient_inbox]
   before_filter :ensure_should_see_therapist_inbox, only: [:therapist_inbox]

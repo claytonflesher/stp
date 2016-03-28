@@ -1,6 +1,5 @@
 class TherapistMessagesController < ApplicationController
   before_filter :ensure_therapist_signed_in, only: [:index, :reply_to_message, :new, :create]
-  before_filter :ensure_connection_accepted, only: [:index, :new]
   #
   # GET /therapist_show_converation/:therapist_id
   def index
