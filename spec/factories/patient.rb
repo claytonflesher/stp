@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :patient do
+    patient_therapist_relationship
     username              "example_user"
     password              "testPassword111"
     email                 "example_user@example.com"
