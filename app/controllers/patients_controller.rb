@@ -22,14 +22,11 @@ class PatientsController < ApplicationController
       @search ||= TherapistSearch.new(current_patient)
       @results = @search.find
     end
-    if current_therapist
-      @message = find_first_message(params[:patient_id], session[:therapist_id])
-    end
   end
 
   def update
     if @patient.update(patient_params)
-      flash.notice = "Profile successfully update"
+      flash.notice = "Profile successfully updated"
       redirect_to patient_dashboard_path 
     else
       render :edit 
@@ -43,7 +40,6 @@ class PatientsController < ApplicationController
   def destroy
     @patient = Patient.find(params[:id])
     @patient.destroy
-
     redirect_to admins_path
   end
   
@@ -53,4 +49,5 @@ class PatientsController < ApplicationController
     params.require(:patient).permit(:username, :password, :password_confirmation, :name, :phone, :email, :zipcode, :gender, :former_religion, :description)
   end
 end
+
 
