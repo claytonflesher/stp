@@ -11,6 +11,7 @@
           <li class="nav-link"><i class="fa fa-info-circle"><%= link_to "About Us", about_path %></i></li>
           <li class="nav-link"><i class="fa fa-phone"><%= link_to "Contact", contact_path %></i></li>
         <% if patient_logged_in? %>
+          <% puts patient_logged_in? %>
           <li class="nav-link more"><%= link_to current_patient.username, patient_dashboard_path(current_patient.id) %>
             <ul class="submenu">
               <li><%= link_to "Edit Profile", edit_patient_path %></li>

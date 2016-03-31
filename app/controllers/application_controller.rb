@@ -55,11 +55,23 @@ class ApplicationController < ActionController::Base
   end
 
   def current_patient
-    @patient ||= Patient.find(session[:patient_id])
+    if session[:patient_id] && Patient.find(session[:patient_id])
+      @patient = Patient.find(session[:patient_id])
+    else
+      @patient = nil
+    end
+    @patient
   end
 
   def current_therapist
-    @therapist ||= Therapist.find(session[:therapist_id])
+    if session[:therapist_id] &&
+        Patient.find(session[:therapist_id]).where.not(verified_at: nil)
+      @therapist = Therapist.find(
+        session[:therapist_id]).where.not(verified_at: nil)
+    else
+      @therapist = nil
+    end
+    @therapist
   end
 
   def is_an_admin?

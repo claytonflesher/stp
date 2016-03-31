@@ -74,7 +74,7 @@
     </div>
   <% end %>
 
-  <% if current_super_admin %>
+  <% if is_a_super_admin? %>
     <div class="admin-tools">
       <%= link_to "Show Connections and Conversation History", patient_inbox_path(params[:patient_id]) %>
     </div>

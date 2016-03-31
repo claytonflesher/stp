@@ -35,7 +35,7 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    @message = Message.find(params[:id])
+    @message = Message.find(params[:message_id])
     @message.destroy
     redirect_to super_admins_path
   end
