@@ -23,6 +23,10 @@ class PatientsController < ApplicationController
     end
   end
 
+  def edit
+    @patient = Patient.find(session[:patient_id])
+  end
+
   def update
     if @patient.update(patient_params)
       flash.notice = "Profile successfully updated"
@@ -30,10 +34,6 @@ class PatientsController < ApplicationController
     else
       render :edit 
     end
-  end
-
-  def edit
-    @patient = Patient.find(session[:patient_id])
   end
 
   def destroy

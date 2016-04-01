@@ -11,6 +11,7 @@ class TherapistSearch
   end
 
   def find
-    Therapist.near([searcher.latitude, searcher.longitude], distance)
+    Therapist.where.not(verified_at: nil)
+      .near([searcher.latitude, searcher.longitude], distance)
   end
 end

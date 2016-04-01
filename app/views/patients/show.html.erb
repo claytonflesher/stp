@@ -64,11 +64,9 @@
 
       <h2>Therapists Near You</h2>
       <% @results.each do |t| %>
-        <% if t.application_status == "accepted" %>
-          <p><%= t.full_name %></p>
-          <p><%= t.city %>, <%= t.state %></p>
-          <p><%= button_to 'Send Contact Request', new_connection_request_path(patient_id: session[:patient_id], therapist_id: t.id, status: 'pending') %></p>
-        <% end %>
+        <p><%= t.full_name %></p>
+        <p><%= t.city %>, <%= t.state %></p>
+        <p><%= button_to 'Send Contact Request', new_connection_request_path(patient_id: session[:patient_id], therapist_id: t.id, status: 'pending') %></p>
       <% end %>
 
     </div>

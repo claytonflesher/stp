@@ -3,7 +3,7 @@ class TherapistMailer < ApplicationMailer
     @therapist = therapist
     @admins    = Therapist.where(admin: true)
     @admins.each do |admin|
-      mail to: admin.email, subject: "[Secular Therapy Project] Therapist Application"
+      mail to: admin.email, subject: "[Secular Therapy Project] New Therapist Application"
     end
   end
 

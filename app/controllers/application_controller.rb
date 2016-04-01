@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_patient
-    if session[:patient_id] && Patient.find(session[:patient_id])
+    if session[:patient_id]
       @patient = Patient.find(session[:patient_id])
     else
       @patient = nil
@@ -64,10 +64,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_therapist
-    if session[:therapist_id] &&
-        Patient.find(session[:therapist_id]).where.not(verified_at: nil)
-      @therapist = Therapist.find(
-        session[:therapist_id]).where.not(verified_at: nil)
+    if session[:therapist_id]
+      @therapist = Therapist.find(session[:therapist_id])
     else
       @therapist = nil
     end

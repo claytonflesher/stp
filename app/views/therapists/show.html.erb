@@ -70,7 +70,7 @@
     </div>
   <% end %>
   
-  <% if current_admin && @therapist.application_status == "pending" %>
+  <% if current_admin && @therapist.verified_at == nil %>
 
     <div class="votes">
       <%= link_to "Back to Dashboard", votes_path %>
