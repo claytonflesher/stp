@@ -1,9 +1,12 @@
 class MessagesController < ApplicationController
-  before_filter :ensure_is_your_message, except: [:index, :destroy]
-  before_filter :ensure_super_admin, only: [:index, :destroy]
+  before_filter :ensure_is_your_message, except: [:index, :update, :destroy]
+  before_filter :ensure_user_signed_in, only: [:index, :update]
+  before_filter :ensure_super_admin, only: [:destroy]
 
   def index
-    @message = Message.all
+    @messages = Message.where(
+      receiver_id: current_user.id
+    )
   end
 
   def create
@@ -12,8 +15,8 @@ class MessagesController < ApplicationController
     if @message.id
       redirect_to conversation_path(
         conversation_id: message_params[:conversation_id],
-        patient_id: conversation.patient_therapist_relationship.patient_id, 
-        therapist_id: conversation.patient_therapist_relationship.therapist_id
+        patient_id: conversation.patient.id, 
+        therapist_id: conversation.therapist.id
       )
     else
       render :new
@@ -24,15 +27,17 @@ class MessagesController < ApplicationController
     @message = Message.find(params[:message_id])
   end
 
-  def edit
-    @message = Message.find(params[:message_id])
-  end
-
   def update
-    if @message.update(message_params)
-      flash.notice = "Message successfully edited"
-      render :edit
-    end
+    @message = Message.find_by(
+      id: params[:message_id],
+      receiver_id: current_user.id
+    )
+    @message.update!(opened: true)
+    redirect_to conversation_path(
+      conversation_id: @message.conversation_id,
+      patient_id: @message.conversation.patient.id,
+      therapist_id: @message.conversation.therapist.id
+    )
   end
 
   def destroy

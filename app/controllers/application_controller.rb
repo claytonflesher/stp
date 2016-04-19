@@ -34,6 +34,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_user_signed_in
+    unless patient_logged_in? || therapist_logged_in?
+      redirect_to home_path
+    end
+  end
+
   def ensure_patient_not_signed_in
     if patient_logged_in?
       redirect_to patient_dashboard_path(current_patient.id)
@@ -89,6 +95,16 @@ class ApplicationController < ActionController::Base
       @therapist = nil
     end
     @therapist
+  end
+
+  def current_user
+    if current_patient
+      @patient
+    elsif current_therapist
+      @therapist
+    else
+      nil
+    end
   end
 
   def is_an_admin?

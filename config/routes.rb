@@ -48,15 +48,15 @@ Rails.application.routes.draw do
   post   "super_admins/:therapist_id"           => "super_admins#update"
   post   "patient_therapist_relationships/admin_message"                 => "patient_therapist_relationships#admin_message"
 
-  post "new_connection_request" => "patient_therapist_relationships#create", as: :new_connection_request
+  post "new_connection_request"    => "patient_therapist_relationships#create", as: :new_connection_request
   post "update_connection_request" => "patient_therapist_relationships#update", as: :update_connection_request
 
   get "exceeded_requests" => "patient_therapist_relationships#exceeded_requests", as: :exceeded_requests
 
-  get "patient_inbox/:patient_id" => "messages#patient_inbox", as: :patient_inbox
-  get "therapist_inbox/:therapist_id" => "messages#therapist_inbox", as: :therapist_inbox
-
+  get "inbox" => "messages#index", as: :inbox
   post "messages" => "messages#create"
+  post "opened" => "messages#update", as: :opened
+
   get "conversations"                                   => "conversations#index"
   get "conversations/:conversation_id"                  => "conversations#show",  as: :conversation
   get "conversation/:patient_therapist_relationship_id" => "conversations#create", as: :create_conversation
