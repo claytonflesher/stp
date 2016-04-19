@@ -1,6 +1,25 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  def ensure_is_your_message
+    unless is_an_admin?
+      conversation = Conversation.find(message_params[:conversation_id])
+      if patient_logged_in?
+        unless session[:patient_id] ==
+            conversation.patient_therapist_relationship.patient_id
+          redirect_to patient_dashboard_path
+        end
+      elsif therapist_logged_in?
+        unless session[:therapist_id] ==
+            conversation.patient_therapist_relationship.therapist_id
+          redirect_to therapist_dashboard_path
+        end
+      else
+        redirect_to home_path
+      end
+    end
+  end
+
   def ensure_patient_signed_in
     unless is_a_super_admin?
       unless patient_logged_in?

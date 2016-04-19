@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   post   "patient_signin"                  => "patients_sessions#create"
   delete "patient_signout"                 => "patients_sessions#destroy"
   get    "patient_verify/:patient_id"      => "patients_verifications#new",      as: :patient_verify
-  get   "patient_verify/confirm/:token"   => "patients_verifications#create",   as: :patient_confirm
+  get    "patient_verify/confirm/:token"   => "patients_verifications#create",   as: :patient_confirm
   get    "patient_dashboard/:patient_id"   => "patients#show",                   as: :patient_dashboard
   get    "edit_patient"                    => "patients#edit"
   put    "update_patient"                  => "patients#update"
@@ -53,12 +53,13 @@ Rails.application.routes.draw do
 
   get "exceeded_requests" => "patient_therapist_relationships#exceeded_requests", as: :exceeded_requests
 
-  get "show_conversation/:message_id" => "messages#index", as: :show_conversation
-  post "reply_to_message" => "messages#reply_to_message", as: :reply_to_message
-  get "new_message/:patient_id/:therapist_id" => "messages#new", as: :new_message
-  post "send_new_message" => "messages#create", as: :send_new_message
   get "patient_inbox/:patient_id" => "messages#patient_inbox", as: :patient_inbox
   get "therapist_inbox/:therapist_id" => "messages#therapist_inbox", as: :therapist_inbox
+
+  post "messages" => "messages#create"
+  get "conversations"                                   => "conversations#index"
+  get "conversations/:conversation_id"                  => "conversations#show",  as: :conversation
+  get "conversation/:patient_therapist_relationship_id" => "conversations#create", as: :create_conversation
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

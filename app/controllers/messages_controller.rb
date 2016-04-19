@@ -1,19 +1,20 @@
 class MessagesController < ApplicationController
-  before_filter :ensure_relationship_exists, except: [:index, :destroy]
+  before_filter :ensure_is_your_message, except: [:index, :destroy]
   before_filter :ensure_super_admin, only: [:index, :destroy]
 
   def index
     @message = Message.all
   end
 
-  def new
-    @message = Message.new
-  end
-
   def create
-    @message = Message.create(message_params)
+    @message = Message.create!(message_params)
+    conversation = Conversation.find(message_params[:conversation_id])
     if @message.id
-      redirect_to conversation_path(conversation_id: message_params[:conversation_id])
+      redirect_to conversation_path(
+        conversation_id: message_params[:conversation_id],
+        patient_id: conversation.patient_therapist_relationship.patient_id, 
+        therapist_id: conversation.patient_therapist_relationship.therapist_id
+      )
     else
       render :new
     end

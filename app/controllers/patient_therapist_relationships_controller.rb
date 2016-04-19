@@ -13,9 +13,13 @@ class PatientTherapistRelationshipsController < ApplicationController
   def create
     @relationship = PatientTherapistRelationship.create(patient_therapist_relationship_params)
     if @relationship.id
-      redirect_to create_conversation_path
+      redirect_to create_conversation_path(
+        patient_therapist_relationship_id: @relationship.id,
+        patient_id:   params[:patient_id],
+        therapist_id: params[:therapist_id]
+      )
     else
-      redirect_to patient_dashboard_path
+      redirect_to patient_dashboard_path(patient_id: params[:patient_id])
     end
   end
 

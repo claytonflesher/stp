@@ -7,17 +7,22 @@ class ConversationsController < ApplicationController
   end
 
   def create
-    @conversation = Conversation.create(conversation_params)
+    @conversation = Conversation.create(
+      patient_therapist_relationship_id: params[:patient_therapist_relationship_id]
+    )
     if @conversation.id
-      redirect_to conversation__path
+      redirect_to conversation_path(
+        conversation_id: @conversation.id,
+        patient_id:   params[:patient_id],
+        therapist_id: params[:therapist_id]
+      )
     else
-      render :new
+      redirect_to root_path
     end
   end
 
   def show
     @conversation = Conversation.find(params[:conversation_id])
-
   end
 
   def destroy
