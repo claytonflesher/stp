@@ -1,4 +1,7 @@
 
+*:focus {
+    outline: none;
+}
 
 
 .navigation {
@@ -10,7 +13,7 @@
   z-index: 999;
   font-size: 1.15em;
   font-weight: bold;
-    border: 1px solid transparent;
+  border: 1px solid transparent;
     box-shadow: 5px 5px 20px black;
     
   margin-bottom:40px;
@@ -21,9 +24,9 @@
     width: 100%;
     @include clearfix;
   }
-    a, a .branding{
-        border:none;
-    }
+    
+    
+   
     .branding {
     background-size:400px 160px;
     background-image: asset-data-url("STPlogosecondary2986x1500.png");
