@@ -21,22 +21,22 @@
     width: 100%;
     @include clearfix;
   }
-    a{
+    a, a .branding{
         border:none;
     }
     .branding {
-    background-size:100%;
-    background-image: asset-data-url("SecularTherapyProjectLogo.png");
+    background-size:400px 160px;
+    background-image: asset-data-url("STPlogosecondary2986x1500.png");
     border:none;    
-    background-repeat: none;
+    background-repeat: no-repeat;
     overflow: visible;
     min-width: 650px;
+    max-height:160px;
     min-height:160px;
     margin: auto;
+    padding:0;
     margin-top:1%;
-    padding:auto;
-    padding-left:3%;
-    padding-top:2%;
+    margin-left:3%;
     float:left;
         
         @media screen and (max-width:860px){
@@ -102,7 +102,7 @@
     clear: both;
     display: block;
     height: auto;
-      margin-top: 4%;
+      margin-top: 6%;
       margin-right:6%;
       float:right;      
     @include media($horizontal-bar-mode) {

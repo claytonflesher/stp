@@ -1,6 +1,13 @@
+html{
+    height:100%;
+}
+html:after{
+    content:none;
+}
 body {
     margin: 0px;
     padding: 0px;
+    min-height:100%;
     a{
         font-weight: 600;
     }
