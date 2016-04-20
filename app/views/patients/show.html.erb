@@ -28,8 +28,8 @@
           <%= @patient.description %>
         </p>
         <p>
-          <strong>Therapist Contacts Left This Month:</strong>
-          <%= @patient.available_requests %>
+        <strong>You may contact up to 3 therapists in a month.</strong><br />
+        <strong>You currently have <%= @patient.available_requests %> left.</strong>
         </p>
       </div>
       <div class="conversations">
