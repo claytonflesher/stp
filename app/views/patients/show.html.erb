@@ -6,34 +6,8 @@
         <img src="https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif">
       </div>
       <div class="dynamic button">
-        <% if therapist_logged_in? %>
-          <% if connection_request_pending? %>
-            <%= form_tag({controller: "patient_therapist_relationships", action: "update"}, method: "post") do %>
-              <%= hidden_field_tag 'patient_id', params[:patient_id] %>
-              <%= hidden_field_tag 'therapist_id', current_therapist.id %>
-              <%= hidden_field_tag 'status', "accept" %>
-              <%= submit_tag "Accept" %>
-            <% end %>
-
-            <!-- FOR DANIEL: This form should be a dialog that opens after the user clicks a Deny button -->
-
-            <%= form_tag({controller: "patient_therapist_relationships", action: "update"}, method: "post") do %>
-              <%= hidden_field_tag 'patient_id', params[:patient_id] %>
-              <%= hidden_field_tag 'therapist_id', current_therapist.id %>
-              <%= hidden_field_tag 'status', "deny" %>
-              <%= text_area_tag 'comment' %>
-              <%= submit_tag "Send Response" %>
-            <% end %>
-          <% elsif connection_accepted %>
-            <%= link_to show_conversation_path(@message) do %>
-              Send Message
-            <% end %>
-          <% end %>
-        <% end %>
-        <% if patient_logged_in? %>
-          <%= link_to inbox_path(patient_id: @patient.id) do %>
-            Inbox
-          <% end %>
+        <%= link_to inbox_path(patient_id: @patient.id) do %>
+          Inbox
         <% end %>
       </div>
 
@@ -53,6 +27,10 @@
           <strong>About you:</strong>
           <%= @patient.description %>
         </p>
+        <p>
+          <strong>Therapist Contacts Left This Month:</strong>
+          <%= @patient.available_requests %>
+        </p>
       </div>
       <div class="conversations">
         <% @patient.conversations.each do |conversation| %>
@@ -67,7 +45,9 @@
       <p>Therapist ID: <%= t.id %></p>
       <p>Description: <%= t.description %></p>
       <p>State: <%= t.state %></p>
-      <p><%= button_to 'Send Contact Request', new_connection_request_path(patient_id: session[:patient_id], therapist_id: t.id) %></p>
+      <% if @patient.available_requests > 0 %>
+        <p><%= button_to 'Send Contact Request', new_connection_request_path(patient_id: session[:patient_id], therapist_id: t.id) %></p>
+      <% end %>
     <% end %>
 
   </div>

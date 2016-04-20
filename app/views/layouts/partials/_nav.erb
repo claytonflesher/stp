@@ -7,27 +7,29 @@
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
     <nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu show">
-       
-          <li class="nav-link"><i class="fa fa-info-circle"><%= link_to "About Us", about_path %></i></li>
-          <li class="nav-link"><i class="fa fa-phone"><%= link_to "Contact", contact_path %></i></li>
+
+        <li class="nav-link"><i class="fa fa-info-circle"><%= link_to "About Us", about_path %></i></li>
+        <li class="nav-link"><i class="fa fa-phone"><%= link_to "Contact", contact_path %></i></li>
         <% if patient_logged_in? %>
           <% puts patient_logged_in? %>
           <li class="nav-link more"><%= link_to current_patient.username, patient_dashboard_path(current_patient.id) %>
-            <ul class="submenu">
-              <li><%= link_to "Edit Profile", edit_patient_path %></li>
-              <li><a href="javascript:void(0)">Inbox</a></li>
-              <li><%= link_to "Sign Out", patient_signout_path, method: :delete %></li>
+          <ul class="submenu">
+            <li><%= link_to "Edit Profile", edit_patient_path %></li>
+            <li><%= link_to "Inbox", inbox_path %></li>
+            <li><%= link_to "Sign Out", patient_signout_path, method: :delete %></li>
+          </ul>
         <% elsif therapist_logged_in? %>
           <li class="nav-link more"><%= link_to current_therapist.username, therapist_dashboard_path(current_therapist.id) %>
-            <ul class="submenu">
-                <li><%= link_to "Edit Profile", edit_therapist_path %></i></li>
-              <li><a href="javascript:void(0)">Inbox</a></li>
-              <li><%= link_to "Sign Out", therapist_signout_path, method: :delete %></li>
+          <ul class="submenu">
+            <li><%= link_to "Edit Profile", edit_therapist_path %></i></li>
+            <li><%= link_to "Inbox", inbox_path %></li>
+            <li><%= link_to "Sign Out", therapist_signout_path, method: :delete %></li>
+          </ul>
         <% else %>
-            <li class="nav-link"><%= link_to("Sign Up", patient_signup_path) %></li>  
-            <li class="nav-link"><%= link_to("Sign In", patient_signin_path) %></li>
+          <li class="nav-link"><%= link_to("Sign Up", patient_signup_path) %></li>  
+          <li class="nav-link"><%= link_to("Sign In", patient_signin_path) %></li>
         <% end %>
       </ul>
     </nav>
-          </div>
+</div>
 </div>

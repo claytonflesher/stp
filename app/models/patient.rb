@@ -26,6 +26,12 @@ class Patient < ActiveRecord::Base
     write_attribute(:email, email.try(:downcase))
   end
 
+  def available_requests
+    @available ||= 3 - (self.patient_therapist_relationships.where(
+      patient_id: self.id,
+      created_at: 1.month.ago..Date.today).count)
+  end
+
   has_many :patient_therapist_relationships
   has_many :therapists, through: :patient_therapist_relationships
   has_many :conversations, through: :patient_therapist_relationships
