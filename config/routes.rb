@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get    "edit_therapist"                  => "therapists#edit"
   put    "update_therapist"                => "therapists#update"
   patch  "update_therapist"                => "therapists#update"
+
   get    "votes"                           => "votes#index"
   post   "votes"                           => "votes#create"
   post   "change_vote"                     => "votes#delete",                    as: :change_vote
@@ -60,6 +61,11 @@ Rails.application.routes.draw do
   get "conversations"                                   => "conversations#index"
   get "conversations/:conversation_id"                  => "conversations#show",  as: :conversation
   get "conversation/:patient_therapist_relationship_id" => "conversations#create", as: :create_conversation
+
+  get  "therapist_searches" => "therapist_searches#show"
+  post "therapist_searches" => "therapist_searches#update"
+  
+  get  "therapist_details"  => "therapist_details#show"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

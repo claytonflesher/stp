@@ -32,7 +32,10 @@
         <strong>You currently have <%= @patient.available_requests %> left.</strong>
         </p>
       </div>
-      <div class="conversations">
+      <div class='lookup'>
+        <p><%= link_to 'Search by location and distance.', therapist_searches_path %></p>
+      </div>
+      <div class='conversations'>
         <% @patient.conversations.each do |conversation| %>
           <p><%= link_to "Conversation with Therapist ##{conversation.therapist.id}", conversation_path(patient_id: @patient.id, therapist_id: conversation.therapist.id, conversation_id: conversation.id) %></p>
         <% end %>
@@ -44,9 +47,10 @@
     <% @results.each do |t| %>
       <p>Therapist ID: <%= t.id %></p>
       <p>Description: <%= t.description %></p>
+      <p>Contacted already? - <%= t.patients.include?(@patient) %>
       <p>State: <%= t.state %></p>
       <% if @patient.available_requests > 0 %>
-        <p><%= button_to 'Send Contact Request', new_connection_request_path(patient_id: session[:patient_id], therapist_id: t.id) %></p>
+        <p><%= link_to 'See Specialties', therapist_details_path(therapist_id: t.id), method: 'get' %></p>
       <% end %>
     <% end %>
 
