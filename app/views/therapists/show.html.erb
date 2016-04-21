@@ -27,6 +27,7 @@
           <strong>About you:</strong>
           <%= @therapist.description %>
         </p>
+        <p><%= link_to 'Find other therapists in my area.', therapist_searches_path %></p>
       </div>
       <div class="conversations">
         <% @therapist.conversations.each do |conversation| %>
@@ -48,5 +49,4 @@
       </ul>
     </div>
   <% end %>
-  
 </div>
