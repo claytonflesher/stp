@@ -1,13 +1,10 @@
 class TherapistsController < ApplicationController
-  before_filter :ensure_therapist_signed_in, only: [:update, :edit]
-  before_filter :ensure_therapist_not_signed_in, except: [:update, :edit, :show]
-  before_filter :ensure_application_accepted, only: [:show]
+  before_filter :ensure_therapist_signed_in, only: [:update, :edit, :show]
   before_filter :ensure_admin, only: [:destroy]
 
   def new
     @therapist = Therapist.new
   end
-
 
   def create
     @therapist = Therapist.create(therapist_params)
@@ -18,12 +15,8 @@ class TherapistsController < ApplicationController
     end
   end
 
-  # GET /therapist_dashboard
   def show
     @therapist = Therapist.find(params[:therapist_id])
-    if current_patient
-      @message = find_first_message(session[:patient_id], params[:therapist_id])
-    end
   end
 
   def update
@@ -31,10 +24,8 @@ class TherapistsController < ApplicationController
     respond_to do |format|
       if @therapist.update(therapist_params)
         format.html { redirect_to therapist_dashboard_path, notice: 'Profile was successfully updated' }
-        format.json { render :show, status: :ok, location: @therapist }
       else
         format.html { render :edit }
-        format.json { render json: @therapist.errors, status: :unprocessable_entity }
       end
     end
   end

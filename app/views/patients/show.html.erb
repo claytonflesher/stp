@@ -1,43 +1,13 @@
 <% provide(:title, "Patient Dashboard") %>
 
-<% if flash[:notice] %>
-  <div class="notice"><%= flash[:notice] %></div>
-<% end %>
-
 <div class="container patient-profile">
     <div class="main">
       <div class="avatar">
         <img src="https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif">
       </div>
       <div class="dynamic button">
-        <% if therapist_logged_in? %>
-          <% if connection_request_pending? %>
-            <%= form_tag({controller: "patient_therapist_relationships", action: "update"}, method: "post") do %>
-              <%= hidden_field_tag 'patient_id', params[:patient_id] %>
-              <%= hidden_field_tag 'therapist_id', current_therapist.id %>
-              <%= hidden_field_tag 'status', "accept" %>
-              <%= submit_tag "Accept" %>
-            <% end %>
-
-            <!-- FOR DANIEL: This form should be a dialog that opens after the user clicks a Deny button -->
-
-            <%= form_tag({controller: "patient_therapist_relationships", action: "update"}, method: "post") do %>
-              <%= hidden_field_tag 'patient_id', params[:patient_id] %>
-              <%= hidden_field_tag 'therapist_id', current_therapist.id %>
-              <%= hidden_field_tag 'status', "deny" %>
-              <%= text_area_tag 'comment' %>
-              <%= submit_tag "Send Response" %>
-            <% end %>
-          <% elsif connection_accepted %>
-            <%= link_to show_conversation_path(@message) do %>
-              Send Message
-            <% end %>
-          <% end %>
-        <% end %>
-        <% if patient_logged_in? %>
-          <%= link_to patient_inbox_path(params[:patient_id]) do %>
-            Inbox
-          <% end %>
+        <%= link_to inbox_path(patient_id: @patient.id) do %>
+          Inbox
         <% end %>
       </div>
 
@@ -57,26 +27,32 @@
           <strong>About you:</strong>
           <%= @patient.description %>
         </p>
+        <p>
+        <strong>You may contact up to 3 therapists in a month.</strong><br />
+        <strong>You currently have <%= @patient.available_requests %> left.</strong>
+        </p>
+      </div>
+      <div class='lookup'>
+        <p><%= link_to 'Search by location and distance.', therapist_searches_path %></p>
+      </div>
+      <div class='conversations'>
+        <% @patient.conversations.each do |conversation| %>
+          <p><%= link_to "Conversation with Therapist ##{conversation.therapist.id}", conversation_path(patient_id: @patient.id, therapist_id: conversation.therapist.id, conversation_id: conversation.id) %></p>
+        <% end %>
       </div>
   </div>
-  <% if patient_logged_in? %>
-    <div class="search">
+  <div class="search">
 
-      <h2>Therapists Near You</h2>
-      <% @results.each do |t| %>
-        <% if t.application_status == "accepted" %>
-          <p><%= t.full_name %></p>
-          <p><%= t.city %>, <%= t.state %></p>
-          <p><%= button_to 'Send Contact Request', new_connection_request_path(patient_id: session[:patient_id], therapist_id: t.id, status: 'pending') %></p>
-        <% end %>
+    <h2>Therapists Near You</h2>
+    <% @results.each do |t| %>
+      <p>Therapist ID: <%= t.id %></p>
+      <p>Description: <%= t.description %></p>
+      <p>Contacted already? - <%= t.patients.include?(@patient) %>
+      <p>State: <%= t.state %></p>
+      <% if @patient.available_requests > 0 %>
+        <p><%= link_to 'See Specialties', therapist_details_path(therapist_id: t.id), method: 'get' %></p>
       <% end %>
+    <% end %>
 
-    </div>
-  <% end %>
-
-  <% if current_super_admin %>
-    <div class="admin-tools">
-      <%= link_to "Show Connections and Conversation History", patient_inbox_path(params[:patient_id]) %>
-    </div>
-  <% end %>
+  </div>
 </div>

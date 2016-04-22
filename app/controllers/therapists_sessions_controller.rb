@@ -7,9 +7,7 @@ class TherapistsSessionsController < ApplicationController
   end
 
   def create
-    @therapist = Therapist.where(
-      "username = ? AND verified_at IS NOT NULL",
-      params[:username]).first
+    @therapist = Therapist.find_by(username: params[:username])
     if @therapist && @therapist.authenticate(params[:password])
       session[:therapist_id] = @therapist.id
       redirect_to therapist_dashboard_path(@therapist.id)

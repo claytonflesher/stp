@@ -1,0 +1,22 @@
+<% provide(:title, 'Therapist Details') %>
+<div class="edit-profile">
+  <h1>Therapist #<%= @therapist.id %> Details</h1>
+
+  <ul>
+    <li>Description: <%= @therapist.description %></li>
+    <br />
+    <li>Specialties -
+      <ul>
+        <% @specialties.each do |specialty| %>
+          <li><%= specialty %></li>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
+  <br />
+  <% if patient_logged_in? && @patient.available_requests && !@therapist.patients.include?(@patient)%>
+    <%= button_to 'Send Contact Request', new_connection_request_path(patient_id: @patient.id, therapist_id: @therapist.id) %>
+  <% end %>
+</div>
+
+        

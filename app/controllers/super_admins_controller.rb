@@ -8,11 +8,15 @@ class SuperAdminsController < ApplicationController
   end
 
   def show
-    @therapist = Therapist.find(params[:therapist_id])
+    @therapist = Therapist.find(params[:id])
+  end
+
+  def edit
+    @therapist = Therapist.find(params[:id])
   end
 
   def update
-    @therapist = Therapist.find(params[:therapist_id])
+    @therapist = Therapist.find(params[:id])
     if params[:super_admin] == true
       @therapist.admin = true
       @therapist.super_admin = true
@@ -24,9 +28,8 @@ class SuperAdminsController < ApplicationController
     else
       @therapist.super_admin = false
       @therapist.admin = false
-      @therapist.save
+      @therapist.save!
     end
     redirect_to super_admins_path
   end
-
 end

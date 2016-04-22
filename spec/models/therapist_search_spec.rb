@@ -34,7 +34,7 @@ RSpec.describe TherapistSearch do
       ]
     )
     @search    = TherapistSearch.new(FactoryGirl.create(:patient))
-    @therapist = FactoryGirl.create(:therapist)
+    @therapist = FactoryGirl.create(:therapist, verified_at: Time.now)
   end
 
   after(:all) do

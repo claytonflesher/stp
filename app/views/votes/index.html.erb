@@ -3,26 +3,31 @@
 <h1>Pending Therapists</h1>
 
 <p>
-  <h3>Therapists Awaiting Your Vote</h3>
-  <ul>
-    <% @dashboard.pending_therapists.each do |therapist| %>
-      <li>
-        <% if !voted_on?(therapist) %>
-          <%= link_to therapist.full_name, therapist_dashboard_path(therapist.id) %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+<h3>Therapists Awaiting Your Vote</h3>
+<ul>
+  <% @dashboard.pending_therapists.each do |therapist| %>
+    <li>
+      <% if !voted_on?(therapist) %>
+        <%= link_to therapist.full_name, therapist_dashboard_path(therapist.id) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
 </p>
 <p>
-  <h3>Therapists You Have Voted On</h3>
-  <ul>
-    <% @dashboard.pending_therapists.each do |therapist| %>
-      <li>
-        <% if voted_on?(therapist) %>
-          <%= link_to therapist.full_name, therapist_dashboard_path(therapist.id) %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+<h3>Therapists You Have Voted On</h3>
+<ul>
+  <% @dashboard.pending_therapists.each do |therapist| %>
+    <li>
+      <% if voted_on?(therapist) %>
+        <%= link_to therapist.full_name, therapist_dashboard_path(therapist.id) %>
+      <% end %>
+    </li>
+    <li>
+      <% if is_a_super_admin? %>
+        <%= button_to 'Set Status as Approved', controller: 'therapists_verifications', action: :create, verification_token: therapist.verification_token %>
+        <%= button_to 'Set Status as Denied', controller: 'therapists_verifications', action: :delete, verification_token: therapist.verification_token %>
+      <% end %>
+  <% end %>
+</ul>
 </p>

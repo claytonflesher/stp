@@ -16,8 +16,6 @@ class Therapist < ActiveRecord::Base
 
   scope :super_admins, -> { where(super_admin: true).order(:last_name) }
 
-  acts_as_messageable :table_name => "messages",
-                      :dependent  => :destroy
 
   def phone=(phone)
     write_attribute(:phone, phone.try(:gsub, /[^+\dx]/, ""))
@@ -60,8 +58,9 @@ class Therapist < ActiveRecord::Base
   validates :zipcode,
             presence:   true
 
-  has_many :patients, through: :patient_therapist_relationships
   has_many :patient_therapist_relationships
+  has_many :patients, through: :patient_therapist_relationships
+  has_many :conversations, through: :patient_therapist_relationships
   has_many :cast_votes,     class_name: "Vote",
                             foreign_key: "voter_id"
   has_many :received_votes, class_name: "Vote",

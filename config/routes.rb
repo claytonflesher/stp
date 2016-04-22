@@ -15,15 +15,11 @@ Rails.application.routes.draw do
   get    "edit_therapist"                  => "therapists#edit"
   put    "update_therapist"                => "therapists#update"
   patch  "update_therapist"                => "therapists#update"
+
   get    "votes"                           => "votes#index"
   post   "votes"                           => "votes#create"
   post   "change_vote"                     => "votes#delete",                    as: :change_vote
   get    "therapist_profile/:therapist_id" => "therapists#profile"
-  #get "therapist_new_message/:patient_id" => "therapist_messages#new", as: :therapist_new_message
-  #get "therapist_show_conversation/:patient_id/:therapist_id" => "therapist_messages#index", as: :therapist_show_conversation
-  #get "therapist_inbox/:therapist_id" => "therapist_messages#inbox", as: :therapist_inbox
-  #post "therapist_send_new_message" => "therapist_messages#create", as: :therapist_send_new_message
-  #post "therapist_reply_to_message" => "therapist_messages#reply_to_message", as: :therapist_reply_to_message
   get    "therapist_reset_password"             => "therapists_password_resets#new",   as: :therapist_reset_password
   post   "therapist_reset_password"             => "therapists_password_resets#create"
   get    "therapist_reset_password/:token/edit" => "therapists_password_resets#edit",  as: :edit_therapist_reset_password
@@ -42,11 +38,6 @@ Rails.application.routes.draw do
   put    "update_patient"                  => "patients#update"
   patch  "update_patient"                  => "patients#update"
   get    "patient_profile/:patient_id"     => "patients#profile"
-  #get "patient_new_message/:therapist_id" => "patient_messages#new", as: :patient_new_message
-  #get "patient_show_conversation/:patient_id/:therapist_id" => "patient_messages#index", as: :patient_show_conversation
-  #get "patient_inbox/:patient_id" => "patient_messages#inbox", as: :patient_inbox
-  #post "patient_send_new_message" => "patient_messages#create"
-  #post "patient_reply_to_message" => "patient_messages#reply_to_message", as: :patient_reply_to_message
   get    "patient_reset_password"               => "patients_password_resets#new",     as: :patient_reset_password
   post   "patient_reset_password"               => "patients_password_resets#create"
   get    "patient_reset_password/:token/edit"   => "patients_password_resets#edit",    as: :edit_patient_reset_password
@@ -58,17 +49,23 @@ Rails.application.routes.draw do
   post   "super_admins/:therapist_id"           => "super_admins#update"
   post   "patient_therapist_relationships/admin_message"                 => "patient_therapist_relationships#admin_message"
 
-  post "new_connection_request" => "patient_therapist_relationships#create", as: :new_connection_request
+  post "new_connection_request"    => "patient_therapist_relationships#create", as: :new_connection_request
   post "update_connection_request" => "patient_therapist_relationships#update", as: :update_connection_request
 
   get "exceeded_requests" => "patient_therapist_relationships#exceeded_requests", as: :exceeded_requests
 
-  get "show_conversation/:message_id" => "messages#index", as: :show_conversation
-  post "reply_to_message" => "messages#reply_to_message", as: :reply_to_message
-  get "new_message/:patient_id/:therapist_id" => "messages#new", as: :new_message
-  post "send_new_message" => "messages#create", as: :send_new_message
-  get "patient_inbox/:patient_id" => "messages#patient_inbox", as: :patient_inbox
-  get "therapist_inbox/:therapist_id" => "messages#therapist_inbox", as: :therapist_inbox
+  get "inbox" => "messages#index", as: :inbox
+  post "messages" => "messages#create"
+  post "opened" => "messages#update", as: :opened
+
+  get "conversations"                                   => "conversations#index"
+  get "conversations/:conversation_id"                  => "conversations#show",  as: :conversation
+  get "conversation/:patient_therapist_relationship_id" => "conversations#create", as: :create_conversation
+
+  get  "therapist_searches" => "therapist_searches#show"
+  post "therapist_searches" => "therapist_searches#update"
+  
+  get  "therapist_details"  => "therapist_details#show"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
