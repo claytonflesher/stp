@@ -6,11 +6,13 @@ Rails.application.routes.draw do
 
   get    "therapist_signup"                => "therapists#new",                  as: :therapist_signup
   post   "therapist_signup"                => "therapists#create"
+  delete "therapist_delete"                => "therapists#delete"
   get    "therapist_signin"                => "therapists_sessions#new",         as: :therapist_signin
   post   "therapist_signin"                => "therapists_sessions#create"
   delete "therapist_signout"               => "therapists_sessions#destroy"
   get    "therapist_verify/:therapist_id"  => "therapists_verifications#new",    as: :therapist_verify
-  get    "therapist_verify/confirm/:token" => "therapists_verifications#create", as: :therapist_confirm
+  post   "therapist_verify/confirm/:token" => "therapists_verifications#create", as: :therapist_confirm
+  post   "therapist_verify/deny/:token"    => "therapists_verifications#delete", as: :therapist_deny
   get    "therapist_dashboard/:therapist_id"             => "therapists#show",   as: :therapist_dashboard
   get    "edit_therapist"                  => "therapists#edit"
   put    "update_therapist"                => "therapists#update"

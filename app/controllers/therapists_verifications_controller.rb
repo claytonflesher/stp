@@ -1,7 +1,8 @@
 require "securerandom"
 
 class TherapistsVerificationsController < ApplicationController
-  before_filter :ensure_therapist_not_signed_in
+  before_filter :ensure_therapist_not_signed_in, only: [:new]
+  before_filter :ensure_admin, only: [:create, :delete]
 
   def new
     @therapist = Therapist.find(params[:therapist_id])
@@ -13,7 +14,7 @@ class TherapistsVerificationsController < ApplicationController
   end
 
   def create
-    @new_therapist = Therapist.find_by(verification_token: params[:token])
+    @new_therapist = Therapist.find(params[:therapist_id])
     @new_therapist.verified_at = Time.now
     @new_therapist.application_status = 'accepted'
     @new_therapist.save!
@@ -23,7 +24,7 @@ class TherapistsVerificationsController < ApplicationController
   end
 
   def delete
-    @denied_therapist = Therapist.find_by(verification_token: params[:token])
+    @denied_therapist = Therapist.find(params[:therapist_id])
     @denied_therapist.verified_at = nil
     @denied_therapist.application_status = 'denied'
     @denied_therapist.save!

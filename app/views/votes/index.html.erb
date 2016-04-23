@@ -1,4 +1,5 @@
 <% provide(:title, "Pending Therapists") %>
+<div class='edit-conversation'>
 
 <h1>Pending Therapists</h1>
 
@@ -9,6 +10,26 @@
     <li>
       <% if !voted_on?(therapist) %>
         <%= link_to therapist.full_name, therapist_dashboard_path(therapist.id) %>
+        <br />
+        <br />
+        <p>Current votes:</p>
+        <ul>
+        <% therapist.received_votes.each do |vote| %>
+          <li><%= vote.voter.full_name %> voted <%= vote.decision %> and said: <%= vote.comment %></li>
+        <% end %>
+        </ul>
+        <%= form_for Vote.new, url: votes_path do |f| %>
+
+          <%= f.hidden_field :voter_id, value: current_therapist.id %>
+          <%= f.hidden_field :votee_id, value: therapist.id %>
+
+          <%= f.select :decision, ["Support", "Oppose", "Need More Info"] %>
+
+          <%= f.label :comment %>
+          <%= f.text_area :comment %>
+
+          <%= f.submit "Vote" %>
+        <% end %>
       <% end %>
     </li>
   <% end %>
@@ -21,13 +42,20 @@
     <li>
       <% if voted_on?(therapist) %>
         <%= link_to therapist.full_name, therapist_dashboard_path(therapist.id) %>
-      <% end %>
-    </li>
-    <li>
+        <p>Current votes:</p>
+        <ul>
+        <% therapist.received_votes.each do |vote| %>
+          <li><%= vote.voter.full_name %> voted <%= vote.decision %> and said: <%= vote.comment %></li>
+        <% end %>
+        </ul>
+        <%= button_to 'Change Vote', change_vote_path(votee_id: therapist.id, voter_id: current_therapist.id) %><br />
       <% if is_a_super_admin? %>
-        <%= button_to 'Set Status as Approved', controller: 'therapists_verifications', action: :create, verification_token: therapist.verification_token %>
-        <%= button_to 'Set Status as Denied', controller: 'therapists_verifications', action: :delete, verification_token: therapist.verification_token %>
+        <%= button_to 'Set Status as Approved', therapist_confirm_path(therapist_id: therapist.id, token: therapist.verification_token) %><br />
+        <%= button_to 'Set Status as Denied', therapist_deny_path(therapist_id: therapist.id, token: therapist.verification_token) %>
       <% end %>
+    <% end %>
+    </li>
   <% end %>
 </ul>
 </p>
+</div>

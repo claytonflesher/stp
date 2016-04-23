@@ -23,7 +23,7 @@ class TherapistsController < ApplicationController
     @therapist = Therapist.find(session[:therapist_id])
     respond_to do |format|
       if @therapist.update(therapist_params)
-        format.html { redirect_to therapist_dashboard_path, notice: 'Profile was successfully updated' }
+        format.html { redirect_to therapist_dashboard_path(therapist_id: session[:therapist_id]), notice: 'Profile was successfully updated' }
       else
         format.html { render :edit }
       end
@@ -69,7 +69,7 @@ class TherapistsController < ApplicationController
       :distance_counseling, 
       :languages, 
       :purpose, 
-      :public_description, 
+      :description, 
       :secular_evidence,
       :adolescents,
       :adults,
