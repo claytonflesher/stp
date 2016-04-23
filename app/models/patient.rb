@@ -27,7 +27,7 @@ class Patient < ActiveRecord::Base
   end
 
   def available_requests
-    @available ||= 3 - (self.patient_therapist_relationships.where(
+    3 - (self.patient_therapist_relationships.where(
       patient_id: self.id,
       created_at: 1.month.ago..Date.today).count)
   end

@@ -42,7 +42,7 @@
       <ul>
         <% if is_a_super_admin? %>
           <li>Search for a Patient</li>
-          <li>List Admins</li>
+          <li><%= link_to "Admins List", admins_path %></li>
         <% end %>
         <li>Search for a Therapist</li>
         <li><%= link_to "Pending Therapist Applications", votes_path %></li>
