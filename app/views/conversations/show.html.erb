@@ -1,35 +1,39 @@
-<p>When you add a message to this conversation, an email will be sent to the recipient, informing them.
-When they respond, an email will be sent to you.</p>
-<% @conversation.messages.each do |message| %>
-  <%= "#{message.sender_type.capitalize} #{message.sender_id} said:" %><br />
-  <%= "Topic: #{message.topic}" %><br />
-  <%= "Message: #{message.body}" %><br />
-  <br />
-<% end %>
+<% provide(:title, "Conversation") %>
+<div class="edit-conversation">
 
-
-<%= form_for (Message.new), action: 'create' do |f| %>
-  <%= f.label :topic %>
-  <%= f.text_field :topic %><br />
-
-  <%= f.label :body %>
-  <%= f.text_area :body %><br />
-
-  <% if patient_logged_in? %>
-    <%= f.hidden_field :sender_type, value: 'patient' %>
-    <%= f.hidden_field :sender_id, value: @conversation.patient_therapist_relationship.patient_id %>
-    <%= f.hidden_field :receiver_type, value: 'therapist' %>
-    <%= f.hidden_field :receiver_id, value: @conversation.patient_therapist_relationship.therapist_id %>
-  <% elsif therapist_logged_in? %>
-    <%= f.hidden_field :sender_type, value: 'therapist' %>
-    <%= f.hidden_field :sender_id, value: @conversation.patient_therapist_relationship.therapist_id %>
-    <%= f.hidden_field :receiver_type, value: 'patient' %>
-    <%= f.hidden_field :receiver_id, value: @conversation.patient_therapist_relationship.patient_id %>
-
+  <p>When you add a message to this conversation, an email will be sent to the recipient, informing them.
+  When they respond, an email will be sent to you.</p>
+  <% @conversation.messages.each do |message| %>
+    <%= "#{message.sender_type.capitalize} #{message.sender_id} said:" %><br />
+    <%= "Topic: #{message.topic}" %><br />
+    <%= "Message: #{message.body}" %><br />
+    <br />
   <% end %>
 
-  <%= f.hidden_field :conversation_id, value: @conversation.id %>
 
-  <%= f.submit %>
+  <%= form_for (Message.new), action: 'create' do |f| %>
+    <%= f.label :topic %>
+    <%= f.text_field :topic %><br />
 
-<% end %>
+    <%= f.label :body %>
+    <%= f.text_area :body %><br />
+
+    <% if patient_logged_in? %>
+      <%= f.hidden_field :sender_type, value: 'patient' %>
+      <%= f.hidden_field :sender_id, value: @conversation.patient_therapist_relationship.patient_id %>
+      <%= f.hidden_field :receiver_type, value: 'therapist' %>
+      <%= f.hidden_field :receiver_id, value: @conversation.patient_therapist_relationship.therapist_id %>
+    <% elsif therapist_logged_in? %>
+      <%= f.hidden_field :sender_type, value: 'therapist' %>
+      <%= f.hidden_field :sender_id, value: @conversation.patient_therapist_relationship.therapist_id %>
+      <%= f.hidden_field :receiver_type, value: 'patient' %>
+      <%= f.hidden_field :receiver_id, value: @conversation.patient_therapist_relationship.patient_id %>
+
+    <% end %>
+
+    <%= f.hidden_field :conversation_id, value: @conversation.id %>
+
+    <%= f.submit %>
+
+  <% end %>
+</div>
