@@ -36,8 +36,10 @@
         <p><%= link_to 'Search by location and distance.', therapist_searches_path %></p>
       </div>
       <div class='conversations'>
-        <% @patient.conversations.each do |conversation| %>
-          <p><%= link_to "Conversation with Therapist ##{conversation.therapist.id}", conversation_path(patient_id: @patient.id, therapist_id: conversation.therapist.id, conversation_id: conversation.id) %></p>
+        <% if @patient.patient_therapist_relationships.any? %>
+          <% @patient.conversations.each do |conversation| %>
+            <p><%= link_to "Conversation with Therapist ##{conversation.therapist.id}", conversation_path(patient_id: @patient.id, therapist_id: conversation.therapist.id, conversation_id: conversation.id) %></p>
+          <% end %>
         <% end %>
       </div>
   </div>
@@ -53,6 +55,5 @@
         <p><%= link_to 'See Specialties', therapist_details_path(therapist_id: t.id), method: 'get' %></p>
       <% end %>
     <% end %>
-
   </div>
 </div>

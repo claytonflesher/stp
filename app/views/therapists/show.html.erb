@@ -30,8 +30,10 @@
         <p><%= link_to 'Find other therapists in my area.', therapist_searches_path %></p>
       </div>
       <div class="conversations">
-        <% @therapist.conversations.each do |conversation| %>
-          <p><%= link_to "Conversation with Patient ##{conversation.patient.id}", conversation_path(patient_id: conversation.patient.id, therapist_id: @therapist.id, conversation_id: conversation.id) %></p>
+        <% if @therapist.patient_therapist_relationships.any? %>
+          <% @therapist.conversations.each do |conversation| %>
+            <p><%= link_to "Conversation with Patient ##{conversation.patient.id}", conversation_path(patient_id: conversation.patient.id, therapist_id: @therapist.id, conversation_id: conversation.id) %></p>
+          <% end %>
         <% end %>
       </div>
   </div>
