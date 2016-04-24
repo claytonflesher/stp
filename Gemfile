@@ -18,8 +18,9 @@ gem 'therubyracer', platforms: :ruby
 gem 'neat'
 gem 'bitters'
 
-# Use heorku gem to test site in production
+# Use heroku gem to test site in production
 gem 'rails_12factor', group: :production
+gem 'puma'
 
 
 # Use font awesome for Icons and Glyphs in scss

@@ -19,3 +19,4 @@
 .*
 !/.gitignore
 !/.travis.yml
+.env
