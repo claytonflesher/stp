@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-type' />
+  </head>
+  <body>
+    <h1>Confirm Email</h1>
+    <p>Please click the following link to verify your email.</p>
+    <p><%= patient_confirm_url(token: @patient.verification_token) %></p>
+  </body>
+</html>
+
