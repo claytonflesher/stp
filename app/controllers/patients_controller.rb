@@ -30,7 +30,7 @@ class PatientsController < ApplicationController
   def update
     if @patient.update(patient_params)
       flash.notice = "Profile successfully updated"
-      redirect_to patient_dashboard_path 
+      redirect_to patient_dashboard_path(patient_id: current_patient.id)
     else
       render :edit 
     end
