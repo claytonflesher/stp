@@ -1,6 +1,10 @@
 class VotesController < ApplicationController
   before_filter :ensure_admin
 
+  def show
+    @votee = Therapist.find(params[:therapist_id])
+  end
+
   def index
     @dashboard = PendingDashboard.new(current_therapist)
   end

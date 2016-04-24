@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   put    "update_therapist"                => "therapists#update"
   patch  "update_therapist"                => "therapists#update"
 
+  get    "therapist_info/:therapist_id"    => "votes#show",                      as: :therapist_info
   get    "votes"                           => "votes#index"
   post   "votes"                           => "votes#create"
   post   "change_vote"                     => "votes#delete",                    as: :change_vote
