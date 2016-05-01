@@ -10,7 +10,7 @@ class Therapist < ActiveRecord::Base
   # because verified_at does not account for a denied application
   scope :pending, -> { where(application_status: "pending").order("created_at DESC") }
 
-  scope :current, -> { where(application_status: "accepted").order(:last_name) }
+  scope :current, -> { where(application_status: "active").order(:last_name) }
 
   scope :admins, -> { where(admin: true).order(:last_name) }
 
