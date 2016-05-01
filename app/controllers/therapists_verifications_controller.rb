@@ -16,7 +16,7 @@ class TherapistsVerificationsController < ApplicationController
   def create
     @new_therapist = Therapist.find(params[:therapist_id])
     @new_therapist.verified_at = Time.now
-    @new_therapist.application_status = 'accepted'
+    @new_therapist.application_status = 'active'
     @new_therapist.save!
     TherapistMailer.confirm(@new_therapist).deliver_now
     flash[:notice] = "Email verified. New therapist emailed confirmation."
@@ -26,7 +26,7 @@ class TherapistsVerificationsController < ApplicationController
   def delete
     @denied_therapist = Therapist.find(params[:therapist_id])
     @denied_therapist.verified_at = nil
-    @denied_therapist.application_status = 'denied'
+    @denied_therapist.application_status = 'disapproved'
     @denied_therapist.save!
     flash[:notice] = "This therapist is still on the database, with a status set to 'denied'"
     redirect_to votes_path

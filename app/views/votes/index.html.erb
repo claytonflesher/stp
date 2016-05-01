@@ -23,7 +23,7 @@
           <%= f.hidden_field :voter_id, value: current_therapist.id %>
           <%= f.hidden_field :votee_id, value: therapist.id %>
 
-          <%= f.select :decision, ["Support", "Oppose", "Need More Info"] %>
+          <%= f.select :decision, ["Approve", "Disapprove", "Need More Info"] %>
 
           <%= f.label :comment %>
           <%= f.text_area :comment %>

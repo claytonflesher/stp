@@ -13,7 +13,7 @@ RSpec.describe Patient, type: :model do
       ]
     )
     Geocoder::Lookup::Test.add_stub(
-      "numbers1111", [
+      "numbers1111$@", [
         {
           'latitude'     => 0,
           'longitude'    => 0
@@ -55,7 +55,7 @@ RSpec.describe Patient, type: :model do
       patient = build(:patient)
       should validate_presence_of(:zipcode)
       should allow_value(patient.zipcode).for(:zipcode)
-      should_not allow_value("numbers1111").for(:zipcode)
+      should_not allow_value("numbers1111$@").for(:zipcode)
     end
   end
 
