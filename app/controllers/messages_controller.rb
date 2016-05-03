@@ -11,6 +11,12 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.create!(message_params)
+    if message_params[:receiver_type] == 'patient'
+      recipient = Patient.find(message_params[:receiver_id])
+    else
+      recipient = Therapist.find(message_params[:receiver_id])
+    end
+    MessageMailer.notify(recipient).deliver_now
     conversation = Conversation.find(message_params[:conversation_id])
     if @message.id
       redirect_to conversation_path(
