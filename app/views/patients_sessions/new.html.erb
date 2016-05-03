@@ -1,8 +1,8 @@
 <% provide(:title, "Sign In") %>
 
 <div class="sign-in">
-<% provide(:title, "Sign In To Your Patient Account") %>
-<h1>Sign In To Your Patient Account</h1>
+<% provide(:title, "Sign In To Your Client Account") %>
+<h1>Sign In To Your Client Account</h1>
 
 <%= form_tag do %>
 
@@ -14,6 +14,7 @@
 
   <%= submit_tag "Log In" %>
 <% end %>
+<%= link_to "I'm a client, but I forgot my password.", patient_reset_password_path %>
 </div>
 
 <div class="sign-in">
@@ -30,5 +31,5 @@
 
   <%= submit_tag "Log In" %>
 <% end %>
+<%= link_to "I'm a therapist, but I forgot my password.", therapist_reset_password_path %>
 </div>
-
