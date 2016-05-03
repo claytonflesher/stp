@@ -26,7 +26,7 @@
             <li><%= link_to "Sign Out", therapist_signout_path, method: :delete %></li>
           </ul>
         <% else %>
-          <li class="nav-link"><%= link_to("Sign Up", patient_signup_path) %></li>  
+          <li class="nav-link"><%= link_to("Sign Up", home_path) %></li>  
           <li class="nav-link"><%= link_to("Sign In", patient_signin_path) %></li>
         <% end %>
       </ul>
