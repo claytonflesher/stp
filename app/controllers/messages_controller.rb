@@ -4,9 +4,17 @@ class MessagesController < ApplicationController
   before_filter :ensure_super_admin, only: [:destroy]
 
   def index
-    @messages = Message.where(
-      receiver_id: current_user.id
-    )
+    if current_patient
+      @messages = Message.where(
+        receiver_id: current_user.id, receiver_type: 'patient'
+      )
+    elsif current_therapist
+      @messages = Message.where(
+        receiver_id: current_user.id, receiver_type: 'therapist'
+      )
+    else
+      @messages = nil
+    end
   end
 
   def create
