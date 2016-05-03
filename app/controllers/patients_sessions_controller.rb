@@ -14,7 +14,7 @@ class PatientsSessionsController < ApplicationController
       session[:patient_id] = @patient.id
       redirect_to patient_dashboard_path(@patient.id)
     else
-      flash.now[:alert] = "Email or password didn't match."
+      flash.now[:alert] = "Username or password didn't match."
       render :new
     end
   end
