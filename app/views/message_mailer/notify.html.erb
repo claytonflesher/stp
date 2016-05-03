@@ -6,6 +6,6 @@
   <body>
     <h1>You have a new message on the Secular Therapy Project website.</h1>
       <p>Please click the following link to go to the conversation.</p>
-      <p><%= conversation_path(conversation_id: @recipient.conversations.last.id, patient_id: @recipient.conversations.last.patient_therapist_relationship.patient_id, therapist_id: @recipient.conversations.last.patient_therapist_relationship.therapist_id) %></p>
+      <p><%= conversation_url(conversation_id: @recipient.conversations.last.id, patient_id: @recipient.conversations.last.patient_therapist_relationship.patient_id, therapist_id: @recipient.conversations.last.patient_therapist_relationship.therapist_id) %></p>
   </body>
 </html>
