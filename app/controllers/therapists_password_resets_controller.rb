@@ -6,7 +6,7 @@ class TherapistsPasswordResetsController < ApplicationController
   end
 
   def create
-    @therapist = Therapist.find_by(username: params[:username])
+    @therapist = Therapist.find_by(email: params[:email])
     if @therapist
       @therapist.password_reset_token = SecureRandom.hex(20)
       @therapist.save!

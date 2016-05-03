@@ -6,7 +6,7 @@ class PatientsPasswordResetsController < ApplicationController
   end
 
   def create
-    @patient = Patient.find_by(username: params[:username])
+    @patient = Patient.find_by(email: params[:email])
     if @patient
       @patient.password_reset_token = SecureRandom.hex(20)
       @patient.save!
