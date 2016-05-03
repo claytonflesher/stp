@@ -48,7 +48,6 @@
     <h2>Therapists Near You</h2>
     <% @results.each do |t| %>
       <p>Therapist ID: <%= t.id %></p>
-      <p>Description: <%= t.description %></p>
       <p>Contacted already? - <%= t.patients.include?(@patient) %>
       <p>State: <%= t.state %></p>
       <% if @patient.available_requests > 0 %>
