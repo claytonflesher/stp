@@ -3,9 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-begin
-  require 'rspec/core/rake_task'
-  task :default => :spec
-  Rails.application.load_tasks
-rescue LoadError
-end
+Rails.application.load_tasks

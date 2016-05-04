@@ -47,8 +47,8 @@ gem 'bcrypt', '~> 3.1.7'
 # Use pry in the console in both development and production
 gem 'pry-rails'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# Use mysql2 for importing from the old database
+gem 'mysql2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
