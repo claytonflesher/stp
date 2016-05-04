@@ -16,18 +16,18 @@
           <ul class="submenu">
             <li><%= link_to "Edit Profile", edit_patient_path %></li>
             <li><%= link_to "Inbox", inbox_path %></li>
-            <li><%= link_to "Sign Out", patient_signout_path, method: :delete %></li>
+            <li><%= link_to "Log Out", patient_signout_path, method: :delete %></li>
           </ul>
         <% elsif therapist_logged_in? %>
           <li class="nav-link more"><%= link_to current_therapist.username, therapist_dashboard_path(current_therapist.id) %>
           <ul class="submenu">
             <li><%= link_to "Edit Profile", edit_therapist_path %></i></li>
             <li><%= link_to "Inbox", inbox_path %></li>
-            <li><%= link_to "Sign Out", therapist_signout_path, method: :delete %></li>
+            <li><%= link_to "Log Out", therapist_signout_path, method: :delete %></li>
           </ul>
         <% else %>
           <li class="nav-link"><%= link_to("Sign Up", home_path) %></li>  
-          <li class="nav-link"><%= link_to("Sign In", patient_signin_path) %></li>
+          <li class="nav-link"><%= link_to("Log In", patient_signin_path) %></li>
         <% end %>
       </ul>
     </nav>

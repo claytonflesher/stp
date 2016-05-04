@@ -1,8 +1,8 @@
-<% provide(:title, "Sign In") %>
+<% provide(:title, "Log In") %>
 
 <div class="sign-in">
-<% provide(:title, "Sign In To Your Client Account") %>
-<h1>Sign In To Your Client Account</h1>
+<% provide(:title, "Log In To Your Client Account") %>
+<h1>Log In To Your Client Account</h1>
 
 <%= form_tag do %>
 
@@ -18,8 +18,8 @@
 </div>
 
 <div class="sign-in">
-<% provide(:title, "Sign In To Your Therapist Account") %>
-<h1>Sign In To Your Therapist Account</h1>
+<% provide(:title, "Log In To Your Therapist Account") %>
+<h1>Log In To Your Therapist Account</h1>
 
 <%= form_tag({controller: "therapists_sessions", action: "create"}, method: "post") do %>
 
