@@ -20,3 +20,4 @@
 !/.gitignore
 !/.travis.yml
 .env
+lib/tasks/import.rake
