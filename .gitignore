@@ -21,3 +21,5 @@
 !/.travis.yml
 .env
 /lib/tasks/import.rake
+/bad_users.pstore
+/bad_therapists.pstore
