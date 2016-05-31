@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 
   def letsencrypt
-    render plain: ENV[CERT]
+    render text: ENV['CERT']
   end
 
   def home
