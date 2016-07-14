@@ -1,22 +1,12 @@
-<% provide(:title, "Patient Registration") %>
+<% provide(:title, "Client Registration") %>
 <div class="registration-form">
-<h1>Patient Registration</h1>
+<h1>Client Registration</h1>
+
+<p>Please enter the below information to sign up for the STP and start finding a secular therapist in your area.</p>
 
 <%= form_for(@patient, url: patient_signup_path) do |f| %>
 
-  <% if @patient.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@patient.errors.count, "error") %> prohibited you from being saved:</h2>
-
-      <ul>
-        <% @patient.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%= f.label :username %>
+  <%= f.label 'Username: Capitalization matters' %>
   <%= f.text_field :username %>
 
   <%= f.label :password %>
@@ -40,11 +30,11 @@
   <%= f.label :gender %>
   <%= f.select :gender, ["Male", "Female"] %>
 
-  <%= f.label :former_religion %>
+  <%= f.label 'What, if any, is your former religion?' %>
   <%= f.text_field :former_religion %>
 
-  <%= f.label :description %>
-  <%= f.text_field :description %>
+  <%= f.label 'Why are you seeking services at this time?' %>
+  <%= f.text_area :description %>
 
   <%= f.submit %>
  

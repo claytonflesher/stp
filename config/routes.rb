@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get    "/.well-known/acme-challenge/:id" => "static_pages#letsencrypt"
   get    "home"                            => "static_pages#home"
   get    "about"                           => "static_pages#about"
   get    "contact"                         => "static_pages#contact"
