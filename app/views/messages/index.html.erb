@@ -15,21 +15,19 @@
 
 <% end %>
 
-<table>
-  <tbody>
-    <% @messages.each do |message| %>
-      <tr>
-        <td>
-        <% if message.sent_messageable_type == "Therapist" %>
-          <%= @therapist.username %>:
-        <% else %>
-          <%= @patient.username %>:
-        <% end %>
-      </td>
-      <td>
-        <%= message.body %>
-      </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="messages-wrapper">
+      <% @messages.each do |message| %>
+          <% if message.sent_messageable_type == "Therapist" %>
+            <div class="message from">
+            <h4><%= @therapist.username %> Says:</h4></br>
+            <p><%= message.body %></p>
+            </div>
+          <% else %>
+          <div class="message to">
+            <h4><%= @patient.username %> Says:</h4></br>
+            <p><%= message.body %></p>
+          </div>
+          <% end %>
+        
+      <% end %>
+  </div>
