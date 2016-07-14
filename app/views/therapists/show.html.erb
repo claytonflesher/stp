@@ -44,7 +44,7 @@
         <p>Find City and State based on Zipcode.</p>
         <p><%= @therapist.gender %></p>
       </div>
-      <div class="info">
+      <!--<div class="info">
         <p>
           <strong>Former Religion:</strong>
           <%= @therapist.former_religion %>
@@ -54,7 +54,7 @@
           <%= @therapist.description %>
         </p>
       </div>
-  </div>
+  </div>-->
 
   <% if current_admin && current_therapist.id == params[:therapist_id].to_i %>
     <div class="admin-tools">
