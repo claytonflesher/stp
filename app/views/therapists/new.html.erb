@@ -2,17 +2,15 @@
 <div class="registration-form"> 
 <h1>Therapist Registration</h1>
 
-<% if @therapist.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@therapist.errors.count, "error") %> prohibited you from being saved:</h2>
+<p>At the Secular Therapy Project (STP), we are looking for very specific types of health professionals for our database. Before taking the time to apply, we encourate you to look at our guidelines for evaluating candidates. If you feel that you fit the criteria, we would love to have your application. If you are uncertain, feel free to apply and we will evaluate your application for fitness in the STP.</p>
 
-    <ul>
-      <% @therapist.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<ul>
+  <li>Guideline 1, Licensure: All listed therapists in the STP should be prperly licensed according to their state, province or country's laws. For instance, we encourage licensed psychologists, psychiatrists, counselors, marital and family therapists, clinical social workers, and other mental health professionals. We do not allow 'coaches' or people who are unlicensed to be listed in the STP database.</li>
+
+  <li>Guideline 2, Secular: All listed therapists in the STP should be non-religious and of a secular nature. While most religious therapists act ethically, and do not bring their personal beliefs into the therapy room, the clients using the STP are often drawn to us because of negative experiences with religious therapists. As such, they are likely to be highly turned off by religous therapists, even those practicing in a non-religous manner.</li>
+
+  <li>Guideline 3, Evidence-based practice: All listed therapists in the STP should be practiciing evidence-based therapy and assessment. Stated simply, evidence based practice (EBP) is a guiding principle that means a mental health professional, regardless of type of license, is guided in the treatment and assessment methods they use by the current practices as defined by scientific evidence. This typically incorporates the use of empirically-supported treatments for specific types of problems in addition to being able to establish a strong therapeutic alliance. Potential applicants who primarily use non-evidence-based or pseudoscientific methods will <i>not</i> be approved for the STP.</li>
+</ul>
 
 <%= form_for(@therapist, url: therapist_signup_path) do |f| %>
 
@@ -52,20 +50,23 @@
   <%= f.label :country %>
   <%= f.text_field :country %>
 
-  <%= f.label :practice %>
+  <%= f.label 'Type of practice' %>
   <%= f.text_field :practice %>
 
   <%= f.label :years_experience %>
   <%= f.text_field :years_experience %>
 
-  <%= f.label :qualifications %>
+  <%= f.label 'Educational Background' %>
   <%= f.text_area :qualifications %>
 
   <%= f.label :gender %>
   <%= f.select :gender, ["Male", "Female"] %>
 
-  <%= f.label :religion %>
+  <%= f.label 'Current religious affiliation' %>
   <%= f.text_field :religion %>
+
+  <%= f.label 'Former religious affiliation(s)' %>
+  <%= f.text_field :former_religion %>
 
   <%= f.label :licenses %>
   <%= f.text_area :licenses %>
@@ -76,8 +77,8 @@
   <%= f.label "Would you like to participate in distance counseling?" %>
   <%= f.select :distance_counseling, options_for_select([["Yes", true], ["No", false]]) %>
 
-  <%= f.label :purpose %>
-  <%= f.text_field :purpose %>
+  <%= f.label 'Describe your involvement in the secular community' %>
+  <%= f.text_area :purpose %>
 
   <!--Specialty Check Boxes -->
 
@@ -127,16 +128,13 @@
   <%= f.label :website %>
   <%= f.text_field :website %>
 
-  <%= f.label :former_religion %>
-  <%= f.text_field :former_religion %>
-
   <%= f.label :languages %>
   <%= f.text_area :languages %>
 
-  <%= f.label "Descriptions patients will see about your practice." %>
+  <%= f.label "Description patients will see about your practice." %>
   <%= f.text_area :description %>
 
-  <%= f.label :approach %>
+  <%= f.label 'Describe your theoretical orientation' %>
   <%= f.text_area :approach %>
 
   <%= f.submit "Create my account" %>
