@@ -3,13 +3,35 @@
 
   <p>When you add a message to this conversation, an email will be sent to the recipient, informing them.
   When they respond, an email will be sent to you.</p>
-  <% @conversation.messages.each do |message| %>
-    <%= "#{message.sender_type.capitalize} #{message.sender_id} said:" %><br />
-    <%= "Topic: #{message.topic}" %><br />
-    <%= "Message: #{message.body}" %><br />
-    <br />
-  <% end %>
+ 
+<!-- Is there a way to remove this style of mesaging ??? -->
 
+
+ <!--<%# @conversation.messages.each do |message| %>
+   <%#= {}"#{message.sender_type.capitalize} #{message.sender_id} said:" %><br />
+    <%#= {}"Topic: #{message.topic}" %><br />
+    <%#= {}"Message: #{message.body}" %><br />
+    <br />
+  <%# end %>-->
+
+
+
+<div class="messages-wrapper">
+      <% @messages.each do |message| %>
+          <% if message.sent_messageable_type == "Therapist" %>
+            <div class="message from">
+            <h4><%= @therapist.username %> Says:</h4></br>
+            <p><%= message.body %></p>
+            </div>
+          <% else %>
+          <div class="message to">
+            <h4><%= @patient.username %> Says:</h4></br>
+            <p><%= message.body %></p>
+          </div>
+          <% end %>
+        
+      <% end %>
+  </div>
 
   <%= form_for (Message.new), action: 'create' do |f| %>
     <%= f.label :topic %>
