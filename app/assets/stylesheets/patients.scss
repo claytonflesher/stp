@@ -40,3 +40,17 @@
 .patient-dashboard {
 
 }
+
+
+.Inbox-button{
+    border:1px solid lightgreen;
+    color:green;
+    background-color:transparent;
+    border-radius:5px;
+    width:150px;
+    height:25px;
+}
+
+.Inbox-button:hover{
+    cursor:pointer;
+}
