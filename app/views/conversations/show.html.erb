@@ -8,14 +8,14 @@
 
 
  <!--<%# @conversation.messages.each do |message| %>
-   <%#= {}"#{message.sender_type.capitalize} #{message.sender_id} said:" %><br />
-    <%#= {}"Topic: #{message.topic}" %><br />
-    <%#= {}"Message: #{message.body}" %><br />
+   <%#= "#{message.sender_type.capitalize} #{message.sender_id} said:" %><br />
+    <%#= "Topic: #{message.topic}" %><br />
+    <%#= "Message: #{message.body}" %><br />
     <br />
   <%# end %>-->
 
 
-
+<h1>Subect: <%= "Topic: #{message.topic}" %></h1>
 <div class="messages-wrapper">
       <% @messages.each do |message| %>
           <% if message.sent_messageable_type == "Therapist" %>
