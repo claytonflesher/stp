@@ -29,21 +29,27 @@
         <% elsif therapist_logged_in? %>
           <% if current_therapist.id.to_i == params[:therapist_id].to_i %>
             <!-- Therapist on their own dashboard, show inbox button -->
-            <%= link_to therapist_inbox_path(params[:therapist_id]) do %>
+            <%= link_to '<button class="Inbox-button" type="button">New Post</button>'.html_safe, therapist_inbox_path(params[:therapist_id]) do %>
               Inbox
             <% end %>
           <% end %>
         <% end %>
       </div>
 
-      <div class="basic">
+        
+
+        <!-- This has been commented out, it is not required on the therapist dashboard -->
+
+
+
+      <!--<div class="basic">
         <!-- si: This is not complete, just putting this here as an idea of what I'm trying to accomplish with this view -->
-        <p><%= @therapist.full_name %></p>
+        <!--<p><%= @therapist.full_name %></p>
         <p><%= @therapist.phone %></p>
         <p><%= @therapist.email %></p>
         <p>Find City and State based on Zipcode.</p>
         <p><%= @therapist.gender %></p>
-      </div>
+      </div> -->
       <!--<div class="info">
         <p>
           <strong>Former Religion:</strong>
