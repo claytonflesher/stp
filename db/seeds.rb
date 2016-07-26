@@ -33,6 +33,8 @@
      :verification_token => 'abcdefghijklmnop',
      :zipcode => 73120,
      :email => 'testemail1@email.com',
-     :phone => '4054461822'
+     :phone => '4055555555'
      )
+     
+     
    
