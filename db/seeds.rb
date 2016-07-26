@@ -13,7 +13,7 @@
      :password_confirmation => 'Welcome1',
      :first_name => 'Daniel',
      :last_name => 'Ashcraft',
-     :address => '2236 carlton way',
+     :address => '22 some address',
      :city => 'Oklahoma City',
      :state => 'Oklahoma',
      :country => 'United States',
@@ -26,12 +26,12 @@
      :main_license => 'Oklahoma state Therapist License #001',
      :distance_counseling => 'true',
      :purpose => 'To help people',
-     :geo_address => '2236 calront way',
+     :geo_address => '22 some address',
      :super_admin => 'true',
      :application_status => 'active',
      :verified_at => Time.now.to_datetime,
      :verification_token => 'abcdefghijklmnop',
-     :zipcode => 73120,
+     :zipcode => 73112,
      :email => 'testemail1@email.com',
      :phone => '4055555555'
      )
