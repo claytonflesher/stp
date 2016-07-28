@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
- Therapist.create!(
+   
+     Therapist.create!(
      :username => 'testuser1',
      :password =>'Welcome1',
      :password_confirmation => 'Welcome1',
@@ -35,6 +35,26 @@
      :email => 'testemail1@email.com',
      :phone => '4055555555'
      )
+ 
+    Patient.create!(
+     :username => 'testpatient1',
+     :password =>'Welcome1',
+     :password_confirmation => 'Welcome1',
+     :name => 'Daniel Ashcraft',
+     :former_religion=> 'Atheist',
+     :description => 'This is the description',
+     :gender => 'Male',
+     :verified_at => Time.now.to_datetime,
+     :verification_token => 'abcdefghijklmnolll',
+     :zipcode => 73112,
+     :email => 'testemail1@email.com',
+     :phone => '4055555555',
+     :longitude => '35.4676',
+     :latitude =>'97.5164',
+     :created_at=>Time.now.to_datetime,
+     :updated_at=>Time.now.to_datetime
      
-     
+     )
+   
+   
    
