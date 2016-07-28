@@ -1,6 +1,12 @@
 // Place all the styles related to the patient_messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container{
+
+h2 {
+    text-align:center;
+}    
 .messages-wrapper {
   padding-top: 10px;
   position: relative;
@@ -27,7 +33,7 @@
 .message.from + .message.from {
   margin-top: -7px;
 }
-.message:before {
+/*.message:before {
     border-color: #2095FE;
     border-radius: 50% 50% 50% 50%;
     border-style: solid;
@@ -40,9 +46,10 @@
     right: -50px;
     width: 30px;
     z-index: -1;
-}
+}*/
 .message.from:before {
     border-color: #E5E4E9;
     left: -50px;
     transform: rotateY(180deg);
+}
 }

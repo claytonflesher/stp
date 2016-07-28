@@ -6,33 +6,21 @@
  
 <!-- Is there a way to remove this style of mesaging ??? -->
 
-
- <!--<%# @conversation.messages.each do |message| %>
-   <%#= "#{message.sender_type.capitalize} #{message.sender_id} said:" %><br />
-    <%#= "Topic: #{message.topic}" %><br />
-    <%#= "Message: #{message.body}" %><br />
+<div class="messages-wrapper" style="border:none;">
+ <% @conversation.messages.each do |message| %>
+ <div class="message from">
+   <% "#{message.sender_type.capitalize} #{message.sender_id} said:" %><br />
+    <%= "Topic: #{message.topic}" %><br />
+    <%= "Message: #{message.body}" %><br />
     <br />
-  <%# end %>-->
-
-
-<h1>Subect: <%= "Topic: #{message.topic}" %></h1>
-<div class="messages-wrapper">
-      <% @messages.each do |message| %>
-          <% if message.sent_messageable_type == "Therapist" %>
-            <div class="message from">
-            <h4><%= @therapist.username %> Says:</h4></br>
-            <p><%= message.body %></p>
-            </div>
-          <% else %>
-          <div class="message to">
-            <h4><%= @patient.username %> Says:</h4></br>
-            <p><%= message.body %></p>
-          </div>
-          <% end %>
-        
-      <% end %>
+    </div>
+  <% end %>
   </div>
 
+
+
+ 
+ 
   <%= form_for (Message.new), action: 'create' do |f| %>
     <%= f.label :topic %>
     <%= f.text_field :topic %><br />
