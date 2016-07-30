@@ -4,13 +4,12 @@
     <div class="main">
       <div class="avatar">
         <img src="https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif">
-      </div>
-      <div class="dynamic button">
+        <div class="Inbox-button">
         <%= link_to inbox_path(therapist_id: params[:therapist_id]) do %>
           Inbox
         <% end %>
       </div>
-      <!-- this information is redundant for the therapist -->
+      
       <div class="basic">
         <p><%= @therapist.full_name %></p>
         <p><%= @therapist.phone %></p>
@@ -18,29 +17,33 @@
         <p><%= @therapist.city %>, <%= @therapist.state %></p>
         <!--<p><%#= @therapist.gender %></p>-->
       </div>
+      </div>
+      
+      
+      <!-- this information is redundant for the therapist -->
+      
 
 
             <!-- this information is redundant for the therapist -->
+      <div style="float:left;text-align:center;">
       <div class="info">
-        <p>
-          <strong>Former Religion:</strong>
-          <%= @therapist.former_religion %>
-        </p>
-        <!--<p>
-          <strong>About you:</strong>
-          <%#= @therapist.description %>
-        </p>-->
-        <p><%= link_to 'Find other therapists in my area.', therapist_searches_path %></p>
+        <h5>View Other Therapists in your area</h5>
+        <div class="Inbox-button" style="width:auto;text-align:center;">
+        <p><%= link_to 'Search', therapist_searches_path %></p>
+        </div>
       </div>
 
 
-      <div class="conversations">
+      <div class="conversations" style="margin-top:10%;">
       <h4>Recent Conversations</h4>
         <% if @therapist.patient_therapist_relationships.any? %>
           <% @therapist.conversations.each do |conversation| %>
+            <div class="Inbox-button" style="width:auto;text-align:center;">
             <p><%= link_to "Conversation with Patient ##{conversation.patient.id}", conversation_path(patient_id: conversation.patient.id, therapist_id: @therapist.id, conversation_id: conversation.id) %></p>
+            </div>
           <% end %>
         <% end %>
+      </div>
       </div>
   </div>
 
