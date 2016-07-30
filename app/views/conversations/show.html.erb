@@ -6,7 +6,7 @@
  
 <!-- Is there a way to remove this style of mesaging ??? -->
 
-<div class="messages-wrapper" style="border:none;">
+<div class="messages-wrapper" style="border:none; margin-bottom:10%;">
  <% @conversation.messages.each do |message| %>
  <div class="message from">
    <% "#{message.sender_type.capitalize} #{message.sender_id} said:" %><br />

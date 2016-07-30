@@ -9,18 +9,6 @@
             @include span-columns( 3 of 9);
             text-align: center;
         }
-        .basic {
-            @include span-columns(6 of 9);
-            @include omega();
-            clear:right;
-        }
-        .info {
-            
-            @include span-columns(3 of 9);
-            padding-top: 4%;
-            clear:left;
-        }
-        
         
         
     }
@@ -39,18 +27,4 @@
 
 .patient-dashboard {
 
-}
-
-
-.Inbox-button{
-    border:1px solid lightgreen;
-    color:green;
-    background-color:transparent;
-    border-radius:5px;
-    width:150px;
-    height:25px;
-}
-
-.Inbox-button:hover{
-    cursor:pointer;
 }
