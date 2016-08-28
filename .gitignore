@@ -23,3 +23,6 @@
 /lib/tasks/import.rake
 /bad_users.pstore
 /bad_therapists.pstore
+
+# Ignore application configuration
+/config/application.yml
