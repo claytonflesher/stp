@@ -1,22 +1,25 @@
 <% provide title: "Inbox" %>
+<div class="container">
 
-<h1>Inbox</h1>
 
-<table>
-  <% if @messages %>
-    <% @messages.each do |m| %>
-      <tr>
-        <td>
-          <% unless m.opened? %>
-            <%= link_to image_tag('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Red_pog.svg/2000px-Red_pog.svg.png', height: '10px', width: '10px'), opened_path(message_id: m.id), method: 'update'  %>
+<h2>Inbox</h2>
+<% if @messages %>
+<div class="messages-wrapper">
+      <% @messages.each do |message| %>
+      <h3>Subect: <%= "#{message.topic}" %></h1>
+          <% if message.receiver_type == "therapist" %>
+            <div class="message from">
+            <h4><%= @therapist.username %> Says:</h4></br>
+            <p><%= message.body %></p>
+            </div>
+          <% else %>
+          <div class="message to">
+            <h4><%= @patient.username %> Says:</h4></br>
+            <p><%= message.body %></p>
+          </div>
           <% end %>
-        </td>
-        <td>
-          <%= link_to m.body, opened_path(message_id: m.id), method: 'update' %>
-        </td>
-      </tr>
-    <% end %>
-  <% else %>
-    <p>You don't have any messages, yet.</p>
-  <% end %>
-</table>
+        
+     <% end %>
+  </div>
+ <% end %>
+</div>

@@ -4,13 +4,13 @@
     <div class="main">
       <div class="avatar">
         <img src="https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif">
-      </div>
-      <div class="dynamic button">
+        
+        <div class="Inbox-button">
         <%= link_to inbox_path(patient_id: @patient.id) do %>
           Inbox
         <% end %>
       </div>
-
+      
       <div class="basic">
         <p><%= @patient.name %></p>
         <p><%= @patient.phone %></p>
@@ -18,8 +18,7 @@
         <p><%= @patient.zipcode %></p>
         <p><%= @patient.gender %></p>
       </div>
-      <div class="info">
-        <p>
+      <p>
           <strong>Former Religion:</strong>
           <%= @patient.former_religion %>
         </p>
@@ -27,32 +26,45 @@
           <strong>About you:</strong>
           <%= @patient.description %>
         </p>
+      </div>
+      
+
+      <div style="float:left;text-align:center;">
+      <div class="info">
         <p>
-        <strong>You may contact up to 3 therapists in a month.</strong><br />
-        <strong>You currently have <%= @patient.available_requests %> left.</strong>
+        <strong>You may contact up to 3 therapists per month.</strong><br />
+        <strong>You currently have <span style="color:red;"><%= @patient.available_requests %></span> left.</strong>
         </p>
       </div>
       <div class='lookup'>
-        <p><%= link_to 'Search by location and distance.', therapist_searches_path %></p>
+        <p><%= link_to 'Search for Therapists', therapist_searches_path %></p>
       </div>
-      <div class='conversations'>
+      <div class='conversations' style="margin-top:10%;">
         <% if @patient.patient_therapist_relationships.any? %>
+        <h4>Recent Conversations</h4>
           <% @patient.conversations.each do |conversation| %>
+                <div class="Inbox-button" style="width:auto;text-align:center;margin-bottom:3%;">
             <p><%= link_to "Conversation with Therapist ##{conversation.therapist.id}", conversation_path(patient_id: @patient.id, therapist_id: conversation.therapist.id, conversation_id: conversation.id) %></p>
+          </div>
           <% end %>
         <% end %>
       </div>
+  </div>
   </div>
   <div class="search">
 
     <h2>Therapists Near You</h2>
     <% @results.each do |t| %>
+    <div class="therapist-search-container" style="margin-bottom:5%;">
       <p>Therapist ID: <%= t.id %></p>
       <p>Contacted already? - <%= t.patients.include?(@patient) %>
       <p>State: <%= t.state %></p>
       <% if @patient.available_requests > 0 %>
+              <div class="Inbox-button" style="width:auto;text-align:center;">
         <p><%= link_to 'See Specialties', therapist_details_path(therapist_id: t.id), method: 'get' %></p>
+      </div>
       <% end %>
+      </div>
     <% end %>
   </div>
 </div>

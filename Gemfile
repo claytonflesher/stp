@@ -49,6 +49,12 @@ gem 'pry-rails'
 
 # Use mysql2 for importing from the old database
 gem 'mysql2'
+<<<<<<< HEAD
+=======
+
+# Use figaro to set environment variables for mailer
+gem 'figaro'
+>>>>>>> 54353bb30f8e588e09b48aadb7274668b365c3c7
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -69,6 +75,7 @@ group :development do
   # Use Rspec for spec testing and Capybara for feature testing
   gem 'capybara'
   gem 'database_cleaner'
+
 
 end
 gem 'rspec-rails', '~> 3.0'

@@ -4,13 +4,16 @@
     <div class="main">
       <div class="avatar">
         <img src="https://cdn0.vox-cdn.com/images/verge/default-avatar.v9899025.gif">
-      </div>
-      <div class="dynamic button">
+        <div class="Inbox-button">
         <%= link_to inbox_path(therapist_id: params[:therapist_id]) do %>
           Inbox
         <% end %>
       </div>
+<<<<<<< HEAD
       <!-- this information is redundant for the therapist -->
+=======
+      
+>>>>>>> 54353bb30f8e588e09b48aadb7274668b365c3c7
       <div class="basic">
         <p><%= @therapist.full_name %></p>
         <p><%= @therapist.phone %></p>
@@ -18,6 +21,7 @@
         <p><%= @therapist.city %>, <%= @therapist.state %></p>
         <!--<p><%#= @therapist.gender %></p>-->
       </div>
+<<<<<<< HEAD
 
 
             <!-- this information is redundant for the therapist -->
@@ -35,12 +39,35 @@
 
 
       <div class="conversations">
+=======
+      </div>
+      
+      
+      <!-- this information is redundant for the therapist -->
+      
+
+
+            <!-- this information is redundant for the therapist -->
+      <div style="float:left;text-align:center;">
+      <div class="info">
+        <h5>View Other Therapists in your area</h5>
+        <div class="Inbox-button" style="width:auto;text-align:center;">
+        <p><%= link_to 'Search', therapist_searches_path %></p>
+        </div>
+      </div>
+
+
+      <div class="conversations" style="margin-top:10%;">
+>>>>>>> 54353bb30f8e588e09b48aadb7274668b365c3c7
       <h4>Recent Conversations</h4>
         <% if @therapist.patient_therapist_relationships.any? %>
           <% @therapist.conversations.each do |conversation| %>
+            <div class="Inbox-button" style="width:auto;text-align:center;">
             <p><%= link_to "Conversation with Patient ##{conversation.patient.id}", conversation_path(patient_id: conversation.patient.id, therapist_id: @therapist.id, conversation_id: conversation.id) %></p>
+            </div>
           <% end %>
         <% end %>
+      </div>
       </div>
   </div>
 

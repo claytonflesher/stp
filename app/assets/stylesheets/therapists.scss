@@ -10,8 +10,30 @@
 	border-radius:5px;
 	width:150px;
 	height:25px;
+<<<<<<< HEAD
+=======
+	margin:0 auto;
+	height:30px;
+	padding-top:2px;
+>>>>>>> 54353bb30f8e588e09b48aadb7274668b365c3c7
 }
 
 .Inbox-button:hover{
 	cursor:pointer;
+<<<<<<< HEAD
+=======
+	transform:scale(1.02);
+	transition:all 0.2s;
+}
+
+.Inbox-buttom a:hover{
+	color:green;
+}
+
+
+
+.basic{
+	margin:0 auto;
+	margin-top:4%;
+>>>>>>> 54353bb30f8e588e09b48aadb7274668b365c3c7
 }

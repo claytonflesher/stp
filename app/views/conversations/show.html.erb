@@ -5,6 +5,7 @@
   When they respond, an email will be sent to you.</p>
  
 <!-- Is there a way to remove this style of mesaging ??? -->
+<<<<<<< HEAD
 
 
  <!--<%# @conversation.messages.each do |message| %>
@@ -33,6 +34,24 @@
       <% end %>
   </div>
 
+=======
+
+<div class="messages-wrapper" style="border:none; margin-bottom:10%;">
+ <% @conversation.messages.each do |message| %>
+ <div class="message from">
+   <% "#{message.sender_type.capitalize} #{message.sender_id} said:" %><br />
+    <%= "Topic: #{message.topic}" %><br />
+    <%= "Message: #{message.body}" %><br />
+    <br />
+    </div>
+  <% end %>
+  </div>
+
+
+
+ 
+ 
+>>>>>>> 54353bb30f8e588e09b48aadb7274668b365c3c7
   <%= form_for (Message.new), action: 'create' do |f| %>
     <%= f.label :topic %>
     <%= f.text_field :topic %><br />
