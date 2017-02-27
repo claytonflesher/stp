@@ -9,11 +9,7 @@
           Inbox
         <% end %>
       </div>
-<<<<<<< HEAD
-      <!-- this information is redundant for the therapist -->
-=======
-      
->>>>>>> 54353bb30f8e588e09b48aadb7274668b365c3c7
+
       <div class="basic">
         <p><%= @therapist.full_name %></p>
         <p><%= @therapist.phone %></p>
@@ -21,34 +17,11 @@
         <p><%= @therapist.city %>, <%= @therapist.state %></p>
         <!--<p><%#= @therapist.gender %></p>-->
       </div>
-<<<<<<< HEAD
 
-
-            <!-- this information is redundant for the therapist -->
-      <div class="info">
-        <p>
-          <strong>Former Religion:</strong>
-          <%= @therapist.former_religion %>
-        </p>
-        <!--<p>
-          <strong>About you:</strong>
-          <%#= @therapist.description %>
-        </p>-->
-        <p><%= link_to 'Find other therapists in my area.', therapist_searches_path %></p>
-      </div>
-
-
-      <div class="conversations">
-=======
-      </div>
-      
-      
-      <!-- this information is redundant for the therapist -->
-      
 
 
             <!-- this information is redundant for the therapist -->
-      <div style="float:left;text-align:center;">
+      <!-- <div style="float:left;text-align:center;"> -->
       <div class="info">
         <h5>View Other Therapists in your area</h5>
         <div class="Inbox-button" style="width:auto;text-align:center;">
@@ -58,7 +31,6 @@
 
 
       <div class="conversations" style="margin-top:10%;">
->>>>>>> 54353bb30f8e588e09b48aadb7274668b365c3c7
       <h4>Recent Conversations</h4>
         <% if @therapist.patient_therapist_relationships.any? %>
           <% @therapist.conversations.each do |conversation| %>
